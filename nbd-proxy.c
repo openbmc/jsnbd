@@ -49,6 +49,7 @@ struct ctx {
 static const char *sockpath_tmpl = RUNSTATEDIR "/nbd.%d.sock";
 static const char *dev_path = "/dev/nbd0";
 static const size_t bufsize = 0x20000;
+static const int nbd_timeout = 30;
 
 static int open_nbd_socket(struct ctx *ctx)
 {
@@ -112,7 +113,10 @@ static int start_nbd_client(struct ctx *ctx)
 
 	/* child process: run nbd-client in non-fork mode */
 	if (pid == 0) {
+		char timeout_str[10];
 		int fd;
+
+		snprintf(timeout_str, sizeof(timeout_str), "%d", nbd_timeout);
 
 		fd = open("/dev/null", O_RDWR);
 		if (fd < 0)
@@ -127,6 +131,7 @@ static int start_nbd_client(struct ctx *ctx)
 		execlp("nbd-client", "nbd-client",
 				"-u", ctx->sock_path,
 				"-n",
+				"-t", timeout_str,
 				dev_path,
 				NULL);
 		err(EXIT_FAILURE, "can't start ndb client");
