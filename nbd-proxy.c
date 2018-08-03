@@ -20,6 +20,7 @@
 #include <err.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <getopt.h>
 #include <signal.h>
 #include <stdbool.h>
 #include <stdint.h>
@@ -546,6 +547,16 @@ static int config_select(struct ctx *ctx, const char *name)
 	return 0;
 }
 
+static const struct option options[] = {
+	{ .name = "help", .val = 'h' },
+	{ 0 },
+};
+
+static void print_usage(const char *progname)
+{
+	fprintf(stderr, "usage: %s [configuration]\n", progname);
+}
+
 int main(int argc, char **argv)
 {
 	const char *config_name;
@@ -554,8 +565,21 @@ int main(int argc, char **argv)
 
 	config_name = NULL;
 
-	if (argc > 1)
-		config_name = argv[1];
+	for (;;) {
+		int c = getopt_long(argc, argv, "h", options, NULL);
+		if (c == -1)
+			break;
+
+		switch (c) {
+		case 'h':
+		case '?':
+			print_usage(argv[0]);
+			return c == 'h' ? EXIT_SUCCESS : EXIT_FAILURE;
+		}
+	}
+
+	if (optind < argc)
+		config_name = argv[optind];
 
 	ctx = &_ctx;
 	memset(ctx, 0, sizeof(*ctx));
