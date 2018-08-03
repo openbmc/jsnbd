@@ -40,6 +40,7 @@
 
 struct config {
 	char			*name;
+	bool			is_default;
 	char			*nbd_device;
 	struct json_object	*metadata;
 };
@@ -56,6 +57,7 @@ struct ctx {
 	size_t		bufsize;
 	struct config	*configs;
 	int		n_configs;
+	struct config	*default_config;
 };
 
 static const char *conf_path = SYSCONFDIR "/nbd-proxy/config.json";
@@ -414,6 +416,9 @@ static int config_parse_one(struct config *config, const char *name,
 	config->nbd_device = strdup(json_object_get_string(tmp));
 	config->name = strdup(name);
 
+	jrc = json_object_object_get_ex(obj, "default", &tmp);
+	config->is_default = jrc && json_object_get_boolean(tmp);
+
 	jrc = json_object_object_get_ex(obj, "metadata", &meta);
 	if (jrc && json_object_is_type(meta, json_type_object))
 		config->metadata = json_object_get(meta);
@@ -476,14 +481,27 @@ static int config_init(struct ctx *ctx)
 	ctx->configs = calloc(ctx->n_configs, sizeof(*ctx->configs));
 
 	i = 0;
-	json_object_object_foreach(tmp, name, config) {
-		rc = config_parse_one(&ctx->configs[i], name, config);
+	json_object_object_foreach(tmp, name, config_json) {
+		struct config *config = &ctx->configs[i];
+
+		rc = config_parse_one(config, name, config_json);
 		if (rc)
 			goto err_free;
+
+		if (config->is_default) {
+			if (ctx->default_config) {
+				warn("multiple configs flagged as default");
+				goto err_free;
+			}
+			ctx->default_config = config;
+		}
 		i++;
 	}
 
 	json_object_put(obj);
+
+	if (ctx->n_configs == 1)
+		ctx->default_config = &ctx->configs[0];
 
 	return 0;
 
@@ -500,17 +518,27 @@ static int config_select(struct ctx *ctx, const char *name)
 
 	config = NULL;
 
-	/* find a matching config... */
-	for (i = 0; i < ctx->n_configs; i++) {
-		if (!strcmp(ctx->configs[i].name, name)) {
-			config = &ctx->configs[i];
-			break;
+	if (!name) {
+		/* no config specified: use the default */
+		if (!ctx->default_config) {
+			warnx("no config specified, and no default");
+			return -1;
 		}
-	}
+		config = ctx->default_config;
 
-	if (!config) {
-		warnx("no such configuration '%s'", name);
-		return -1;
+	} else {
+		/* find a matching config... */
+		for (i = 0; i < ctx->n_configs; i++) {
+			if (!strcmp(ctx->configs[i].name, name)) {
+				config = &ctx->configs[i];
+				break;
+			}
+		}
+
+		if (!config) {
+			warnx("no such configuration '%s'", name);
+			return -1;
+		}
 	}
 
 	/* ... and apply it */
@@ -524,12 +552,10 @@ int main(int argc, char **argv)
 	struct ctx _ctx, *ctx;
 	int rc;
 
-	if (argc != 2) {
-		fprintf(stderr, "usage: %s <configuration>\n", argv[0]);
-		return EXIT_FAILURE;
-	}
+	config_name = NULL;
 
-	config_name = argv[1];
+	if (argc > 1)
+		config_name = argv[1];
 
 	ctx = &_ctx;
 	memset(ctx, 0, sizeof(*ctx));
