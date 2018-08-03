@@ -34,22 +34,34 @@
 #include <sys/un.h>
 #include <sys/wait.h>
 
+#include <json.h>
+
 #include "config.h"
+
+struct config {
+	char			*name;
+	char			*nbd_device;
+	struct json_object	*metadata;
+};
 
 struct ctx {
 	int		sock;
 	int		sock_client;
 	int		signal_pipe[2];
 	char		*sock_path;
+	char		*dev_path;
 	pid_t		nbd_client_pid;
+	int		nbd_timeout;
 	uint8_t		*buf;
 	size_t		bufsize;
+	struct config	*configs;
+	int		n_configs;
 };
 
+static const char *conf_path = SYSCONFDIR "/nbd-proxy/config.json";
 static const char *sockpath_tmpl = RUNSTATEDIR "/nbd.%d.sock";
-static const char *dev_path = "/dev/nbd0";
 static const size_t bufsize = 0x20000;
-static const int nbd_timeout = 30;
+static const int nbd_timeout_default = 30;
 
 static int open_nbd_socket(struct ctx *ctx)
 {
@@ -116,7 +128,8 @@ static int start_nbd_client(struct ctx *ctx)
 		char timeout_str[10];
 		int fd;
 
-		snprintf(timeout_str, sizeof(timeout_str), "%d", nbd_timeout);
+		snprintf(timeout_str, sizeof(timeout_str),
+				"%d", ctx->nbd_timeout);
 
 		fd = open("/dev/null", O_RDWR);
 		if (fd < 0)
@@ -132,7 +145,7 @@ static int start_nbd_client(struct ctx *ctx)
 				"-u", ctx->sock_path,
 				"-n",
 				"-t", timeout_str,
-				dev_path,
+				ctx->dev_path,
 				NULL);
 		err(EXIT_FAILURE, "can't start ndb client");
 	}
@@ -373,16 +386,163 @@ static int run_proxy(struct ctx *ctx)
 	return rc ? -1 : 0;
 }
 
-int main(void)
+static void config_free_one(struct config *config)
 {
+	if (config->metadata)
+		json_object_put(config->metadata);
+	free(config->nbd_device);
+	free(config->name);
+}
+
+static int config_parse_one(struct config *config, const char *name,
+		json_object *obj)
+{
+	struct json_object *tmp, *meta;
+	json_bool jrc;
+
+	jrc = json_object_object_get_ex(obj, "nbd-device", &tmp);
+	if (!jrc) {
+		warnx("config %s doesn't specify a nbd-device", name);
+		return -1;
+	}
+
+	if (!json_object_is_type(tmp, json_type_string)) {
+		warnx("config %s has invalid nbd-device", name);
+		return -1;
+	}
+
+	config->nbd_device = strdup(json_object_get_string(tmp));
+	config->name = strdup(name);
+
+	jrc = json_object_object_get_ex(obj, "metadata", &meta);
+	if (jrc && json_object_is_type(meta, json_type_object))
+		config->metadata = json_object_get(meta);
+	else
+		config->metadata = NULL;
+
+	return 0;
+}
+
+static void config_free(struct ctx *ctx)
+{
+	int i;
+
+	for (i = 0; i < ctx->n_configs; i++)
+		config_free_one(&ctx->configs[i]);
+
+	free(ctx->configs);
+	ctx->n_configs = 0;
+}
+
+static int config_init(struct ctx *ctx)
+{
+	struct json_object *obj, *tmp;
+	json_bool jrc;
+	int i, rc;
+
+	/* apply defaults */
+	ctx->nbd_timeout = nbd_timeout_default;
+
+	obj = json_object_from_file(conf_path);
+	if (!obj) {
+		warnx("can't read configuration from %s\n", conf_path);
+		return -1;
+	}
+
+	/* global configuration */
+	jrc = json_object_object_get_ex(obj, "timeout", &tmp);
+	if (jrc) {
+		errno = 0;
+		ctx->nbd_timeout = json_object_get_int(tmp);
+		if (ctx->nbd_timeout == 0 && errno) {
+			warnx("can't parse timeout value");
+			goto err_free;
+		}
+	}
+
+	/* per-config configuration */
+	jrc = json_object_object_get_ex(obj, "configurations", &tmp);
+	if (!jrc) {
+		warnx("no configurations specified");
+		goto err_free;
+	}
+
+	if (!json_object_is_type(tmp, json_type_object)) {
+		warnx("invalid configurations format");
+		goto err_free;
+	}
+
+	ctx->n_configs = json_object_object_length(tmp);
+	ctx->configs = calloc(ctx->n_configs, sizeof(*ctx->configs));
+
+	i = 0;
+	json_object_object_foreach(tmp, name, config) {
+		rc = config_parse_one(&ctx->configs[i], name, config);
+		if (rc)
+			goto err_free;
+		i++;
+	}
+
+	json_object_put(obj);
+
+	return 0;
+
+err_free:
+	warnx("failed to load config from %s", conf_path);
+	json_object_put(obj);
+	return -1;
+}
+
+static int config_select(struct ctx *ctx, const char *name)
+{
+	struct config *config;
+	int i;
+
+	config = NULL;
+
+	/* find a matching config... */
+	for (i = 0; i < ctx->n_configs; i++) {
+		if (!strcmp(ctx->configs[i].name, name)) {
+			config = &ctx->configs[i];
+			break;
+		}
+	}
+
+	if (!config) {
+		warnx("no such configuration '%s'", name);
+		return -1;
+	}
+
+	/* ... and apply it */
+	ctx->dev_path = config->nbd_device;
+	return 0;
+}
+
+int main(int argc, char **argv)
+{
+	const char *config_name;
 	struct ctx _ctx, *ctx;
 	int rc;
 
+	if (argc != 2) {
+		fprintf(stderr, "usage: %s <configuration>\n", argv[0]);
+		return EXIT_FAILURE;
+	}
+
+	config_name = argv[1];
+
 	ctx = &_ctx;
+	memset(ctx, 0, sizeof(*ctx));
 	ctx->bufsize = bufsize;
 	ctx->buf = malloc(ctx->bufsize);
-	ctx->sock_path = NULL;
-	ctx->nbd_client_pid = 0;
+
+	rc = config_init(ctx);
+	if (rc)
+		goto out_free;
+
+	rc = config_select(ctx, config_name);
+	if (rc)
+		goto out_free;
 
 	rc = open_nbd_socket(ctx);
 	if (rc)
@@ -419,6 +579,7 @@ out_close:
 	}
 	close(ctx->sock);
 out_free:
+	config_free(ctx);
 	free(ctx->buf);
 	return rc ? EXIT_FAILURE : EXIT_SUCCESS;
 }

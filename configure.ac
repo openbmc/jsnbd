@@ -14,5 +14,7 @@ AX_APPEND_COMPILE_FLAGS([-Wall -Werror], [CFLAGS])
 
 AC_CHECK_FUNCS(splice)
 
+PKG_CHECK_MODULES(JSON, [json-c])
+
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT
