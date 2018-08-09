@@ -83,7 +83,7 @@ static int open_nbd_socket(struct ctx *ctx)
 	if (rc < 0)
 		return -1;
 
-	sd = socket(AF_UNIX, SOCK_STREAM, 0);
+	sd = socket(AF_UNIX, SOCK_STREAM | SOCK_CLOEXEC, 0);
 	if (sd < 0) {
 		warn("can't create socket");
 		goto err_free;
@@ -141,7 +141,7 @@ static int start_nbd_client(struct ctx *ctx)
 		snprintf(timeout_str, sizeof(timeout_str),
 				"%d", ctx->nbd_timeout);
 
-		fd = open("/dev/null", O_RDWR);
+		fd = open("/dev/null", O_RDWR | O_CLOEXEC);
 		if (fd < 0)
 			err(EXIT_FAILURE, "can't open /dev/null");
 
@@ -149,7 +149,6 @@ static int start_nbd_client(struct ctx *ctx)
 		dup2(fd, STDOUT_FILENO);
 		dup2(fd, STDERR_FILENO);
 		close(fd);
-		close(ctx->sock);
 
 		execlp("nbd-client", "nbd-client",
 				"-u", ctx->sock_path,
@@ -245,7 +244,7 @@ static int setup_signals(struct ctx *ctx)
 	struct sigaction sa;
 	int rc;
 
-	rc = pipe(ctx->signal_pipe);
+	rc = pipe2(ctx->signal_pipe, O_CLOEXEC);
 	if (rc) {
 		warn("cant setup signal pipe");
 		return -1;
@@ -329,7 +328,7 @@ static int wait_for_nbd_client(struct ctx *ctx)
 		}
 
 		if (pollfds[0].revents) {
-			rc = accept(ctx->sock, NULL, NULL);
+			rc = accept4(ctx->sock, NULL, NULL, SOCK_CLOEXEC);
 			if (rc < 0) {
 				warn("can't create connection");
 				return -1;
@@ -383,11 +382,7 @@ static int run_state_hook(struct ctx *ctx,
 	}
 
 	if (!pid) {
-		close(ctx->sock);
-		close(ctx->sock_client);
-		close(ctx->signal_pipe[0]);
-		close(ctx->signal_pipe[1]);
-		fd = open("/dev/null", O_RDWR);
+		fd = open("/dev/null", O_RDWR | O_CLOEXEC);
 		if (fd < 0)
 			exit(EXIT_FAILURE);
 
