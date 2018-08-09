@@ -389,6 +389,24 @@ static int run_proxy(struct ctx *ctx)
 	return rc ? -1 : 0;
 }
 
+static void print_metadata(struct ctx *ctx)
+{
+	struct json_object *md;
+	int i;
+
+	md = json_object_new_object();
+
+	for (i = 0; i < ctx->n_configs; i++) {
+		struct config *config = &ctx->configs[i];
+		json_object_object_add(md, config->name,
+				config->metadata);
+	}
+
+	puts(json_object_get_string(md));
+
+	json_object_put(md);
+}
+
 static void config_free_one(struct config *config)
 {
 	if (config->metadata)
@@ -548,17 +566,26 @@ static int config_select(struct ctx *ctx, const char *name)
 }
 
 static const struct option options[] = {
-	{ .name = "help", .val = 'h' },
+	{ .name = "help",	.val = 'h' },
+	{ .name = "metadata",	.val = 'm' },
 	{ 0 },
+};
+
+enum action {
+	ACTION_PROXY,
+	ACTION_METADATA,
 };
 
 static void print_usage(const char *progname)
 {
-	fprintf(stderr, "usage: %s [configuration]\n", progname);
+	fprintf(stderr, "usage:\n");
+	fprintf(stderr, "\t%s [configuration]\n", progname);
+	fprintf(stderr, "\t%s --metadata\n", progname);
 }
 
 int main(int argc, char **argv)
 {
+	enum action action = ACTION_PROXY;
 	const char *config_name;
 	struct ctx _ctx, *ctx;
 	int rc;
@@ -571,6 +598,9 @@ int main(int argc, char **argv)
 			break;
 
 		switch (c) {
+		case 'm':
+			action = ACTION_METADATA;
+			break;
 		case 'h':
 		case '?':
 			print_usage(argv[0]);
@@ -589,6 +619,11 @@ int main(int argc, char **argv)
 	rc = config_init(ctx);
 	if (rc)
 		goto out_free;
+
+	if (action == ACTION_METADATA) {
+		print_metadata(ctx);
+		goto out_free;
+	}
 
 	rc = config_select(ctx, config_name);
 	if (rc)

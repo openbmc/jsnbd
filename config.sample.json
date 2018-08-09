@@ -2,7 +2,10 @@
     "timeout": 30,
     "configurations": {
         "0": {
-            "nbd-device": "/dev/nbd0"
+            "nbd-device": "/dev/nbd0",
+            "metadata": {
+                "description": "Virtual media device"
+            }
         }
     }
 }
