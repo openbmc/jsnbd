@@ -17,10 +17,12 @@
 
 #define _GNU_SOURCE
 
+#include <dirent.h>
 #include <err.h>
 #include <errno.h>
 #include <fcntl.h>
 #include <getopt.h>
+#include <limits.h>
 #include <signal.h>
 #include <stdbool.h>
 #include <stdint.h>
@@ -32,6 +34,7 @@
 #include <sys/poll.h>
 #include <sys/socket.h>
 #include <sys/stat.h>
+#include <sys/types.h>
 #include <sys/un.h>
 #include <sys/wait.h>
 
@@ -51,7 +54,6 @@ struct ctx {
 	int		sock_client;
 	int		signal_pipe[2];
 	char		*sock_path;
-	char		*dev_path;
 	pid_t		nbd_client_pid;
 	int		nbd_timeout;
 	uint8_t		*buf;
@@ -59,12 +61,17 @@ struct ctx {
 	struct config	*configs;
 	int		n_configs;
 	struct config	*default_config;
+	struct config	*config;
 };
 
 static const char *conf_path = SYSCONFDIR "/nbd-proxy/config.json";
+static const char *state_hook_path = SYSCONFDIR "/nbd-proxy/state.d";
 static const char *sockpath_tmpl = RUNSTATEDIR "/nbd.%d.sock";
+
 static const size_t bufsize = 0x20000;
 static const int nbd_timeout_default = 30;
+
+#define BUILD_ASSERT_OR_ZERO(c) (sizeof(struct {int:-!(c);}))
 
 static int open_nbd_socket(struct ctx *ctx)
 {
@@ -148,7 +155,7 @@ static int start_nbd_client(struct ctx *ctx)
 				"-u", ctx->sock_path,
 				"-n",
 				"-t", timeout_str,
-				ctx->dev_path,
+				ctx->config->nbd_device,
 				NULL);
 		err(EXIT_FAILURE, "can't start ndb client");
 	}
@@ -342,6 +349,111 @@ static int wait_for_nbd_client(struct ctx *ctx)
 	return 0;
 }
 
+#define join_paths(p1, p2, r) \
+	(BUILD_ASSERT_OR_ZERO(sizeof(r) > PATH_MAX) + __join_paths(p1, p2, r))
+static int __join_paths(const char *p1, const char *p2, char res[])
+{
+	size_t len;
+	char *pos;
+
+	len = strlen(p1) + 1 + strlen(p2);
+	if (len > PATH_MAX)
+		return -1;
+
+	pos = res;
+	strcpy(pos, p1);
+	pos += strlen(p1);
+	*pos = '/';
+	pos++;
+	strcpy(pos, p2);
+
+	return 0;
+}
+
+static int run_state_hook(struct ctx *ctx,
+		const char *path, const char *name, const char *action)
+{
+	int status, rc, fd;
+	pid_t pid;
+
+	pid = fork();
+	if (pid < 0) {
+		warn("can't fork to execute hook %s", name);
+		return -1;
+	}
+
+	if (!pid) {
+		close(ctx->sock);
+		close(ctx->sock_client);
+		close(ctx->signal_pipe[0]);
+		close(ctx->signal_pipe[1]);
+		fd = open("/dev/null", O_RDWR);
+		if (fd < 0)
+			exit(EXIT_FAILURE);
+
+		dup2(fd, STDIN_FILENO);
+		dup2(fd, STDOUT_FILENO);
+		dup2(fd, STDERR_FILENO);
+		execl(path, name, action, ctx->config->name, NULL);
+		exit(EXIT_FAILURE);
+	}
+
+	rc = waitpid(pid, &status, 0);
+	if (rc < 0) {
+		warn("wait");
+		return -1;
+	}
+
+	if (!WIFEXITED(status) || WEXITSTATUS(status) != 0) {
+		warnx("hook %s failed", name);
+		return -1;
+	}
+
+	return 0;
+}
+
+static int run_state_hooks(struct ctx *ctx, const char *action)
+{
+	struct dirent *dirent;
+	int rc;
+	DIR *dir;
+
+	dir = opendir(state_hook_path);
+	if (!dir)
+		return 0;
+
+	rc = 0;
+
+	for (dirent = readdir(dir); dirent; dirent = readdir(dir)) {
+		char full_path[PATH_MAX+1];
+		struct stat statbuf;
+
+		if (dirent->d_name[0] == '.')
+			continue;
+
+		rc = fstatat(dirfd(dir), dirent->d_name, &statbuf, 0);
+		if (rc)
+			continue;
+
+		if (!(S_ISREG(statbuf.st_mode) || S_ISLNK(statbuf.st_mode)))
+			continue;
+
+		if (faccessat(dirfd(dir), dirent->d_name, X_OK, 0))
+			continue;
+
+		rc = join_paths(state_hook_path, dirent->d_name, full_path);
+		if (rc)
+			continue;
+
+		rc = run_state_hook(ctx, full_path, dirent->d_name, action);
+		if (rc)
+			break;
+	}
+
+	closedir(dir);
+
+	return rc;
+}
 
 static int run_proxy(struct ctx *ctx)
 {
@@ -561,7 +673,7 @@ static int config_select(struct ctx *ctx, const char *name)
 	}
 
 	/* ... and apply it */
-	ctx->dev_path = config->nbd_device;
+	ctx->config = config;
 	return 0;
 }
 
@@ -645,7 +757,13 @@ int main(int argc, char **argv)
 	if (rc)
 		goto out_stop_client;
 
+	rc = run_state_hooks(ctx, "start");
+	if (rc)
+		goto out_stop_client;
+
 	rc = run_proxy(ctx);
+
+	run_state_hooks(ctx, "stop");
 
 out_stop_client:
 	/* we cleanup signals before stopping the client, because we

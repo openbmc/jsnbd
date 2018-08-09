@@ -53,3 +53,13 @@ clients can connect as NBD servers.
 There is no authentication or authorisation implemented in the nbd proxy. Your
 websocket proxy should implement proper authentication before nbd-proxy is
 connected to the websocket endpoint.
+
+State hooks
+-----------
+
+The nbd-proxy has a facility to run hooks on state change. When a
+nbd session is established or shut down, the proxy will run any executables
+found under the hook path (by default, /etc/nbd-proxy/state.d/).
+
+These hooks are called with two arguments: the action ("start" or "stop"),
+and the name of the configuration (as specified in the config.json file).
