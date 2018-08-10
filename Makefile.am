@@ -2,7 +2,7 @@ sbin_PROGRAMS = nbd-proxy
 
 nbd_proxy_CPPFLAGS = \
 	$(JSON_CFLAGS) \
-	-DRUNSTATEDIR=\"$(runstatedir)\" \
+	-DRUNSTATEDIR=\"$(localstatedir)/run\" \
 	-DSYSCONFDIR=\"$(sysconfdir)\"
 
 nbd_proxy_LDADD = \
