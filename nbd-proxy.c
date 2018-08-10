@@ -410,8 +410,8 @@ static int run_state_hook(struct ctx *ctx,
 static int run_state_hooks(struct ctx *ctx, const char *action)
 {
 	struct dirent *dirent;
-	int rc;
 	DIR *dir;
+	int rc;
 
 	dir = opendir(state_hook_path);
 	if (!dir)
@@ -427,8 +427,10 @@ static int run_state_hooks(struct ctx *ctx, const char *action)
 			continue;
 
 		rc = fstatat(dirfd(dir), dirent->d_name, &statbuf, 0);
-		if (rc)
+		if (rc) {
+			rc = 0;
 			continue;
+		}
 
 		if (!(S_ISREG(statbuf.st_mode) || S_ISLNK(statbuf.st_mode)))
 			continue;
@@ -437,8 +439,10 @@ static int run_state_hooks(struct ctx *ctx, const char *action)
 			continue;
 
 		rc = join_paths(state_hook_path, dirent->d_name, full_path);
-		if (rc)
+		if (rc) {
+			rc = 0;
 			continue;
+		}
 
 		rc = run_state_hook(ctx, full_path, dirent->d_name, action);
 		if (rc)
