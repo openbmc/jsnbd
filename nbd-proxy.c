@@ -39,6 +39,7 @@
 #include <sys/wait.h>
 
 #include <json.h>
+#include <libudev.h>
 
 #include "config.h"
 
@@ -56,12 +57,15 @@ struct ctx {
 	char		*sock_path;
 	pid_t		nbd_client_pid;
 	int		nbd_timeout;
+	dev_t		nbd_devno;
 	uint8_t		*buf;
 	size_t		bufsize;
 	struct config	*configs;
 	int		n_configs;
 	struct config	*default_config;
 	struct config	*config;
+	struct udev	*udev;
+	struct udev_monitor *monitor;
 };
 
 static const char *conf_path = SYSCONFDIR "/nbd-proxy/config.json";
@@ -454,11 +458,94 @@ static int run_state_hooks(struct ctx *ctx, const char *action)
 	return rc;
 }
 
+static int udev_init(struct ctx *ctx)
+{
+	int rc;
+
+	ctx->udev = udev_new();
+	if (!ctx) {
+		warn("can't create udev object");
+		return -1;
+	}
+
+	ctx->monitor = udev_monitor_new_from_netlink(ctx->udev, "kernel");
+	if (!ctx->monitor) {
+		warn("can't create udev monitor");
+		goto out_unref_udev;
+	}
+
+	rc = udev_monitor_filter_add_match_subsystem_devtype(
+			ctx->monitor, "block", "disk");
+	if (rc) {
+		warn("can't create udev monitor filter");
+		goto out_unref_monitor;
+	}
+
+	rc = udev_monitor_enable_receiving(ctx->monitor);
+	if (rc) {
+		warn("can't start udev monitor");
+		goto out_unref_monitor;
+	}
+
+	return 0;
+
+out_unref_monitor:
+	udev_monitor_unref(ctx->monitor);
+out_unref_udev:
+	udev_unref(ctx->udev);
+	return -1;
+}
+
+static void udev_free(struct ctx *ctx)
+{
+	udev_monitor_unref(ctx->monitor);
+	udev_unref(ctx->udev);
+}
+
+/* Check for the change event on our nbd device, signifying that the kernel
+ * has finished initialising the block device. Once we see the event, we run
+ * the "start" state hook, and close the udev monitor.
+ *
+ * Returns:
+ *   0 if no processing was performed
+ *  -1 on state hook error (and the nbd session should be closed)
+ */
+static int udev_process(struct ctx *ctx)
+{
+	struct udev_device *dev;
+	bool action_is_change;
+	dev_t devno;
+	int rc;
+
+	dev = udev_monitor_receive_device(ctx->monitor);
+	if (!dev)
+		return 0;
+
+	devno = udev_device_get_devnum(dev);
+	action_is_change = !strcmp(udev_device_get_action(dev), "change");
+	udev_device_unref(dev);
+
+	if (devno != ctx->nbd_devno)
+		return 0;
+
+	if (!action_is_change)
+		return 0;
+
+	udev_monitor_unref(ctx->monitor);
+	udev_unref(ctx->udev);
+	ctx->monitor = NULL;
+	ctx->udev = NULL;
+
+	rc = run_state_hooks(ctx, "start");
+
+	return rc;
+}
+
 static int run_proxy(struct ctx *ctx)
 {
-	struct pollfd pollfds[3];
+	struct pollfd pollfds[4];
 	bool exit = false;
-	int rc;
+	int rc, n_fd;
 
 	/* main proxy: forward data between stdio & socket */
 	pollfds[0].fd = ctx->sock_client;
@@ -467,10 +554,14 @@ static int run_proxy(struct ctx *ctx)
 	pollfds[1].events = POLLIN;
 	pollfds[2].fd = ctx->signal_pipe[0];
 	pollfds[2].events = POLLIN;
+	pollfds[3].fd = udev_monitor_get_fd(ctx->monitor);
+	pollfds[3].events = POLLIN;
+
+	n_fd = 4;
 
 	for (;;) {
 		errno = 0;
-		rc = poll(pollfds, 3, -1);
+		rc = poll(pollfds, n_fd, -1);
 		if (rc < 0) {
 			if (errno == EINTR)
 				continue;
@@ -494,6 +585,20 @@ static int run_proxy(struct ctx *ctx)
 			rc = process_signal_pipe(ctx, &exit);
 			if (rc || exit)
 				break;
+		}
+
+		if (pollfds[3].revents) {
+			rc = udev_process(ctx);
+			if (rc)
+				break;
+
+			/* udev_process may have closed the udev connection,
+			 * in which case we can stop polling on its fd */
+			if (!ctx->udev) {
+				pollfds[3].fd = 0;
+				pollfds[3].revents = 0;
+				n_fd = 3;
+			}
 		}
 	}
 
@@ -644,7 +749,8 @@ err_free:
 static int config_select(struct ctx *ctx, const char *name)
 {
 	struct config *config;
-	int i;
+	struct stat statbuf;
+	int i, rc;
 
 	config = NULL;
 
@@ -671,8 +777,23 @@ static int config_select(struct ctx *ctx, const char *name)
 		}
 	}
 
+	/* check that the device exists */
+	rc = stat(config->nbd_device, &statbuf);
+	if (rc) {
+		warn("can't stat nbd device %s", config->nbd_device);
+		return -1;
+	}
+
+	if (!S_ISBLK(statbuf.st_mode)) {
+		warn("specified nbd path %s isn't a block device",
+				config->nbd_device);
+		return -1;
+	}
+
 	/* ... and apply it */
 	ctx->config = config;
+	ctx->nbd_devno = statbuf.st_rdev;
+
 	return 0;
 }
 
@@ -756,11 +877,14 @@ int main(int argc, char **argv)
 	if (rc)
 		goto out_stop_client;
 
-	rc = run_state_hooks(ctx, "start");
+	rc = udev_init(ctx);
 	if (rc)
 		goto out_stop_client;
 
 	rc = run_proxy(ctx);
+
+	if (ctx->udev)
+		udev_free(ctx);
 
 	run_state_hooks(ctx, "stop");
 
