@@ -69,13 +69,11 @@ struct ctx {
 };
 
 static const char *conf_path = SYSCONFDIR "/nbd-proxy/config.json";
-static const char *state_hook_path = SYSCONFDIR "/nbd-proxy/state.d";
+static const char *state_hook_path = SYSCONFDIR "/nbd-proxy/state";
 static const char *sockpath_tmpl = RUNSTATEDIR "/nbd.%d.sock";
 
 static const size_t bufsize = 0x20000;
 static const int nbd_timeout_default = 30;
-
-#define BUILD_ASSERT_OR_ZERO(c) (sizeof(struct {int:-!(c);}))
 
 static int open_nbd_socket(struct ctx *ctx)
 {
@@ -352,40 +350,29 @@ static int wait_for_nbd_client(struct ctx *ctx)
 	return 0;
 }
 
-#define join_paths(p1, p2, r) \
-	(BUILD_ASSERT_OR_ZERO(sizeof(r) > PATH_MAX) + __join_paths(p1, p2, r))
-static int __join_paths(const char *p1, const char *p2, char res[])
-{
-	size_t len;
-	char *pos;
-
-	len = strlen(p1) + 1 + strlen(p2);
-	if (len > PATH_MAX)
-		return -1;
-
-	pos = res;
-	strcpy(pos, p1);
-	pos += strlen(p1);
-	*pos = '/';
-	pos++;
-	strcpy(pos, p2);
-
-	return 0;
-}
-
-static int run_state_hook(struct ctx *ctx,
-		const char *path, const char *name, const char *action)
+static int run_state_hook(struct ctx *ctx, const char *action)
 {
 	int status, rc, fd;
 	pid_t pid;
 
+	/* if the hook isn't present or executable, that's not necessarily
+	 * an error condition */
+	if (!access(state_hook_path, X_OK))
+		return 0;
+
 	pid = fork();
 	if (pid < 0) {
-		warn("can't fork to execute hook %s", name);
+		warn("can't fork to execute hook %s", state_hook_path);
 		return -1;
 	}
 
 	if (!pid) {
+		const char *argv0;
+
+		argv0 = strchr(state_hook_path, '/');
+		if (!argv0)
+			argv0 = state_hook_path;
+
 		fd = open("/dev/null", O_RDWR | O_CLOEXEC);
 		if (fd < 0)
 			exit(EXIT_FAILURE);
@@ -393,7 +380,7 @@ static int run_state_hook(struct ctx *ctx,
 		dup2(fd, STDIN_FILENO);
 		dup2(fd, STDOUT_FILENO);
 		dup2(fd, STDERR_FILENO);
-		execl(path, name, action, ctx->config->name, NULL);
+		execl(state_hook_path, argv0, action, ctx->config->name, NULL);
 		exit(EXIT_FAILURE);
 	}
 
@@ -404,58 +391,11 @@ static int run_state_hook(struct ctx *ctx,
 	}
 
 	if (!WIFEXITED(status) || WEXITSTATUS(status) != 0) {
-		warnx("hook %s failed", name);
+		warnx("hook %s failed", state_hook_path);
 		return -1;
 	}
 
 	return 0;
-}
-
-static int run_state_hooks(struct ctx *ctx, const char *action)
-{
-	struct dirent *dirent;
-	DIR *dir;
-	int rc;
-
-	dir = opendir(state_hook_path);
-	if (!dir)
-		return 0;
-
-	rc = 0;
-
-	for (dirent = readdir(dir); dirent; dirent = readdir(dir)) {
-		char full_path[PATH_MAX+1];
-		struct stat statbuf;
-
-		if (dirent->d_name[0] == '.')
-			continue;
-
-		rc = fstatat(dirfd(dir), dirent->d_name, &statbuf, 0);
-		if (rc) {
-			rc = 0;
-			continue;
-		}
-
-		if (!(S_ISREG(statbuf.st_mode) || S_ISLNK(statbuf.st_mode)))
-			continue;
-
-		if (faccessat(dirfd(dir), dirent->d_name, X_OK, 0))
-			continue;
-
-		rc = join_paths(state_hook_path, dirent->d_name, full_path);
-		if (rc) {
-			rc = 0;
-			continue;
-		}
-
-		rc = run_state_hook(ctx, full_path, dirent->d_name, action);
-		if (rc)
-			break;
-	}
-
-	closedir(dir);
-
-	return rc;
 }
 
 static int udev_init(struct ctx *ctx)
@@ -536,7 +476,7 @@ static int udev_process(struct ctx *ctx)
 	ctx->monitor = NULL;
 	ctx->udev = NULL;
 
-	rc = run_state_hooks(ctx, "start");
+	rc = run_state_hook(ctx, "start");
 
 	return rc;
 }
@@ -886,7 +826,7 @@ int main(int argc, char **argv)
 	if (ctx->udev)
 		udev_free(ctx);
 
-	run_state_hooks(ctx, "stop");
+	run_state_hook(ctx, "stop");
 
 out_stop_client:
 	/* we cleanup signals before stopping the client, because we
