@@ -56,6 +56,7 @@ struct ctx {
 	int		signal_pipe[2];
 	char		*sock_path;
 	pid_t		nbd_client_pid;
+	pid_t		state_hook_pid;
 	int		nbd_timeout;
 	dev_t		nbd_devno;
 	uint8_t		*buf;
@@ -278,9 +279,42 @@ static void cleanup_signals(struct ctx *ctx)
 	close(ctx->signal_pipe[1]);
 }
 
+static void process_sigchld(struct ctx *ctx, bool *exit)
+{
+	int status;
+	pid_t pid;
+
+	for (;;) {
+		pid = waitpid(-1, &status, WNOHANG);
+		if (pid == 0)
+			break;
+
+		if (pid == ctx->nbd_client_pid) {
+			warnx("nbd client stopped (%s: %d); exiting",
+					WIFEXITED(status) ? "rc" : "sig",
+					WIFEXITED(status) ?
+						WEXITSTATUS(status) :
+						WTERMSIG(status));
+			ctx->nbd_client_pid = 0;
+			*exit = true;
+
+		} else if (pid == ctx->state_hook_pid) {
+			if (!WIFEXITED(status) || WEXITSTATUS(status)) {
+				warnx("state hook failed (%s: %d); exiting",
+					WIFEXITED(status) ? "rc" : "sig",
+					WIFEXITED(status) ?
+						WEXITSTATUS(status) :
+						WTERMSIG(status));
+				*exit = true;
+			}
+			ctx->state_hook_pid = 0;
+		}
+	}
+}
+
 static int process_signal_pipe(struct ctx *ctx, bool *exit)
 {
-	int buf, rc, status;
+	int buf, rc;
 
 	rc = read(ctx->signal_pipe[0], &buf, sizeof(buf));
 	if (rc != sizeof(buf))
@@ -290,15 +324,7 @@ static int process_signal_pipe(struct ctx *ctx, bool *exit)
 
 	switch (buf) {
 	case SIGCHLD:
-		rc = waitpid(ctx->nbd_client_pid, &status, WNOHANG);
-		if (rc > 0) {
-			warnx("nbd client stopped (%s: %d); exiting",
-					WIFEXITED(status) ? "rc" : "sig",
-					WIFEXITED(status) ?
-						WEXITSTATUS(status) :
-						WTERMSIG(status));
-			ctx->nbd_client_pid = 0;
-		}
+		process_sigchld(ctx, exit);
 		break;
 	case SIGINT:
 	case SIGTERM:
@@ -350,14 +376,14 @@ static int wait_for_nbd_client(struct ctx *ctx)
 	return 0;
 }
 
-static int run_state_hook(struct ctx *ctx, const char *action)
+static int run_state_hook(struct ctx *ctx, const char *action, bool wait)
 {
 	int status, rc, fd;
 	pid_t pid;
 
 	/* if the hook isn't present or executable, that's not necessarily
 	 * an error condition */
-	if (!access(state_hook_path, X_OK))
+	if (access(state_hook_path, X_OK))
 		return 0;
 
 	pid = fork();
@@ -382,6 +408,11 @@ static int run_state_hook(struct ctx *ctx, const char *action)
 		dup2(fd, STDERR_FILENO);
 		execl(state_hook_path, argv0, action, ctx->config->name, NULL);
 		exit(EXIT_FAILURE);
+	}
+
+	if (!wait) {
+		ctx->state_hook_pid = pid;
+		return 0;
 	}
 
 	rc = waitpid(pid, &status, 0);
@@ -476,7 +507,7 @@ static int udev_process(struct ctx *ctx)
 	ctx->monitor = NULL;
 	ctx->udev = NULL;
 
-	rc = run_state_hook(ctx, "start");
+	rc = run_state_hook(ctx, "start", false);
 
 	return rc;
 }
@@ -826,7 +857,7 @@ int main(int argc, char **argv)
 	if (ctx->udev)
 		udev_free(ctx);
 
-	run_state_hook(ctx, "stop");
+	run_state_hook(ctx, "stop", true);
 
 out_stop_client:
 	/* we cleanup signals before stopping the client, because we
