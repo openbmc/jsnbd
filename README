@@ -11,6 +11,9 @@ There are two components here:
              stdio. This can be used with a websocket proxy to expose
              that stdio as a websocket.
 
+             Prerequisites:
+             - cJSON: https://github.com/DaveGamble/cJSON 
+
   nbd.js:    a javascript implementation of a NBD server.
 
 Running

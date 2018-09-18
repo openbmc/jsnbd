@@ -38,7 +38,7 @@
 #include <sys/un.h>
 #include <sys/wait.h>
 
-#include <json.h>
+#include <cjson/cJSON.h>
 #include <libudev.h>
 
 #include "config.h"
@@ -47,7 +47,7 @@ struct config {
 	char			*name;
 	bool			is_default;
 	char			*nbd_device;
-	struct json_object	*metadata;
+	struct cJSON		*metadata;
 };
 
 struct ctx {
@@ -578,56 +578,54 @@ static int run_proxy(struct ctx *ctx)
 
 static void print_metadata(struct ctx *ctx)
 {
-	struct json_object *md;
+	cJSON* md = NULL;
 	int i;
 
-	md = json_object_new_object();
+	md = cJSON_CreateObject();
 
 	for (i = 0; i < ctx->n_configs; i++) {
 		struct config *config = &ctx->configs[i];
-		json_object_object_add(md, config->name,
+		cJSON_AddItemToObject(md, config->name,
 				config->metadata);
 	}
 
-	puts(json_object_get_string(md));
-
-	json_object_put(md);
+	puts(cJSON_Print(md));
 }
 
 static void config_free_one(struct config *config)
 {
-	if (config->metadata)
-		json_object_put(config->metadata);
 	free(config->nbd_device);
 	free(config->name);
 }
 
 static int config_parse_one(struct config *config, const char *name,
-		json_object *obj)
+		const cJSON *obj)
 {
-	struct json_object *tmp, *meta;
-	json_bool jrc;
+	const cJSON* tmp = NULL;
+	cJSON* meta = NULL;
 
-	jrc = json_object_object_get_ex(obj, "nbd-device", &tmp);
-	if (!jrc) {
+	tmp = cJSON_GetObjectItem(obj, "nbd-device");
+	if (!tmp) {
 		warnx("config %s doesn't specify a nbd-device", name);
 		return -1;
 	}
 
-	if (!json_object_is_type(tmp, json_type_string)) {
+	if (!cJSON_IsString(tmp)) {
 		warnx("config %s has invalid nbd-device", name);
 		return -1;
 	}
 
-	config->nbd_device = strdup(json_object_get_string(tmp));
+	config->nbd_device = strdup(tmp->valuestring);
 	config->name = strdup(name);
 
-	jrc = json_object_object_get_ex(obj, "default", &tmp);
-	config->is_default = jrc && json_object_get_boolean(tmp);
+	config->is_default = false;
+	tmp = cJSON_GetObjectItem(obj, "default");
+	if ((tmp) && (cJSON_IsTrue(tmp)))
+		config->is_default = true;
 
-	jrc = json_object_object_get_ex(obj, "metadata", &meta);
-	if (jrc && json_object_is_type(meta, json_type_object))
-		config->metadata = json_object_get(meta);
+	meta = cJSON_GetObjectItem(obj, "metadata");
+	if (cJSON_IsObject(meta))
+		config->metadata = meta;
 	else
 		config->metadata = NULL;
 
@@ -645,51 +643,46 @@ static void config_free(struct ctx *ctx)
 	ctx->n_configs = 0;
 }
 
-static int config_init(struct ctx *ctx)
+static int config_init(const cJSON* obj, struct ctx *ctx)
 {
-	struct json_object *obj, *tmp;
-	json_bool jrc;
+	const cJSON* tmp = NULL;
+	cJSON* config_json = NULL;
+	char* name;
 	int i, rc;
 
 	/* apply defaults */
 	ctx->nbd_timeout = nbd_timeout_default;
 
-	obj = json_object_from_file(conf_path);
-	if (!obj) {
-		warnx("can't read configuration from %s\n", conf_path);
-		return -1;
-	}
-
 	/* global configuration */
-	jrc = json_object_object_get_ex(obj, "timeout", &tmp);
-	if (jrc) {
-		errno = 0;
-		ctx->nbd_timeout = json_object_get_int(tmp);
-		if (ctx->nbd_timeout == 0 && errno) {
+	tmp = cJSON_GetObjectItem(obj, "timeout");
+	if (tmp) {
+		if (!cJSON_IsNumber(tmp)) {
 			warnx("can't parse timeout value");
 			goto err_free;
 		}
+		ctx->nbd_timeout = tmp->valueint;
 	}
 
 	/* per-config configuration */
-	jrc = json_object_object_get_ex(obj, "configurations", &tmp);
-	if (!jrc) {
+	tmp = cJSON_GetObjectItem(obj, "configurations");
+	if (!tmp) {
 		warnx("no configurations specified");
 		goto err_free;
 	}
 
-	if (!json_object_is_type(tmp, json_type_object)) {
+	if (!cJSON_IsObject(tmp)) {
 		warnx("invalid configurations format");
 		goto err_free;
 	}
 
-	ctx->n_configs = json_object_object_length(tmp);
+	ctx->n_configs = cJSON_GetArraySize(tmp);
 	ctx->configs = calloc(ctx->n_configs, sizeof(*ctx->configs));
 
 	i = 0;
-	json_object_object_foreach(tmp, name, config_json) {
+	cJSON_ArrayForEach(config_json, tmp) {
 		struct config *config = &ctx->configs[i];
 
+		name = config_json->string;
 		rc = config_parse_one(config, name, config_json);
 		if (rc)
 			goto err_free;
@@ -704,8 +697,6 @@ static int config_init(struct ctx *ctx)
 		i++;
 	}
 
-	json_object_put(obj);
-
 	if (ctx->n_configs == 1)
 		ctx->default_config = &ctx->configs[0];
 
@@ -713,7 +704,6 @@ static int config_init(struct ctx *ctx)
 
 err_free:
 	warnx("failed to load config from %s", conf_path);
-	json_object_put(obj);
 	return -1;
 }
 
@@ -786,8 +776,52 @@ static void print_usage(const char *progname)
 	fprintf(stderr, "\t%s --metadata\n", progname);
 }
 
+static cJSON* load_json()
+{
+	cJSON* json = NULL;
+	FILE* fd;
+	char* data;
+	long size;
+	size_t rc;
+
+	fd = fopen(conf_path, "r");
+	if (!fd) {
+		warn("Unable to open config JSON file %s", conf_path);
+		return NULL;
+	}
+
+	fseek(fd, 0, SEEK_END);
+	size = ftell(fd);
+	rewind(fd);
+
+	data = malloc(size + 1);
+
+	rc = fread(data, 1, size, fd);
+	fclose(fd);
+	if (rc != size) {
+		free(data);
+		warn("Only read %zd out of %ld bytes of config file %s",
+			rc, size, conf_path);
+		return NULL;
+	}
+
+	data[size] = '\0';
+	json = cJSON_Parse(data);
+	free(data);
+
+	if (json == NULL) {
+		warn("Failed parsing config file %s", conf_path);
+
+		const char* error_loc = cJSON_GetErrorPtr();
+		if (error_loc != NULL)
+			warn("JSON error at %s", error_loc);
+	}
+	return json;
+}
+
 int main(int argc, char **argv)
 {
+	cJSON* obj = NULL;
 	enum action action = ACTION_PROXY;
 	const char *config_name;
 	struct ctx _ctx, *ctx;
@@ -819,7 +853,13 @@ int main(int argc, char **argv)
 	ctx->bufsize = bufsize;
 	ctx->buf = malloc(ctx->bufsize);
 
-	rc = config_init(ctx);
+	obj = load_json();
+	if (!obj) {
+		rc = -1;
+		goto out_free;
+	}
+
+	rc = config_init(obj, ctx);
 	if (rc)
 		goto out_free;
 
@@ -876,6 +916,7 @@ out_close:
 	}
 	close(ctx->sock);
 out_free:
+	cJSON_Delete(obj);
 	config_free(ctx);
 	free(ctx->buf);
 	return rc ? EXIT_FAILURE : EXIT_SUCCESS;
