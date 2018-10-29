@@ -99,7 +99,7 @@ static int open_nbd_socket(struct ctx *ctx)
 	}
 
 	addr.sun_family = AF_UNIX;
-	strncpy(addr.sun_path, path, sizeof(addr.sun_path));
+	strncpy(addr.sun_path, path, sizeof(addr.sun_path) -1);
 
 	rc = bind(sd, (struct sockaddr *)&addr, sizeof(addr));
 	if (rc) {
