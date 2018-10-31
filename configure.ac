@@ -17,5 +17,9 @@ AC_CHECK_FUNCS(splice)
 PKG_CHECK_MODULES(JSON, [json-c])
 PKG_CHECK_MODULES(UDEV, [libudev])
 
+AC_ARG_VAR(CONFIG_JSON, [The JSON file containing the device configurations.])
+AS_IF([test "x$CONFIG_JSON" == "x"], \
+    [CONFIG_JSON="$srcdir/config.json"])
+
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT

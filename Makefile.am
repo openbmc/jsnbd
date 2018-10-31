@@ -9,3 +9,6 @@ nbd_proxy_CPPFLAGS = \
 nbd_proxy_LDADD = \
 	$(JSON_LIBS) \
 	$(UDEV_LIBS)
+
+configjsondir = ${sysconfdir}/nbd-proxy
+configjson_DATA = ${CONFIG_JSON}
