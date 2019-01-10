@@ -596,8 +596,6 @@ static void print_metadata(struct ctx *ctx)
 
 static void config_free_one(struct config *config)
 {
-	if (config->metadata)
-		json_object_put(config->metadata);
 	free(config->nbd_device);
 	free(config->name);
 }
