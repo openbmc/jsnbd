@@ -586,7 +586,7 @@ static void print_metadata(struct ctx *ctx)
 	for (i = 0; i < ctx->n_configs; i++) {
 		struct config *config = &ctx->configs[i];
 		json_object_object_add(md, config->name,
-				config->metadata);
+				json_object_get(config->metadata));
 	}
 
 	puts(json_object_get_string(md));
