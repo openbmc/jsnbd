@@ -195,9 +195,10 @@ function NBDServer(endpoint, file)
                 n += 124;
             var resp = new ArrayBuffer(n);
             var view = new DataView(resp, 0, 10);
-            /* export size. todo: 64 bits? */
-            view.setUint32(0, 0);
-            view.setUint32(4, this.file.size & 0xffffffff);
+            /* export size. */
+            var size = this.file.size;
+            view.setUint32(0, Math.floor(size / (2**32)));
+            view.setUint32(4, size & 0xffffffff);
             /* transmission flags: read-only */
             view.setUint16(8, NBD_FLAG_HAS_FLAGS | NBD_FLAG_READ_ONLY);
             this.ws.send(resp);
@@ -305,17 +306,23 @@ function NBDServer(endpoint, file)
 
     this._handle_cmd_read = function(req)
     {
-        if (req.offset_msB)
+        var offset;
+
+        offset = (req.offset_msB * 2**32) + req.offset_lsB;
+
+        if (offset > Number.MAX_SAFE_INTEGER)
             return ENOSPC;
 
-        if (req.offset_lsB + req.length > file.size)
+        if (offset + req.length > Number.MAX_SAFE_INTEGER)
+            return ENOSPC;
+
+        if (offset + req.length > file.size)
             return ENOSPC;
 
         this._log("read: 0x" + req.length.toString(16) +
-                " bytes, offset 0x" + req.offset_lsB.toString(16));
+                " bytes, offset 0x" + offset.toString(16));
 
-        var blob = this.file.slice(req.offset_lsB,
-                req.offset_lsB + req.length);
+        var blob = this.file.slice(offset, offset + req.length);
         var reader = new FileReader();
 
         reader.onload = (function(ev) {
