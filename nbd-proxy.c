@@ -385,6 +385,10 @@ static int run_state_hook(struct ctx *ctx, const char *action, bool wait)
 	 * an error condition */
 	if (access(state_hook_path, X_OK))
 		return 0;
+ 
+        /* don't run state hook for nbd1 device */
+        if(!strcmp(ctx->config->nbd_device,"/dev/nbd1"))
+                return 0;
 
 	pid = fork();
 	if (pid < 0) {
