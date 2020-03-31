@@ -1,0 +1,8 @@
+Ok-To-Test+1: Adriana Kobylak <anoo@linux.ibm.com>
+Code-Review+2: Jeremy Kerr <jk@ozlabs.org>
+Verified+1: Jeremy Kerr <jk@ozlabs.org>
+Submitted-by: Jeremy Kerr <jk@ozlabs.org>
+Submitted-at: Tue, 31 Mar 2020 00:27:33 +0000
+Reviewed-on: https://gerrit.openbmc-project.xyz/c/openbmc/jsnbd/+/17285
+Project: openbmc/jsnbd
+Branch: refs/heads/master
