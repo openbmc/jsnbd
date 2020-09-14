@@ -30,6 +30,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <assert.h>
 
 #include <sys/poll.h>
 #include <sys/socket.h>
@@ -42,6 +43,15 @@
 #include <libudev.h>
 
 #include "config.h"
+
+typedef enum
+{
+	MediaTypeUSB,
+	MediaTypeHDD,
+	MediaTypeCDROM,
+
+	MediaTypeInvalid = 0xFFU,
+} media_type_t;
 
 struct config {
 	char			*name;
@@ -61,12 +71,25 @@ struct ctx {
 	dev_t		nbd_devno;
 	uint8_t		*buf;
 	size_t		bufsize;
+	media_type_t 	interface_type;
 	struct config	*configs;
 	int		n_configs;
 	struct config	*default_config;
 	struct config	*config;
 	struct udev	*udev;
 	struct udev_monitor *monitor;
+};
+
+typedef struct
+{
+	media_type_t type;
+	const char *opt_name;
+} media_type_opt_t;
+
+static const media_type_opt_t media_type_table[] = {
+	{MediaTypeUSB, "usb"},
+	{MediaTypeHDD, "hdd"},
+	{MediaTypeCDROM, "cdrom"},
 };
 
 static const char *conf_path = SYSCONFDIR "/nbd-proxy/config.json";
@@ -386,6 +409,12 @@ static int run_state_hook(struct ctx *ctx, const char *action, bool wait)
 	if (access(state_hook_path, X_OK))
 		return 0;
 
+	if (ctx->interface_type == MediaTypeInvalid)
+	{
+		warn("can't start UsbGadget without media type");
+		return -1;
+	}
+
 	pid = fork();
 	if (pid < 0) {
 		warn("can't fork to execute hook %s", state_hook_path);
@@ -406,7 +435,8 @@ static int run_state_hook(struct ctx *ctx, const char *action, bool wait)
 		dup2(fd, STDIN_FILENO);
 		dup2(fd, STDOUT_FILENO);
 		dup2(fd, STDERR_FILENO);
-		execl(state_hook_path, argv0, action, ctx->config->name, NULL);
+		execl(state_hook_path, argv0, action, ctx->config->name,
+				media_type_table[ctx->interface_type].opt_name, NULL);
 		exit(EXIT_FAILURE);
 	}
 
@@ -770,6 +800,8 @@ static int config_select(struct ctx *ctx, const char *name)
 
 static const struct option options[] = {
 	{ .name = "help",	.val = 'h' },
+	{ .name = "type",	.val = 't' },
+	{ .name = "config",	.val = 'c' },
 	{ .name = "metadata",	.val = 'm' },
 	{ 0 },
 };
@@ -782,8 +814,32 @@ enum action {
 static void print_usage(const char *progname)
 {
 	fprintf(stderr, "usage:\n");
-	fprintf(stderr, "\t%s [configuration]\n", progname);
+	fprintf(stderr, "\t%s --config configuration", progname);
+	fprintf(stderr, " [--type usb|hdd|cdrom]\n");
 	fprintf(stderr, "\t%s --metadata\n", progname);
+}
+
+/**
+ * @brief parse passed string presentation
+ * of media type into the media_type_t
+ *
+ * @param opt_media string presentation of media type
+ * @return media_type_t media type
+ */
+static media_type_t parse_media_type(const char *opt_media) {
+	uint8_t media_table_len =
+			sizeof(media_type_table) / sizeof(media_type_table[0]);
+	uint8_t index = 0;
+
+	assert(NULL != opt_media);
+
+	for (index = 0; index < media_table_len; ++index) {
+		if (strcmp(opt_media, media_type_table[index].opt_name) == 0) {
+			return (media_type_t)index;
+		}
+	}
+
+	return MediaTypeInvalid;
 }
 
 int main(int argc, char **argv)
@@ -792,6 +848,7 @@ int main(int argc, char **argv)
 	const char *config_name;
 	struct ctx _ctx, *ctx;
 	int rc;
+	media_type_t vm_type = MediaTypeInvalid;
 
 	config_name = NULL;
 
@@ -804,6 +861,12 @@ int main(int argc, char **argv)
 		case 'm':
 			action = ACTION_METADATA;
 			break;
+		case 'c':
+			config_name = argv[optind];
+			break;
+		case 't':
+			vm_type = parse_media_type(argv[optind]);
+			break;
 		case 'h':
 		case '?':
 			print_usage(argv[0]);
@@ -811,13 +874,24 @@ int main(int argc, char **argv)
 		}
 	}
 
-	if (optind < argc)
-		config_name = argv[optind];
+	if (NULL == config_name) {
+		fprintf(stderr, "No config specified\n");
+		print_usage(argv[0]);
+		return EXIT_FAILURE;
+	}
+
+	if (MediaTypeInvalid == vm_type) {
+		fprintf(
+			stderr,
+			"Virtual Media type is not specified, using USB as default\n");
+		vm_type = MediaTypeUSB;
+	}
 
 	ctx = &_ctx;
 	memset(ctx, 0, sizeof(*ctx));
 	ctx->bufsize = bufsize;
 	ctx->buf = malloc(ctx->bufsize);
+	ctx->interface_type = vm_type;
 
 	rc = config_init(ctx);
 	if (rc)
