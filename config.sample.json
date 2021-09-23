@@ -4,11 +4,41 @@
         "0": {
             "nbd-device": "/dev/nbd0",
             "metadata": {
-                "description": "Virtual media device"
+                "description": "Virtual media device redirected by nbd0"
             }
         },
         "1": {
             "nbd-device": "/dev/nbd1",
+            "metadata": {
+                "description": "Virtual media device redirected by nbd1"
+            }
+        },
+        "2": {
+            "nbd-device": "/dev/nbd2",
+            "metadata": {
+                "description": "Virtual media device redirected by nbd2"
+            }
+        },
+        "3": {
+            "nbd-device": "/dev/nbd3",
+            "metadata": {
+                "description": "Virtual media device redirected by nbd3"
+            }
+        },
+        "4": {
+            "nbd-device": "/dev/nbd4",
+            "metadata": {
+                "description": "Virtual media device redirected by nbd4"
+            }
+        },
+        "5": {
+            "nbd-device": "/dev/nbd5",
+            "metadata": {
+                "description": "Virtual media device redirected by nbd5"
+            }
+        },
+        "6": {
+            "nbd-device": "/dev/nbd6",
             "metadata": {
                 "description": "Dump Offload"
             }
