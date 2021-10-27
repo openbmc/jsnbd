@@ -1,0 +1,8 @@
+Ok-To-Test+1: ManojKiran Eda <manojkiran.eda@gmail.com>
+Code-Review+2: Jeremy Kerr <jk@ozlabs.org>
+Verified+1: Jeremy Kerr <jk@ozlabs.org>
+Submitted-by: Jeremy Kerr <jk@ozlabs.org>
+Submitted-at: Wed, 27 Oct 2021 23:44:57 +0000
+Reviewed-on: https://gerrit.openbmc-project.xyz/c/openbmc/jsnbd/+/48102
+Project: openbmc/jsnbd
+Branch: refs/heads/master
