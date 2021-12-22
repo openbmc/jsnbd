@@ -1,0 +1,1 @@
+option('legacy-mode', type: 'feature', value: 'enabled', description: 'Enable Legacy mode (HTTPs/CIFS support',)
