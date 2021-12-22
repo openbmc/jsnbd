@@ -1,0 +1,11 @@
+[Unit]
+Description=Virtual Media Service
+After=dbus.service
+
+[Service]
+ExecStart=/usr/sbin/virtual-media
+Restart=always
+Type=simple
+
+[Install]
+WantedBy=multi-user.target
