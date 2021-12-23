@@ -146,13 +146,6 @@ else
     nlohmann_json = nlohmann_json.as_system('system')
 endif
 
-sdbusplus = dependency('sdbusplus', required: false)
-if not sdbusplus.found()
-  sdbusplus_proj = subproject('sdbusplus', required: true)
-  sdbusplus = sdbusplus_proj.get_variable('sdbusplus_dep')
-  sdbusplus = sdbusplus.as_system('system')
-endif
-
 boost = dependency('boost',
                    modules: ['coroutine', 'iostreams', 'filesystem',
 			     'program_options', 'regex', 'system'],
@@ -160,6 +153,13 @@ boost = dependency('boost',
                    fallback : ['boost', 'boost_dep'],
                    static: false,
                    required: true)
+
+sdbusplus = dependency('sdbusplus', required: false)
+if not sdbusplus.found()
+  sdbusplus_proj = subproject('sdbusplus', required: true)
+  sdbusplus = sdbusplus_proj.get_variable('sdbusplus_dep')
+  sdbusplus = sdbusplus.as_system('system')
+endif
 
 
 add_project_arguments(
