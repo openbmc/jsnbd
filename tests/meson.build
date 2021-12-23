@@ -38,6 +38,7 @@ test(
         [
             'src/configuration_test.cpp',
             'src/events_test.cpp',
+            'src/initial_state_test.cpp',
             'src/system_test.cpp',
         ],
         dependencies: [
