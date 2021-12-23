@@ -2,6 +2,7 @@
 
 #include "interfaces/mount_point_state_machine.hpp"
 #include "state/basic_state.hpp"
+#include "state/initial_state.hpp"
 #include "utils/log-wrapper.hpp"
 
 #include <boost/asio/io_context.hpp>
@@ -56,6 +57,11 @@ struct MountPointStateMachine : public interfaces::MountPointStateMachine
     void changeState(std::unique_ptr<BasicState> newState)
     {
         state = std::move(newState);
+        LOGGER_INFO << name << " state changed to " << state->getStateName();
+        if ((newState = state->onEnter()))
+        {
+            changeState(std::move(newState));
+        }
     }
 
     template <class EventT>
@@ -63,6 +69,11 @@ struct MountPointStateMachine : public interfaces::MountPointStateMachine
     {
         LOGGER_INFO << name << " received " << event.eventName << " while in "
                     << state->getStateName();
+
+        if (auto newState = state->handleEvent(std::move(event)))
+        {
+            changeState(std::move(newState));
+        }
     }
 
     boost::asio::io_context& ioc;
@@ -70,6 +81,6 @@ struct MountPointStateMachine : public interfaces::MountPointStateMachine
     Configuration::MountPoint config;
 
     std::optional<Target> target;
-    std::unique_ptr<BasicState> state;
+    std::unique_ptr<BasicState> state = std::make_unique<InitialState>(*this);
     int exitCode = -1;
 };
