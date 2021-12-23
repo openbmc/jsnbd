@@ -11,7 +11,7 @@
 #include <array>
 #include <compare>
 #include <filesystem>
-#include <map>
+#include <ranges>
 #include <string>
 
 #define NBD_DISCONNECT _IO(0xab, 8)
@@ -120,4 +120,12 @@ class NBDDevice
     static constexpr std::array<std::string_view, 16> nameMatching = {
         "nbd0", "nbd1", "nbd2",  "nbd3",  "nbd4",  "nbd5",  "nbd6",  "nbd7",
         "nbd8", "nbd9", "nbd10", "nbd11", "nbd12", "nbd13", "nbd14", "nbd15"};
+};
+
+enum class StateChange
+{
+    notMonitored,
+    unknown,
+    removed,
+    inserted
 };
