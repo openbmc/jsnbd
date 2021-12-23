@@ -8,11 +8,11 @@
 #include <unistd.h>
 
 #include <algorithm>
+#include <array>
 #include <compare>
 #include <filesystem>
-#include <map>
-
-namespace fs = std::filesystem;
+#include <ranges>
+#include <string>
 
 #define NBD_DISCONNECT _IO(0xab, 8)
 #define NBD_CLEAR_SOCK _IO(0xab, 4)
@@ -105,13 +105,13 @@ class NBDDevice
         return value;
     }
 
-    fs::path toPath() const
+    std::filesystem::path toPath() const
     {
         if (value.empty())
         {
             return {};
         }
-        return fs::path("/dev") / fs::path(value);
+        return std::filesystem::path("/dev") / std::filesystem::path(value);
     }
 
   private:
@@ -120,4 +120,12 @@ class NBDDevice
     static constexpr std::array<std::string_view, 16> nameMatching = {
         "nbd0", "nbd1", "nbd2",  "nbd3",  "nbd4",  "nbd5",  "nbd6",  "nbd7",
         "nbd8", "nbd9", "nbd10", "nbd11", "nbd12", "nbd13", "nbd14", "nbd15"};
+};
+
+enum class StateChange
+{
+    notMonitored,
+    unknown,
+    removed,
+    inserted
 };
