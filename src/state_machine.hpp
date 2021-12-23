@@ -3,6 +3,7 @@
 #include "interfaces/mount_point_state_machine.hpp"
 #include "state/basic_state.hpp"
 #include "state/initial_state.hpp"
+#include "types/dbus_types.hpp"
 
 #include <boost/asio/io_context.hpp>
 
@@ -15,11 +16,13 @@
 struct MountPointStateMachine : public interfaces::MountPointStateMachine
 {
     MountPointStateMachine(boost::asio::io_context& ioc,
-                           const std::string& name,
+                           DeviceMonitor& devMonitor, const std::string& name,
                            const Configuration::MountPoint& config) :
         ioc{ioc},
         name{name}, config{config}
-    {}
+    {
+        devMonitor.addDevice(config.nbdDevice);
+    }
 
     MountPointStateMachine& operator=(MountPointStateMachine&&) = delete;
 
@@ -72,6 +75,41 @@ struct MountPointStateMachine : public interfaces::MountPointStateMachine
         if (auto newState = state->handleEvent(std::move(event)))
         {
             changeState(std::move(newState));
+        }
+    }
+
+    void
+        emitRegisterDBusEvent(std::shared_ptr<sdbusplus::asio::connection> bus,
+                              std::shared_ptr<object_server> objServer) override
+    {
+        emitEvent(RegisterDbusEvent(bus, objServer));
+    }
+
+    void emitMountEvent(std::optional<Target> newTarget) override
+    {
+        emitEvent(MountEvent(std::move(newTarget)));
+    }
+
+    void emitUnmountEvent() override
+    {
+        emitEvent(UnmountEvent());
+    }
+
+    void emitSubprocessStoppedEvent() override
+    {
+        emitEvent(SubprocessStoppedEvent());
+    }
+
+    void emitUdevStateChangeEvent(const NBDDevice<>& dev,
+                                  StateChange devState) override
+    {
+        if (config.nbdDevice == dev)
+        {
+            emitEvent(UdevStateChangeEvent(devState));
+        }
+        else
+        {
+            LogMsg(Logger::Debug, name, " Ignoring request.");
         }
     }
 
