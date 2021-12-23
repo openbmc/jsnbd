@@ -1,10 +1,16 @@
 #include "configuration.hpp"
 #include "logger.hpp"
+#include "state_machine.hpp"
+#include "system.hpp"
 
 #include <boost/asio.hpp>
-#include <memory>
+#include <boost/container/flat_map.hpp>
 #include <sdbusplus/asio/connection.hpp>
 #include <sdbusplus/asio/object_server.hpp>
+
+#include <filesystem>
+#include <memory>
+#include <string>
 
 std::chrono::seconds Configuration::inactivityTimeout;
 
@@ -29,9 +35,18 @@ class App
         bus->request_name("xyz.openbmc_project.VirtualMedia");
         objManager = std::make_shared<sdbusplus::server::manager::manager>(
             *bus, "/xyz/openbmc_project/VirtualMedia");
+
+        for (const auto& [name, entry] : config.mountPoints)
+        {
+            mpsm[name] =
+                std::make_shared<MountPointStateMachine>(ioc, name, entry);
+        }
     }
 
   private:
+    boost::container::flat_map<std::string,
+                               std::shared_ptr<MountPointStateMachine>>
+        mpsm;
     boost::asio::io_context& ioc;
     std::shared_ptr<sdbusplus::asio::connection> bus;
     std::shared_ptr<sdbusplus::asio::object_server> objServer;
