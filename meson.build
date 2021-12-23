@@ -202,6 +202,10 @@ configure_file(input : 'config/config.json',
                install : true)
 
 srcfiles_app = [ 'src/main.cpp',
+                 'src/utils/impl/child.cpp',
+                 'src/utils/impl/pipe_reader.cpp',
+                 'src/utils/impl/stream_descriptor.cpp',
+                 'src/utils/impl/udev.cpp',
                ]
 
 bindir = get_option('prefix') + '/' +get_option('libexecdir')

@@ -29,6 +29,11 @@ test(
     executable(
         'virtual-media-ut',
         [
+            'src/mocks/child_mock.cpp',
+            'src/mocks/pipe_reader_mock.cpp',
+            'src/mocks/stream_descriptor_mock.cpp',
+            'src/mocks/udev_mock.cpp',
+
             'src/configuration_test.cpp',
             'src/events_test.cpp',
             'src/initial_state_test.cpp',
