@@ -9,9 +9,10 @@
 struct TestableMountPointStateMachine : public MountPointStateMachine
 {
     TestableMountPointStateMachine(boost::asio::io_context& ioc,
+                                   DeviceMonitor& devMonitor,
                                    const std::string& name,
                                    const Configuration::MountPoint& config) :
-        MountPointStateMachine(ioc, name, config)
+        MountPointStateMachine(ioc, devMonitor, name, config)
     {
         bus = std::make_shared<sdbusplus::asio::connection>(ioc);
     }
@@ -24,6 +25,7 @@ class StateMachineTestBase
   protected:
     boost::asio::io_context ioc;
     NBDDevice<> dev{"nbd0"};
+    DeviceMonitor monitor{ioc};
     Configuration::MountPoint mp{dev,
                                  "tests/run/virtual-media/nbd0.sock",
                                  "/nbd/0",
@@ -31,5 +33,5 @@ class StateMachineTestBase
                                  512,
                                  std::chrono::seconds(0),
                                  Configuration::Mode::proxy};
-    TestableMountPointStateMachine mpsm{ioc, "Slot_0", mp};
+    TestableMountPointStateMachine mpsm{ioc, monitor, "Slot_0", mp};
 };
