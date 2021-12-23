@@ -19,7 +19,8 @@ std::chrono::seconds Configuration::inactivityTimeout;
 class App
 {
   public:
-    App(boost::asio::io_context& ioc, const Configuration& config)
+    App(boost::asio::io_context& ioc, const Configuration& config) :
+        devMonitor(ioc)
     {
         auto bus = std::make_shared<sdbusplus::asio::connection>(ioc);
         objServer = std::make_shared<sdbusplus::asio::object_server>(bus);
@@ -30,8 +31,16 @@ class App
         for (const auto& [name, entry] : config.mountPoints)
         {
             mpsm.emplace(name, std::make_shared<MountPointStateMachine>(
-                                   ioc, name, entry));
+                                   ioc, devMonitor, name, entry));
+            mpsm[name]->emitRegisterDBusEvent(bus, objServer);
         }
+
+        devMonitor.run([this](const NBDDevice& device, StateChange change) {
+            for (auto& [name, entry] : mpsm)
+            {
+                entry->emitUdevStateChangeEvent(device, change);
+            }
+        });
     }
 
   private:
@@ -39,6 +48,7 @@ class App
         mpsm;
     std::shared_ptr<sdbusplus::asio::object_server> objServer;
     std::shared_ptr<sdbusplus::server::manager_t> objManager;
+    DeviceMonitor devMonitor;
 };
 
 int main()
