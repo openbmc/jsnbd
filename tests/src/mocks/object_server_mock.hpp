@@ -24,8 +24,8 @@ namespace virtual_media_mock
 
 using optional_fd = std::variant<int, sdbusplus::message::unix_fd>;
 using DefaultMethod = std::function<bool(void)>;
-using LegacyMountMethod = std::function<bool(
-    boost::asio::yield_context, const std::string&, bool, optional_fd)>;
+using LegacyMountMethod =
+    std::function<bool(const std::string&, bool, optional_fd)>;
 
 namespace impl
 {
