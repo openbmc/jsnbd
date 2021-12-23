@@ -20,7 +20,7 @@ class App
     App(boost::asio::io_context& ioc, const Configuration& config,
         sd_bus* custom_bus = nullptr) :
         ioc(ioc),
-        config(config)
+        devMonitor(ioc), config(config)
     {
         if (!custom_bus)
         {
@@ -38,9 +38,17 @@ class App
 
         for (const auto& [name, entry] : config.mountPoints)
         {
-            mpsm[name] =
-                std::make_shared<MountPointStateMachine>(ioc, name, entry);
+            mpsm[name] = std::make_shared<MountPointStateMachine>(
+                ioc, devMonitor, name, entry);
+            mpsm[name]->emitRegisterDBusEvent(bus, objServer);
         }
+
+        devMonitor.run([this](const NBDDevice& device, StateChange change) {
+            for (auto& [name, entry] : mpsm)
+            {
+                entry->emitUdevStateChangeEvent(device, change);
+            }
+        });
     }
 
   private:
@@ -51,6 +59,7 @@ class App
     std::shared_ptr<sdbusplus::asio::connection> bus;
     std::shared_ptr<sdbusplus::asio::object_server> objServer;
     std::shared_ptr<sdbusplus::server::manager::manager> objManager;
+    DeviceMonitor devMonitor;
     const Configuration& config;
 };
 
