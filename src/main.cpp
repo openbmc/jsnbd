@@ -1,5 +1,7 @@
 #include "configuration.hpp"
 #include "logger.hpp"
+#include "state_machine.hpp"
+#include "system.hpp"
 
 #include <boost/asio/io_context.hpp>
 #include <boost/asio/signal_set.hpp>
@@ -8,23 +10,33 @@
 
 #include <filesystem>
 #include <memory>
+#include <string>
 #include <system_error>
+#include <unordered_map>
 
 std::chrono::seconds Configuration::inactivityTimeout;
 
 class App
 {
   public:
-    App(boost::asio::io_context& ioc)
+    App(boost::asio::io_context& ioc, const Configuration& config)
     {
         auto bus = std::make_shared<sdbusplus::asio::connection>(ioc);
         objServer = std::make_shared<sdbusplus::asio::object_server>(bus);
         bus->request_name("xyz.openbmc_project.VirtualMedia");
         objManager = std::make_shared<sdbusplus::server::manager_t>(
             *bus, "/xyz/openbmc_project/VirtualMedia");
+
+        for (const auto& [name, entry] : config.mountPoints)
+        {
+            mpsm.emplace(name, std::make_shared<MountPointStateMachine>(
+                                   ioc, name, entry));
+        }
     }
 
   private:
+    std::unordered_map<std::string, std::shared_ptr<MountPointStateMachine>>
+        mpsm;
     std::shared_ptr<sdbusplus::asio::object_server> objServer;
     std::shared_ptr<sdbusplus::server::manager_t> objManager;
 };
@@ -55,7 +67,7 @@ int main()
     signals.async_wait(
         [&ioc](const boost::system::error_code&, const int&) { ioc.stop(); });
 
-    App app(ioc);
+    App app(ioc, config);
 
     ioc.run();
 
