@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d6f88dc7_254e26cb",
+        "filename": "nbd-proxy.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000675
+      },
+      "writtenOn": "2021-12-24T15:09:20Z",
+      "side": 0,
+      "message": "I guess if the `jsnbd` feature is totally removed the appropriate capability should be also removed from webui-vue and bmcweb together.\nAdditionally, I guess there are manufactures that are still using nbd-proxy and I don\u0027t understand why this feature is removing.\nIf nbd-proxy is totally removing, then the repository name was confusing and brings implicit meaning. I guess after the current patch the repository will nether provide `jsnbd` and seems to me will be better to have a new separate repository like \u0027virtual-media\u0027 and the current repository might be removed when the nbp-proxy will be marked as obsolete and each manufacturer will give up of that feature.",
+      "revId": "7b7c29369cfeb267efa7f45b271aca6910687461",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}

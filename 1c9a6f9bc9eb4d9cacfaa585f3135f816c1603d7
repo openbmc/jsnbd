@@ -414,6 +414,23 @@
     },
     {
       "key": {
+        "uuid": "7eef31f6_d34745ac",
+        "filename": "src/main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000675
+      },
+      "writtenOn": "2021-12-24T15:09:20Z",
+      "side": 1,
+      "message": "Why virtual-media.conf stored in the /etc that is rwfs? Does we desire the VM-endpoints might be configured at runtime on the field mode? I\u0027d prefer to store that config at the /usr/share/virtual-media/",
+      "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c3befceb_dcbcb731",
         "filename": "src/main.cpp",
         "patchSetId": 1
@@ -425,6 +442,30 @@
       "writtenOn": "2021-12-24T13:41:28Z",
       "side": 1,
       "message": "This doesn\u0027t seem obviously connected to virtual-media.  Someone\u0027s just going to see a random /tmp/sock directory?",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 61
+      },
+      "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cee95152_65d877f4",
+        "filename": "src/main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000675
+      },
+      "writtenOn": "2021-12-24T15:09:20Z",
+      "side": 1,
+      "message": "+1. \nI\u0027d prefer to store the virtual-media-specific stuff at the (/var)/run/virtual-media/ directory.",
+      "parentUuid": "c3befceb_dcbcb731",
       "range": {
         "startLine": 54,
         "startChar": 0,
