@@ -1,0 +1,152 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e097e950_7b52cc50",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-12-24T14:04:04Z",
+      "side": 1,
+      "message": "Are we going to get any test cases for any of this code?",
+      "revId": "a3ce83c5d1e1e06de4d4632e00f2108e4c920888",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f6db59d9_31ff39e9",
+        "filename": "src/events.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-12-24T14:04:04Z",
+      "side": 1,
+      "message": "You\u0027re holding around a pointer in every instance of this class because you\u0027re trying to invent your own RTTI?\n\nAt a minimum this should be added to the vtable:\n\n    virtual std::string_view eventName() const \u003d 0;\n\nEven better is if you have:\n\ntemplate \u003ctypename T\u003e\nstruct NamedBasicEvent : BasicEvent\n{\n   //...\n};\n\nWhere the NamedBasicEvent is a CRTP that uses techniques such as this to turn it into a constexpr function: https://bitwizeshift.github.io/posts/2021/03/09/getting-an-unmangled-type-name-at-compile-time/\n\nIdeally you can just do \"struct RegisterDbusEvent : public NamedBasicEvent\u003cRegisterDbusEvent\u003e\" and the name registration happens by the compiler.",
+      "revId": "a3ce83c5d1e1e06de4d4632e00f2108e4c920888",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69aabc27_539a13a4",
+        "filename": "src/events.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-12-24T14:04:04Z",
+      "side": 1,
+      "message": "__func__.  __FUNCTION__ is a deprecated GCC extension.  __func__ is part of the C++ standard.",
+      "range": {
+        "startLine": 23,
+        "startChar": 19,
+        "endLine": 23,
+        "endChar": 31
+      },
+      "revId": "a3ce83c5d1e1e06de4d4632e00f2108e4c920888",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46bb62fe_2d2e08e7",
+        "filename": "src/events.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-12-24T14:04:04Z",
+      "side": 1,
+      "message": "What???  Why do you even have BasicEvent if you\u0027re going to use variant instead?  You\u0027ve now got the overhead of _both_ a virtual function table AND the variant-visitor stuff.  Pick one.",
+      "revId": "a3ce83c5d1e1e06de4d4632e00f2108e4c920888",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cbc5aedc_f2cb6c91",
+        "filename": "src/interfaces/mount_point_state_machine.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-12-24T14:04:04Z",
+      "side": 1,
+      "message": "IOC?",
+      "range": {
+        "startLine": 27,
+        "startChar": 40,
+        "endLine": 27,
+        "endChar": 43
+      },
+      "revId": "a3ce83c5d1e1e06de4d4632e00f2108e4c920888",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "121e24a8_8663d769",
+        "filename": "src/main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-12-24T14:04:04Z",
+      "side": 1,
+      "message": "emplace this.",
+      "revId": "a3ce83c5d1e1e06de4d4632e00f2108e4c920888",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5a03918_fe35ce0c",
+        "filename": "src/main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-12-24T14:04:04Z",
+      "side": 1,
+      "message": "Use std.",
+      "revId": "a3ce83c5d1e1e06de4d4632e00f2108e4c920888",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "235ea1d7_27c9ef2e",
+        "filename": "src/resources.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-12-24T14:04:04Z",
+      "side": 1,
+      "message": "Taking a pause from reviewing here...",
+      "revId": "a3ce83c5d1e1e06de4d4632e00f2108e4c920888",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
