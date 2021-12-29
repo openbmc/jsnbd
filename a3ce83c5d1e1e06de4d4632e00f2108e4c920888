@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2b89bb5a_fe4381a6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-12-29T13:37:13Z",
+      "side": 1,
+      "message": "I don\u0027t find this a particularly acceptable answer.  You\u0027re going to be adding a bunch of code and nobody has any way to test it except your team?  How can anyone contribute to it?  How are you going to be able to accept even trivial fixes to this code without slowing down the project by saying \"I need to test this first\"?\n\nNew code should have unit tests at a minimum.  Integration tests in openbmc-test-automation is an additional bonus.",
+      "parentUuid": "391d16f9_f2ff760d",
+      "revId": "a3ce83c5d1e1e06de4d4632e00f2108e4c920888",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f6db59d9_31ff39e9",
         "filename": "src/events.hpp",
         "patchSetId": 1
