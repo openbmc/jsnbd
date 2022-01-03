@@ -4,10 +4,16 @@
 
 #include <stdlib.h>
 #include <sys/ioctl.h>
+#include <unistd.h>
 
+#include <boost/asio/buffer.hpp>
+#include <boost/asio/io_context.hpp>
 #include <boost/beast/core/file_base.hpp>
 #include <boost/beast/core/file_posix.hpp>
+#include <boost/process/async_pipe.hpp>
 #include <boost/system/error_code.hpp>
+#include <boost/type_traits/has_dereference.hpp>
+#include <sdbusplus/message/native_types.hpp>
 
 #include <algorithm>
 #include <array>
@@ -15,6 +21,7 @@
 #include <chrono>
 #include <cstddef>
 #include <cstdint>
+#include <exception>
 #include <filesystem>
 #include <fstream>
 #include <functional>
@@ -24,6 +31,7 @@
 #include <optional>
 #include <string>
 #include <system_error>
+#include <type_traits>
 #include <utility>
 #include <vector>
 
@@ -154,6 +162,77 @@ class CredentialsProvider
 
   private:
     Credentials credentials;
+};
+
+// Wrapper for boost::async_pipe ensuring proper pipe cleanup
+template <typename Buffer>
+class NamedPipe
+{
+  public:
+    using unix_fd = sdbusplus::message::unix_fd;
+
+    NamedPipe(boost::asio::io_context& io, const std::string& name,
+              Buffer&& buffer) :
+        name(name), impl(io, name), buffer{std::move(buffer)}
+    {}
+
+    ~NamedPipe()
+    {
+        try
+        {
+            // Named pipe needs to be explicitly removed
+            impl.close();
+            ::unlink(name.c_str());
+        }
+        catch (const std::exception& e)
+        {
+            LOGGER_ERROR("Error on pipe cleanup: {}", e.what());
+        }
+    }
+
+    NamedPipe(const NamedPipe&) = delete;
+    NamedPipe(NamedPipe&&) = delete;
+
+    NamedPipe& operator=(const NamedPipe&) = delete;
+    NamedPipe& operator=(NamedPipe&&) = delete;
+
+    unix_fd fd()
+    {
+        return unix_fd{impl.native_sink()};
+    }
+
+    const std::string& file() const
+    {
+        return name;
+    }
+
+    template <typename WriteHandler>
+    void asyncWrite(WriteHandler&& handler)
+    {
+        impl.async_write_some(data(), std::forward<WriteHandler>(handler));
+    }
+
+  private:
+    // Specialization for pointer types
+    template <typename B = Buffer>
+    typename std::enable_if<boost::has_dereference<B>::value,
+                            boost::asio::const_buffer>::type
+        data()
+    {
+        return boost::asio::buffer(*buffer);
+    }
+
+    template <typename B = Buffer>
+    typename std::enable_if<!boost::has_dereference<B>::value,
+                            boost::asio::const_buffer>::type
+        data()
+    {
+        return boost::asio::buffer(buffer);
+    }
+
+    const std::string name;
+    boost::process::async_pipe impl;
+    Buffer buffer;
 };
 
 class FileObject
