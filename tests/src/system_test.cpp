@@ -1,4 +1,5 @@
 #include "mocks/child_mock.hpp"
+#include "mocks/file_printer_mock.hpp"
 #include "mocks/udev_mock.hpp"
 #include "mocks/utils_mock.hpp"
 #include "system.hpp"
@@ -9,12 +10,16 @@
 #include <vector>
 
 #include <gmock-global/gmock-global.h>
+#include <gmock/gmock-cardinalities.h>
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
+using ::testing::AtLeast;
 using ::testing::NiceMock;
 using ::testing::Return;
 using ::testing::StrEq;
+using ::testing::Throw;
+using ::testing::Values;
 
 /* NBDDevice tests */
 class NBDDeviceTest : public ::testing::Test
@@ -321,4 +326,218 @@ TEST_F(ProcessTest, StopProcessCheckUglyPath)
     process->stop(mockExitCallback2);
 
     run();
+}
+
+/* UsbGadget tests */
+namespace fs = std::filesystem;
+
+using utils::GadgetDirs;
+
+class UsbGadgetTest : public ::testing::Test
+{
+  protected:
+    UsbGadgetTest()
+    {
+        MockFilePrinter::engine = &printer;
+        fs::create_directories(portPath);
+    }
+
+    ~UsbGadgetTest()
+    {
+        fs::remove_all(GadgetDirs::busPrefix());
+    }
+
+    NiceMock<MockFilePrinterEngine> printer;
+    const std::string name{"Slot_0"};
+    const fs::path gadgetDir = GadgetDirs::gadgetPrefix() + name;
+    const fs::path portPath = GadgetDirs::busPrefix() + "/1";
+};
+
+TEST_F(UsbGadgetTest, ConfigurationFailsForUnknownDeviceState)
+{
+    EXPECT_EQ(
+        UsbGadget::configure(name, "/dev/nbd0", StateChange::unknown, true),
+        -1);
+}
+
+TEST_F(UsbGadgetTest, InsertFailsOnFsExceptions)
+{
+    EXPECT_CALL(printer, createDirs(_))
+        .WillRepeatedly(Throw(
+            fs::filesystem_error("Cannot create directory",
+                                 std::make_error_code(std::errc::io_error))));
+    EXPECT_CALL(printer, echo(_, _))
+        .WillRepeatedly(Throw(std::ofstream::failure("Echo failed")));
+
+    EXPECT_EQ(
+        UsbGadget::configure(name, "/dev/nbd0", StateChange::inserted, true),
+        -1);
+}
+
+TEST_F(UsbGadgetTest, RemoveFailsOnStreamException)
+{
+    EXPECT_CALL(printer, echo(gadgetDir / "UDC", StrEq("")))
+        .WillOnce(Throw(std::ofstream::failure("Echo failed")));
+
+    EXPECT_EQ(
+        UsbGadget::configure(name, "/dev/nbd0", StateChange::removed, true),
+        -1);
+}
+
+TEST_F(UsbGadgetTest, RemoveFailsDueToRemovalError)
+{
+    EXPECT_CALL(printer, echo(gadgetDir / "UDC", StrEq("")));
+    EXPECT_CALL(printer, remove(_, _))
+        .Times(AtLeast(1))
+        .WillOnce(
+            []([[maybe_unused]] const fs::path& path, std::error_code& ec) {
+                ec = std::make_error_code(std::errc::no_such_file_or_directory);
+            })
+        .WillRepeatedly(Return());
+
+    EXPECT_EQ(
+        UsbGadget::configure(name, "/dev/nbd0", StateChange::removed, true),
+        -1);
+}
+
+TEST_F(UsbGadgetTest, RemoveSucceeds)
+{
+    EXPECT_CALL(printer, echo(gadgetDir / "UDC", StrEq("")));
+    EXPECT_CALL(printer, remove(_, _)).Times(AtLeast(1));
+
+    EXPECT_EQ(
+        UsbGadget::configure(name, "/dev/nbd0", StateChange::removed, true), 0);
+}
+
+TEST_F(UsbGadgetTest, StatisticsNotPresent)
+{
+    EXPECT_EQ(UsbGadget::getStats(name), std::nullopt);
+}
+
+TEST_F(UsbGadgetTest, StatisticsPresent)
+{
+    const fs::path statsDir = GadgetDirs::gadgetPrefix() + name +
+                              "/functions/mass_storage.usb0/lun.0";
+
+    fs::create_directories(statsDir);
+    std::ofstream ofs{statsDir / "stats"};
+    ofs << "testStats";
+    ofs.close();
+
+    EXPECT_EQ(UsbGadget::getStats(name), "testStats");
+
+    fs::remove_all(gadgetDir);
+}
+
+class UsbGadgetInsertTest :
+    public UsbGadgetTest,
+    public ::testing::WithParamInterface<std::pair<bool, bool>>
+{
+  protected:
+    const fs::path funcMassStorageDir =
+        gadgetDir / "functions/mass_storage.usb0";
+    const fs::path stringsDir = gadgetDir / "strings/0x409";
+    const fs::path configDir = gadgetDir / "configs/c.1";
+    const fs::path massStorageDir = configDir / "mass_storage.usb0";
+    const fs::path configStringsDir = configDir / "strings/0x409";
+};
+
+TEST_P(UsbGadgetInsertTest, ConfigurationInsert)
+{
+    auto [rw, portAvailable] = GetParam();
+
+    EXPECT_CALL(printer, createDirs(gadgetDir));
+    EXPECT_CALL(printer, echo(gadgetDir / "idVendor", StrEq("0x1d6b")));
+    EXPECT_CALL(printer, echo(gadgetDir / "idProduct", StrEq("0x0104")));
+    EXPECT_CALL(printer, createDirs(stringsDir));
+    EXPECT_CALL(printer,
+                echo(StrEq(stringsDir / "manufacturer"), StrEq("OpenBMC")));
+    EXPECT_CALL(printer,
+                echo(stringsDir / "product", StrEq("Virtual Media Device")));
+    EXPECT_CALL(printer, createDirs(configStringsDir));
+    EXPECT_CALL(printer,
+                echo(configStringsDir / "configuration", StrEq("config 1")));
+    EXPECT_CALL(printer, createDirs(funcMassStorageDir));
+    EXPECT_CALL(printer, createDirs(funcMassStorageDir / "lun.0"));
+    EXPECT_CALL(printer, createDirSymlink(funcMassStorageDir, massStorageDir));
+    EXPECT_CALL(printer,
+                echo(funcMassStorageDir / "lun.0/removable", StrEq("1")));
+    if (rw)
+    {
+        EXPECT_CALL(printer, echo(funcMassStorageDir / "lun.0/ro", StrEq("0")));
+    }
+    else
+    {
+        EXPECT_CALL(printer, echo(funcMassStorageDir / "lun.0/ro", StrEq("1")));
+    }
+    EXPECT_CALL(printer, echo(funcMassStorageDir / "lun.0/cdrom", StrEq("0")));
+    EXPECT_CALL(printer,
+                echo(funcMassStorageDir / "lun.0/file", StrEq("/dev/nbd0")));
+
+    EXPECT_CALL(printer, isDir(portPath)).WillOnce(Return(true));
+    EXPECT_CALL(printer, isSymlink(portPath)).WillOnce(Return(false));
+    EXPECT_CALL(printer, exists(portPath / "gadget/suspended"))
+        .WillOnce(Return(!portAvailable));
+    if (portAvailable)
+    {
+        EXPECT_CALL(printer,
+                    echo(gadgetDir / "UDC", portPath.filename().string()));
+    }
+    else
+    {
+        EXPECT_CALL(printer, echo(gadgetDir / "UDC", StrEq("")));
+        EXPECT_CALL(printer, remove(_, _)).Times(AtLeast(1));
+    }
+
+    EXPECT_EQ(
+        UsbGadget::configure(name, "/dev/nbd0", StateChange::inserted, rw),
+        (portAvailable ? 0 : -1));
+}
+
+TEST_P(UsbGadgetInsertTest, IsGadgetConfigured)
+{
+    bool portAvailable = GetParam().second;
+
+    EXPECT_CALL(printer, exists(gadgetDir)).WillOnce(Return(portAvailable));
+
+    EXPECT_EQ(UsbGadget::isConfigured(name), portAvailable);
+}
+
+INSTANTIATE_TEST_SUITE_P(UsbGadgetTest, UsbGadgetInsertTest,
+                         Values(
+                             //  [ rw, portAvailable ]
+                             std::make_pair(false, false),
+                             std::make_pair(false, true),
+                             std::make_pair(true, false),
+                             std::make_pair(true, true)));
+
+/* UdevGadget tests */
+class UdevGadgetTest : public ::testing::Test
+{
+  protected:
+    UdevGadgetTest()
+    {
+        MockFilePrinter::engine = &printer;
+    }
+
+    MockFilePrinterEngine printer;
+    const std::string changeStr = "change";
+};
+
+TEST_F(UdevGadgetTest, ChangeStringIsPrintedToFiles)
+{
+    EXPECT_CALL(printer, echo(StrEq("/sys/block/nbd0/uevent"), changeStr));
+    EXPECT_CALL(printer, echo(StrEq("/sys/block/nbd1/uevent"), changeStr));
+    EXPECT_CALL(printer, echo(StrEq("/sys/block/nbd2/uevent"), changeStr));
+    EXPECT_CALL(printer, echo(StrEq("/sys/block/nbd3/uevent"), changeStr));
+
+    EXPECT_EQ(UdevGadget::forceUdevChange(), true);
+}
+
+TEST_F(UdevGadgetTest, WriteFailsOnException)
+{
+    EXPECT_CALL(printer, echo(_, _))
+        .WillOnce(Throw(std::ofstream::failure("Echo failed")));
+
+    EXPECT_EQ(UdevGadget::forceUdevChange(), false);
 }
