@@ -34,6 +34,26 @@ struct ActivatingState : public BasicStateT<ActivatingState>
 
   private:
     std::unique_ptr<BasicState> activateProxyMode();
+    std::unique_ptr<BasicState> activateLegacyMode();
+    std::unique_ptr<BasicState> mountSmbShare();
+
+    static std::unique_ptr<resource::Process>
+        spawnNbdKit(interfaces::MountPointStateMachine& machine,
+                    const std::vector<std::string>& params);
+    static std::unique_ptr<resource::Process>
+        spawnNbdKit(interfaces::MountPointStateMachine& machine,
+                    const std::filesystem::path& file);
+
+    static bool checkUrl(const std::string& urlScheme,
+                         const std::string& imageUrl);
+    static bool getImagePathFromUrl(const std::string& urlScheme,
+                                    const std::string& imageUrl,
+                                    std::string* imagePath);
+
+    static bool isCifsUrl(const std::string& imageUrl);
+    static bool getImagePathFromCifsUrl(const std::string& imageUrl,
+                                        std::string* imagePath);
+    static std::filesystem::path getImagePath(const std::string& imageUrl);
 
     std::unique_ptr<resource::Process> process;
     std::unique_ptr<resource::Gadget> gadget;

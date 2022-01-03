@@ -202,13 +202,14 @@ configure_file(input : 'config/config.json',
                install : true)
 
 srcfiles_app = [ 'src/main.cpp',
+                 'src/state/activating_state.cpp',
                  'src/utils/impl/child.cpp',
+                 'src/utils/impl/file_printer.cpp',
+                 'src/utils/impl/gadget_dirs.cpp',
+                 'src/utils/impl/mounter.cpp',
                  'src/utils/impl/pipe_reader.cpp',
                  'src/utils/impl/stream_descriptor.cpp',
                  'src/utils/impl/udev.cpp',
-                 'src/utils/impl/file_printer.cpp',
-                 'src/utils/impl/gadget_dirs.cpp',
-                 'src/state/activating_state.cpp',
                  'src/resources.cpp',
                ]
 

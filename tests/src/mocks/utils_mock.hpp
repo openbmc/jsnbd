@@ -71,4 +71,15 @@ class MockFileObject
     MOCK_METHOD(ssize_t, write, (void*, ssize_t), ());
 };
 
+class FailableSecretFileObject
+{
+  public:
+    explicit FailableSecretFileObject([[maybe_unused]] int fd) {}
+
+    ssize_t write([[maybe_unused]] void* data, [[maybe_unused]] ssize_t nw)
+    {
+        return static_cast<ssize_t>(-1);
+    }
+};
+
 } // namespace utils

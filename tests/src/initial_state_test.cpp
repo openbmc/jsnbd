@@ -13,6 +13,7 @@
 #include <iterator>
 #include <vector>
 
+#include <gmock/gmock-nice-strict.h>
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
@@ -64,6 +65,7 @@ class VirtualMediaDbBaseTest :
         virtualMediaMountPointInterface;
     std::shared_ptr<virtual_media_mock::dbus_interface_mock>
         virtualMediaServiceInterface;
+    testing::NiceMock<MockFilePrinterEngine> printer;
 };
 
 TEST_F(VirtualMediaDbBaseTest, InitialStateBaseProxyTest)

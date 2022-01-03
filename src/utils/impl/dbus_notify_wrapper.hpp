@@ -13,7 +13,6 @@
 
 namespace utils
 {
-
 class DbusSignalSender : public SignalSender
 {
   public:
