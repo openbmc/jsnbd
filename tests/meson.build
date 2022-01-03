@@ -30,6 +30,8 @@ test(
         'virtual-media-ut',
         [
             'src/mocks/child_mock.cpp',
+            'src/mocks/file_printer_mock.cpp',
+            'src/mocks/gadget_dirs_mock.cpp',
             'src/mocks/pipe_reader_mock.cpp',
             'src/mocks/stream_descriptor_mock.cpp',
             'src/mocks/udev_mock.cpp',

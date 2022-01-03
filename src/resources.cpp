@@ -1,0 +1,42 @@
+
+#include "resources.hpp"
+
+#include "interfaces/mount_point_state_machine.hpp"
+#include "system.hpp"
+#include "utils/log-wrapper.hpp"
+
+#include <boost/asio/post.hpp>
+
+#include <string>
+
+namespace resource
+{
+
+Process::~Process()
+{
+    if (spawned)
+    {
+        process->stop([&machine = *machine] {
+            boost::asio::post(machine.getIOC(), [&machine]() {
+                machine.emitSubprocessStoppedEvent();
+            });
+        });
+    }
+}
+
+Gadget::Gadget(interfaces::MountPointStateMachine& machine,
+               StateChange devState) :
+    machine(&machine)
+{
+    status = UsbGadget::configure(
+        std::string(machine.getName()), machine.getConfig().nbdDevice, devState,
+        machine.getTarget() ? machine.getTarget()->rw : false);
+}
+
+Gadget::~Gadget()
+{
+    UsbGadget::configure(std::string(machine->getName()),
+                         machine->getConfig().nbdDevice, StateChange::removed);
+}
+
+} // namespace resource
