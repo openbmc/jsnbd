@@ -138,6 +138,10 @@ std::unique_ptr<BasicState> ActivatingState::activateLegacyMode()
     {
         return mountSmbShare();
     }
+    if (isHttpsUrl(machine.getTarget()->imgUrl))
+    {
+        return mountHttpsShare();
+    }
 
     return std::make_unique<ReadyState>(machine, std::errc::invalid_argument,
                                         "URL not recognized");
@@ -180,9 +184,23 @@ std::unique_ptr<BasicState> ActivatingState::mountSmbShare()
     }
 }
 
-std::unique_ptr<resource::Process>
-    ActivatingState::spawnNbdKit(interfaces::MountPointStateMachine& machine,
-                                 const std::vector<std::string>& params)
+std::unique_ptr<BasicState> ActivatingState::mountHttpsShare()
+{
+    process = spawnNbdKit(machine, machine.getTarget()->imgUrl);
+    if (!process)
+    {
+        return std::make_unique<ReadyState>(machine,
+                                            std::errc::invalid_argument,
+                                            "Failed to mount HTTPS share");
+    }
+
+    return nullptr;
+}
+
+std::unique_ptr<resource::Process> ActivatingState::spawnNbdKit(
+    interfaces::MountPointStateMachine& machine,
+    std::unique_ptr<utils::VolatileFile<>>&& secret,
+    const std::vector<std::string>& params)
 {
     // Investigate
     auto process = std::make_unique<resource::Process>(
@@ -233,7 +251,8 @@ std::unique_ptr<resource::Process>
     // Insert extra params
     args.insert(args.end(), params.begin(), params.end());
 
-    if (!process->spawn(args, [&machine = machine](int exitCode) {
+    if (!process->spawn(args, [&machine = machine,
+                               secret = std::move(secret)](int exitCode) {
             LOGGER_INFO << machine.getName() << " process ended.";
             machine.getExitCode() = exitCode;
             machine.emitSubprocessStoppedEvent();
@@ -252,11 +271,52 @@ std::unique_ptr<resource::Process>
     ActivatingState::spawnNbdKit(interfaces::MountPointStateMachine& machine,
                                  const std::filesystem::path& file)
 {
-    return spawnNbdKit(machine,
+    return spawnNbdKit(machine, {},
                        {// Use file plugin ...
                         "file",
                         // ... to mount file at this location
                         "file=" + file.string()});
+}
+
+std::unique_ptr<resource::Process>
+    ActivatingState::spawnNbdKit(interfaces::MountPointStateMachine& machine,
+                                 const std::string& url)
+{
+    std::unique_ptr<utils::VolatileFile<>> secret;
+    std::vector<std::string> params = {
+        // Use curl plugin ...
+        "curl",
+        // ... to mount http resource at url
+        "url=" + url,
+        // custom OpenBMC path for CA
+        "cainfo=", "capath=/etc/ssl/certs/authority", "ssl-version=tlsv1.2",
+        "followlocation=false",
+        "ssl-cipher-list="
+        "ECDHE-RSA-AES256-GCM-SHA384:"
+        "ECDHE-ECDSA-AES256-GCM-SHA384",
+        "tls13-ciphers="
+        "TLS_AES_256_GCM_SHA384"};
+
+    // Authenticate if needed
+    if (machine.getTarget()->credentials)
+    {
+        // Pack password into buffer
+        utils::CredentialsProvider::SecureBuffer buff =
+            machine.getTarget()->credentials->pack(
+                []([[maybe_unused]] const std::string& user,
+                   const std::string& pass, std::vector<char>& buff) {
+                    std::copy(pass.begin(), pass.end(),
+                              std::back_inserter(buff));
+                });
+
+        // Prepare file to provide the password with
+        secret = std::make_unique<utils::VolatileFile<>>(std::move(buff));
+
+        params.push_back("user=" + machine.getTarget()->credentials->user());
+        params.push_back("password=+" + secret->path());
+    }
+
+    return spawnNbdKit(machine, std::move(secret), params);
 }
 
 bool ActivatingState::checkUrl(const std::string& urlScheme,
@@ -287,6 +347,17 @@ bool ActivatingState::getImagePathFromUrl(const std::string& urlScheme,
     return false;
 }
 
+bool ActivatingState::isHttpsUrl(const std::string& imageUrl)
+{
+    return checkUrl("https://", imageUrl);
+}
+
+bool ActivatingState::getImagePathFromHttpsUrl(const std::string& imageUrl,
+                                               std::string* imagePath)
+{
+    return getImagePathFromUrl("https://", imageUrl, imagePath);
+}
+
 bool ActivatingState::isCifsUrl(const std::string& imageUrl)
 {
     return checkUrl("smb://", imageUrl);
@@ -301,6 +372,11 @@ bool ActivatingState::getImagePathFromCifsUrl(const std::string& imageUrl,
 std::filesystem::path ActivatingState::getImagePath(const std::string& imageUrl)
 {
     std::string imagePath;
+
+    if (isHttpsUrl(imageUrl) && getImagePathFromHttpsUrl(imageUrl, &imagePath))
+    {
+        return {imagePath};
+    }
 
     if (isCifsUrl(imageUrl) && getImagePathFromCifsUrl(imageUrl, &imagePath))
     {
