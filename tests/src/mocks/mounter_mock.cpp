@@ -14,9 +14,6 @@ Mounter::Mounter([[maybe_unused]] const char* source, const char* target,
                  [[maybe_unused]] unsigned long mountflags, const void* data) :
     target(target)
 {
-    std::cout << "MOCK MOUNTER MOCK MOUNTER MOCK MOUNTER MOCK MOUNTER MOCK "
-                 "MOUNTER MOCK MOUNTER"
-              << std::endl;
     std::string mountDir(target);
     std::string options(static_cast<const char*>(data));
 
