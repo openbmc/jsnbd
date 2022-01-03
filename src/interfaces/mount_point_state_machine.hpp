@@ -23,8 +23,10 @@ struct MountPointStateMachine
 {
     struct Target
     {
+        std::string imgUrl;
         bool rw;
         std::unique_ptr<resource::Mount> mountPoint;
+        std::unique_ptr<utils::CredentialsProvider> credentials;
     };
 
     virtual ~MountPointStateMachine() = default;
