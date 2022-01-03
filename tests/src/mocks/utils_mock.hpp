@@ -11,6 +11,22 @@ using ::testing::Return;
 namespace utils
 {
 
+class MockSignalSender : public SignalSender
+{
+  public:
+    MOCK_METHOD(void, send, (std::optional<const std::error_code>), (override));
+};
+
+class MockNotificationWrapper : public NotificationWrapper
+{
+  public:
+    MOCK_METHOD(void, start,
+                (std::function<void(const boost::system::error_code&)>,
+                 const std::chrono::seconds&),
+                (override));
+    MOCK_METHOD(void, notify, (const std::error_code&), (override));
+};
+
 class FailableFileObject
 {
   public:
