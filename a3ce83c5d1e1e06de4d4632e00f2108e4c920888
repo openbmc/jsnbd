@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "43244f6e_5bc5d571",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2022-01-03T14:16:59Z",
+      "side": 1,
+      "message": "That is good, but I would prefer we don\u0027t accept this code into upstream until unit tests are available.  Those should be co-developed with the original code.",
+      "parentUuid": "8578a356_2f475f10",
+      "revId": "a3ce83c5d1e1e06de4d4632e00f2108e4c920888",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f6db59d9_31ff39e9",
         "filename": "src/events.hpp",
         "patchSetId": 1
