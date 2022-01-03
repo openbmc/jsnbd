@@ -1,4 +1,5 @@
 #include "mocks/file_printer_mock.hpp"
+#include "mocks/mounter_test_dirs.hpp"
 #include "mocks/test_states.hpp"
 #include "resources.hpp"
 #include "state_machine.hpp"
@@ -14,6 +15,54 @@ using ::testing::Return;
 using namespace resource;
 
 namespace fs = std::filesystem;
+
+/* Mount tests */
+class MountTest : public ::testing::Test
+{
+  protected:
+    MountTest()
+    {
+        credentials =
+            std::make_unique<utils::CredentialsProvider>("user", "1234");
+    }
+
+    void doMountAndUnmount(const fs::path& name)
+    {
+        auto mountDir = std::make_unique<Directory>(name);
+        SmbShare smb(mountDir->getPath());
+        mount = std::make_unique<Mount>(std::move(mountDir), smb,
+                                        directories::remoteDir, true,
+                                        std::move(credentials));
+        mount = nullptr;
+    }
+
+    std::unique_ptr<utils::CredentialsProvider> credentials;
+    std::unique_ptr<Mount> mount;
+};
+
+TEST_F(MountTest, MountFailed)
+{
+    EXPECT_THROW(doMountAndUnmount("Slot_2"), Error);
+}
+
+namespace utils
+{
+extern int result;
+}
+
+TEST_F(MountTest, UnmountSuccessful)
+{
+    EXPECT_NO_THROW(doMountAndUnmount("Slot_0"));
+
+    EXPECT_EQ(utils::result, 0);
+}
+
+TEST_F(MountTest, UnmountFailed)
+{
+    EXPECT_NO_THROW(doMountAndUnmount("Slot_3"));
+
+    EXPECT_EQ(utils::result, 1);
+}
 
 /* Gadget tests */
 class GadgetTest : public ::testing::Test
