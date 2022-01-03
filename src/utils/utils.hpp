@@ -4,7 +4,12 @@
 #include <sys/ioctl.h>
 #include <unistd.h>
 
+#include <boost/system/error_code.hpp>
+
+#include <chrono>
 #include <filesystem>
+#include <functional>
+#include <optional>
 #include <system_error>
 
 namespace utils
@@ -48,6 +53,26 @@ class FileObject
 
   private:
     int fd;
+};
+
+class SignalSender
+{
+  public:
+    virtual ~SignalSender() = default;
+
+    virtual void send(std::optional<const std::error_code> status) = 0;
+};
+
+class NotificationWrapper
+{
+  public:
+    virtual ~NotificationWrapper() = default;
+
+    virtual void
+        start(std::function<void(const boost::system::error_code&)> handler,
+              const std::chrono::seconds& duration) = 0;
+
+    virtual void notify(const std::error_code& ec) = 0;
 };
 
 } // namespace utils

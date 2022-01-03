@@ -22,7 +22,9 @@ struct ActiveState : public BasicStateT<ActiveState>
                 std::unique_ptr<resource::Gadget> gadget) :
         BasicStateT(machine),
         process(std::move(process)), gadget(std::move(gadget))
-    {}
+    {
+        machine.notify();
+    }
 
     virtual std::unique_ptr<BasicState> onEnter() override
     {
@@ -43,6 +45,7 @@ struct ActiveState : public BasicStateT<ActiveState>
 
     std::unique_ptr<BasicState> handleEvent([[maybe_unused]] UnmountEvent event)
     {
+        machine.notificationStart();
         return std::make_unique<DeactivatingState>(machine, std::move(process),
                                                    std::move(gadget));
     }
