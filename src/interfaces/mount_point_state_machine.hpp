@@ -5,6 +5,8 @@
 #include "system.hpp"
 #include "types/dbus_types.hpp"
 
+#include <boost/asio/io_context.hpp>
+
 #include <memory>
 #include <optional>
 #include <string>
@@ -18,6 +20,7 @@ struct MountPointStateMachine
 {
     struct Target
     {
+        bool rw;
         std::unique_ptr<resource::Mount> mountPoint;
     };
 
