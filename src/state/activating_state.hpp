@@ -32,6 +32,8 @@ struct ActivatingState : public BasicStateT<ActivatingState>
     }
 
   private:
+    std::unique_ptr<BasicState> activateProxyMode();
+
     std::unique_ptr<resource::Process> process;
     std::unique_ptr<resource::Gadget> gadget;
 };

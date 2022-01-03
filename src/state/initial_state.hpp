@@ -1,17 +1,26 @@
 #pragma once
 
-#include "basic_state.hpp"
+#include "configuration.hpp"
+#include "events.hpp"
 #include "interfaces/mount_point_state_machine.hpp"
 #include "logger.hpp"
+#include "state/active_state.hpp"
+#include "state/basic_state.hpp"
+#include "state/ready_state.hpp"
+#include "system.hpp"
 
 #include <boost/asio/spawn.hpp>
-#include <sdbusplus/exception.hpp>
 #include <sdbusplus/message.hpp>
+#include <boost/asio/steady_timer.hpp>
+#include <sdbusplus/exception.hpp>
+#include <sdbusplus/message/native_types.hpp>
 
+#include <algorithm>
 #include <memory>
 #include <string>
 #include <system_error>
 #include <utility>
+#include <variant>
 
 struct InitialState : public BasicStateT<InitialState>
 {
@@ -33,7 +42,9 @@ struct InitialState : public BasicStateT<InitialState>
         addProcessInterface(event);
         addServiceInterface(event, isLegacy);
 
-        return nullptr;
+        UdevGadget::forceUdevChange();
+
+        return std::make_unique<ReadyState>(machine);
     }
 
     template <class AnyEvent>
@@ -67,9 +78,8 @@ struct InitialState : public BasicStateT<InitialState>
             "Active", bool(false),
             []([[maybe_unused]] const bool& req,
                [[maybe_unused]] bool& property) { return 0; },
-            []([[maybe_unused]] const bool& property) -> bool {
-                return false;
-            });
+            [&machine = machine]([[maybe_unused]] const bool& property)
+                -> bool { return machine.getState().get_if<ActiveState>(); });
         processIface->register_property(
             "ExitCode", int32_t(0),
             []([[maybe_unused]] const int32_t& req,
@@ -107,8 +117,14 @@ struct InitialState : public BasicStateT<InitialState>
             "WriteProtected", bool(true),
             []([[maybe_unused]] const bool& req,
                [[maybe_unused]] bool& property) { return 0; },
-            [&target = machine.getTarget()](
-                [[maybe_unused]] const bool& property) { return bool(true); });
+            [&target =
+                 machine.getTarget()]([[maybe_unused]] const bool& property) {
+                if (target)
+                {
+                    return !target->rw;
+                }
+                return bool(true);
+            });
         iface->register_property(
             "Timeout", machine.getConfig().timeout.value_or(
                            Configuration::MountPoint::defaultTimeout));
@@ -141,13 +157,16 @@ struct InitialState : public BasicStateT<InitialState>
         auto iface = event.objServer->add_interface(path, name);
 
         iface->register_signal<int32_t>("Completion");
+        machine.notificationInitialize(event.bus, path, name, "Completion");
 
         // Common unmount
         iface->register_method("Unmount", [&machine = machine]() {
             LogMsg(Logger::Info, "[App]: Unmount called on ",
                    machine.getName());
 
-            return false;
+            machine.emitUnmountEvent();
+
+            return true;
         });
 
         // Mount specialization
@@ -173,7 +192,9 @@ struct InitialState : public BasicStateT<InitialState>
                 LogMsg(Logger::Info, "[App]: Mount called on ",
                        getObjectPath(machine), machine.getName());
 
-                return false;
+                machine.emitMountEvent(std::nullopt);
+
+                return true;
             });
         }
 

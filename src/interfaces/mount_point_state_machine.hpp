@@ -4,12 +4,15 @@
 #include "resources.hpp"
 #include "system.hpp"
 #include "types/dbus_types.hpp"
+#include "utils/utils.hpp"
 
 #include <boost/asio/io_context.hpp>
+#include <sdbusplus/asio/connection.hpp>
 
 #include <memory>
 #include <optional>
 #include <string>
+#include <system_error>
 
 struct BasicState;
 
@@ -25,6 +28,14 @@ struct MountPointStateMachine
     };
 
     virtual ~MountPointStateMachine() = default;
+
+    virtual void notify(const std::error_code& ec = {}) = 0;
+    virtual void
+        notificationInitialize(std::shared_ptr<sdbusplus::asio::connection> con,
+                               const std::string& svc, const std::string& iface,
+                               const std::string& name) = 0;
+
+    virtual void notificationStart() = 0;
 
     virtual std::string_view getName() const = 0;
     virtual Configuration::MountPoint& getConfig() = 0;
