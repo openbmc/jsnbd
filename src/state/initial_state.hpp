@@ -38,6 +38,18 @@ struct InitialState : public BasicStateT<InitialState>
         const bool isLegacy =
             (machine.getConfig().mode == Configuration::Mode::legacy);
 
+#ifndef LEGACY_MODE_ENABLED
+        if (isLegacy)
+        {
+            return std::make_unique<ReadyState>(machine,
+                                                std::errc::invalid_argument,
+                                                "Legacy mode is not supported");
+        }
+#endif
+        if (isLegacy)
+        {
+            cleanUpMountPoint();
+        }
         addMountPointInterface(event);
         addProcessInterface(event);
         addServiceInterface(event, isLegacy);
@@ -90,6 +102,47 @@ struct InitialState : public BasicStateT<InitialState>
         processIface->initialize();
     }
 
+    void cleanUpMountPoint()
+    {
+        if (UsbGadget::isConfigured(std::string(machine.getName())))
+        {
+            int result = UsbGadget::configure(std::string(machine.getName()),
+                                              machine.getConfig().nbdDevice,
+                                              StateChange::removed);
+            LogMsg(Logger::Info, "UsbGadget cleanup");
+
+            if (result != 0)
+            {
+                LogMsg(Logger::Critical, machine.getName(),
+                       "Some serious failure happened! Cleanup failed.");
+            }
+        }
+
+        auto localFile = std::filesystem::temp_directory_path() /
+                         std::string(machine.getName());
+
+        if (std::filesystem::exists(localFile))
+        {
+            if (0 == ::umount2(localFile.c_str(), MNT_FORCE))
+            {
+                LogMsg(Logger::Info, "Cleanup directory ", localFile);
+                std::error_code ec;
+                if (!std::filesystem::remove(localFile, ec))
+                {
+                    LogMsg(Logger::Error, ec,
+                           "Cleanup failed - unable to remove directory ",
+                           localFile);
+                }
+            }
+            else
+            {
+                LogMsg(Logger::Error,
+                       "Cleanup failed - unable to unmount directory ",
+                       localFile);
+            }
+        }
+    }
+
     void addMountPointInterface(const RegisterDbusEvent& event)
     {
         std::string objPath = getObjectPath(machine);
@@ -111,6 +164,10 @@ struct InitialState : public BasicStateT<InitialState>
             },
             [&target = machine.getTarget()](
                 [[maybe_unused]] const std::string& property) {
+                if (target)
+                {
+                    return target->imgUrl;
+                }
                 return std::string();
             });
         iface->register_property(
@@ -176,14 +233,55 @@ struct InitialState : public BasicStateT<InitialState>
             using optional_fd = std::variant<int, unix_fd>;
 
             iface->register_method(
-                "Mount",
-                [&machine = machine]([[maybe_unused]] const std::string& imgUrl,
-                                     [[maybe_unused]] bool rw,
-                                     [[maybe_unused]] optional_fd fd) {
+                "Mount", [&machine = machine](boost::asio::yield_context yield,
+                                              const std::string& imgUrl,
+                                              bool rw, optional_fd fd) {
                     LogMsg(Logger::Info, "[App]: Mount called on ",
                            getObjectPath(machine), machine.getName());
 
-                    return false;
+                    interfaces::MountPointStateMachine::Target target = {
+                        imgUrl, rw, nullptr, nullptr};
+
+                    if (std::holds_alternative<unix_fd>(fd))
+                    {
+                        LogMsg(Logger::Debug, "[App] Extra data available");
+
+                        // Open pipe and prepare output buffer
+                        boost::asio::posix::stream_descriptor secretPipe(
+                            machine.getIOC(), dup(std::get<unix_fd>(fd).fd));
+                        std::array<char, utils::secretLimit> buf;
+
+                        // Read data
+                        auto size = secretPipe.async_read_some(
+                            boost::asio::buffer(buf), yield);
+
+                        // Validate number of NULL delimiters, ensures
+                        // further operations are safe
+                        auto nullCount =
+                            std::count(buf.begin(), buf.begin() + size, '\0');
+                        if (nullCount != 2)
+                        {
+                            throw sdbusplus::exception::SdBusError(
+                                EINVAL, "Malformed extra data");
+                        }
+
+                        // First 'part' of payload
+                        std::string user(buf.begin());
+                        // Second 'part', after NULL delimiter
+                        std::string pass(buf.begin() + user.length() + 1);
+
+                        // Encapsulate credentials into safe buffer
+                        target.credentials =
+                            std::make_unique<utils::CredentialsProvider>(
+                                std::move(user), std::move(pass));
+
+                        // Cover the tracks
+                        utils::secureCleanup(buf);
+                    }
+
+                    machine.emitMountEvent(std::move(target));
+
+                    return true;
                 });
         }
         else // proxy
