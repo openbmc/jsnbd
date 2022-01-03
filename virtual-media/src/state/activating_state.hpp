@@ -5,6 +5,7 @@
 #include "resources.hpp"
 #include "state/basic_state.hpp"
 #include "utils/log-wrapper.hpp"
+#include "utils/utils.hpp"
 
 #include <sdbusplus/exception.hpp>
 
@@ -40,19 +41,26 @@ struct ActivatingState : public BasicStateT<ActivatingState>
     std::unique_ptr<BasicState> activateProxyMode();
     std::unique_ptr<BasicState> activateStandardMode();
     std::unique_ptr<BasicState> mountSmbShare();
+    std::unique_ptr<BasicState> mountHttpsShare();
 
     static std::unique_ptr<resource::Process>
         spawnNbdKit(interfaces::MountPointStateMachine& machine,
+                    std::unique_ptr<utils::VolatileFile<>>&& secret,
                     const std::vector<std::string>& params);
     static std::unique_ptr<resource::Process>
         spawnNbdKit(interfaces::MountPointStateMachine& machine,
                     const std::filesystem::path& file);
+    static std::unique_ptr<resource::Process> spawnNbdKit(
+        interfaces::MountPointStateMachine& machine, const std::string& url);
 
     static bool checkUrl(const std::string& urlScheme,
                          const std::string& imageUrl);
     static bool getImagePathFromUrl(const std::string& urlScheme,
                                     const std::string& imageUrl,
                                     std::string* imagePath);
+    static bool isHttpsUrl(const std::string& imageUrl);
+    static bool getImagePathFromHttpsUrl(const std::string& imageUrl,
+                                         std::string* imagePath);
 
     static bool isCifsUrl(const std::string& imageUrl);
     static bool getImagePathFromCifsUrl(const std::string& imageUrl,
