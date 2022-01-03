@@ -1,5 +1,6 @@
 #include "events.hpp"
 #include "interfaces/mount_point_state_machine.hpp"
+#include "mocks/file_printer_mock.hpp"
 #include "mocks/object_server_mock.hpp"
 #include "state/basic_state.hpp"
 #include "state_machine.hpp"
