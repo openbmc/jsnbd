@@ -1,3 +1,9 @@
+add_project_arguments(
+    cxx.get_supported_arguments([
+        '-DBOOST_USE_VALGRIND'
+    ]),
+    language : 'cpp')
+
 gtest_dep = dependency(
     'gtest_main',
     version: '>=1.11.0',
@@ -35,15 +41,17 @@ test(
             'src/mocks/child_mock.cpp',
             'src/mocks/file_printer_mock.cpp',
             'src/mocks/gadget_dirs_mock.cpp',
+            'src/mocks/mounter_mock.cpp',
             'src/mocks/pipe_reader_mock.cpp',
             'src/mocks/stream_descriptor_mock.cpp',
             'src/mocks/udev_mock.cpp',
 
-
+            'src/activating_state_test.cpp',
             'src/configuration_test.cpp',
             'src/events_test.cpp',
             'src/initial_state_test.cpp',
             'src/resources_test.cpp',
+            'src/smb_test.cpp',
             'src/state_machine_test.cpp',
             'src/state_transitions_test.cpp',
             'src/system_test.cpp',

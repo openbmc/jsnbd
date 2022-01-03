@@ -202,13 +202,14 @@ configure_file(input : 'config/config.json',
                install : true)
 
 srcfiles_app = [ 'src/main.cpp',
+                 'src/state/activating_state.cpp',
                  'src/utils/impl/child.cpp',
+                 'src/utils/impl/file_printer.cpp',
+                 'src/utils/impl/gadget_dirs.cpp',
+                 'src/utils/impl/mounter.cpp',
                  'src/utils/impl/pipe_reader.cpp',
                  'src/utils/impl/stream_descriptor.cpp',
                  'src/utils/impl/udev.cpp',
-                 'src/utils/impl/file_printer.cpp',
-                 'src/utils/impl/gadget_dirs.cpp',
-                 'src/state/activating_state.cpp',
                  'src/resources.cpp',
                ]
 
@@ -228,6 +229,11 @@ if get_option('verbose-nbdkit-logs').enabled()
         language: 'cpp')
 endif
 
+#Tests are placed in the tests folder, with it's own meson.build
+if (get_option('tests').enabled())
+    subdir('tests')
+endif
+
 executable('virtual-media',
            srcfiles_app,
            dependencies: [ systemd, boost, udev, udev_lib_dep,
@@ -237,7 +243,4 @@ executable('virtual-media',
            install: true,
            install_dir:bindir)
 
-#Tests are placed in the tests folder, with it's own meson.build
-if (get_option('tests').enabled())
-    subdir('tests')
-endif
+
