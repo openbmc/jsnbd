@@ -1,11 +1,14 @@
 #pragma once
 
+#include "configuration.hpp"
 #include "interfaces/mount_point_state_machine.hpp"
 #include "state/basic_state.hpp"
 #include "state/initial_state.hpp"
+#include "system.hpp"
 #include "types/dbus_types.hpp"
 
 #include <boost/asio/io_context.hpp>
+#include <sdbusplus/asio/connection.hpp>
 
 #include <memory>
 #include <optional>
