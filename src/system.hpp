@@ -2,6 +2,8 @@
 
 #include "logger.hpp"
 #include "utils/child.hpp"
+#include "utils/file_printer.hpp"
+#include "utils/gadget_dirs.hpp"
 #include "utils/pipe_reader.hpp"
 #include "utils/stream_descriptor.hpp"
 #include "utils/udev.hpp"
@@ -15,6 +17,7 @@
 #include <chrono>
 #include <compare>
 #include <filesystem>
+#include <fstream>
 #include <ranges>
 #include <string>
 #include <system_error>
@@ -414,4 +417,185 @@ class Process : public std::enable_shared_from_this<Process>
     utils::Child child;
     utils::PipeReader reader;
     const NBDDevice<>& dev;
+};
+
+struct UsbGadget
+{
+  private:
+    using Printer = utils::FilePrinter;
+    using Dirs = utils::GadgetDirs;
+
+  public:
+    static int32_t configure(const std::string& name, const NBDDevice<>& nbd,
+                             StateChange change, const bool rw = false)
+    {
+        return configure(name, nbd.toPath(), change, rw);
+    }
+
+    static int32_t configure(const std::string& name,
+                             const std::filesystem::path& path,
+                             StateChange change, const bool rw = false)
+    {
+        LogMsg(Logger::Info, "[App]: Configure USB Gadget (name=", name,
+               ", path=", path, ", State=", static_cast<uint32_t>(change), ")");
+        bool success = true;
+
+        if (change == StateChange::unknown)
+        {
+            LogMsg(Logger::Critical,
+                   "[App]: Change to unknown state is not possible");
+            return -1;
+        }
+
+        const std::filesystem::path gadgetDir = Dirs::gadgetPrefix() + name;
+        const std::filesystem::path funcMassStorageDir =
+            gadgetDir / "functions/mass_storage.usb0";
+        const std::filesystem::path stringsDir = gadgetDir / "strings/0x409";
+        const std::filesystem::path configDir = gadgetDir / "configs/c.1";
+        const std::filesystem::path massStorageDir =
+            configDir / "mass_storage.usb0";
+        const std::filesystem::path configStringsDir =
+            configDir / "strings/0x409";
+
+        if (change == StateChange::inserted)
+        {
+            try
+            {
+                Printer::createDirs(gadgetDir);
+                Printer::echo(gadgetDir / "idVendor", "0x1d6b");
+                Printer::echo(gadgetDir / "idProduct", "0x0104");
+                Printer::createDirs(stringsDir);
+                Printer::echo(stringsDir / "manufacturer", "OpenBMC");
+                Printer::echo(stringsDir / "product", "Virtual Media Device");
+                Printer::createDirs(configStringsDir);
+                Printer::echo(configStringsDir / "configuration", "config 1");
+                Printer::createDirs(funcMassStorageDir);
+                Printer::createDirs(funcMassStorageDir / "lun.0");
+                Printer::createDirSymlink(funcMassStorageDir, massStorageDir);
+                Printer::echo(funcMassStorageDir / "lun.0/removable", "1");
+                Printer::echo(funcMassStorageDir / "lun.0/ro", rw ? "0" : "1");
+                Printer::echo(funcMassStorageDir / "lun.0/cdrom", "0");
+                Printer::echo(funcMassStorageDir / "lun.0/file", path);
+
+                for (const auto& port :
+                     std::filesystem::directory_iterator(Dirs::busPrefix()))
+                {
+                    if (Printer::isDir(port) && !Printer::isSymlink(port) &&
+                        !Printer::exists(port.path() / "gadget/suspended"))
+                    {
+                        const std::string portId = port.path().filename();
+                        LogMsg(Logger::Debug,
+                               "Use port : ", port.path().filename());
+                        Printer::echo(gadgetDir / "UDC", portId);
+                        return 0;
+                    }
+                }
+                // No ports available - clear success flag and go to cleanup
+                success = false;
+            }
+            catch (std::filesystem::filesystem_error& e)
+            {
+                // Got error perform cleanup
+                LogMsg(Logger::Error, "[App]: UsbGadget: ", e.what());
+                success = false;
+            }
+            catch (std::ofstream::failure& e)
+            {
+                // Got error perform cleanup
+                LogMsg(Logger::Error, "[App]: UsbGadget: ", e.what());
+                success = false;
+            }
+        }
+        // StateChange: unknown, notMonitored, inserted were handler
+        // earlier. We'll get here only for removed, or cleanup
+        try
+        {
+            Printer::echo(gadgetDir / "UDC", "");
+        }
+        catch (std::ofstream::failure& e)
+        {
+            // Got error perform cleanup
+            LogMsg(Logger::Error, "[App]: UsbGadget: ", e.what());
+            success = false;
+        }
+        const std::array<const char*, 6> dirs = {
+            massStorageDir.c_str(),   funcMassStorageDir.c_str(),
+            configStringsDir.c_str(), configDir.c_str(),
+            stringsDir.c_str(),       gadgetDir.c_str()};
+        for (const char* dir : dirs)
+        {
+            std::error_code ec;
+            Printer::remove(dir, ec);
+            if (ec)
+            {
+                success = false;
+                LogMsg(Logger::Error, "[App]: UsbGadget ", ec.message());
+            }
+        }
+
+        if (success)
+        {
+            return 0;
+        }
+        return -1;
+    }
+
+    static std::optional<std::string> getStats(const std::string& name)
+    {
+        const std::filesystem::path statsPath =
+            Dirs::gadgetPrefix() + name +
+            "/functions/mass_storage.usb0/lun.0/stats";
+
+        std::ifstream ifs(statsPath);
+        if (!ifs.is_open())
+        {
+            LogMsg(Logger::Error, name, "Failed to open ", statsPath);
+            return {};
+        }
+
+        return std::string{std::istreambuf_iterator<char>(ifs),
+                           std::istreambuf_iterator<char>()};
+    }
+
+    static bool isConfigured(const std::string& name)
+    {
+        const std::filesystem::path gadgetDir = Dirs::gadgetPrefix() + name;
+
+        if (!Printer::exists(gadgetDir))
+        {
+            return false;
+        }
+
+        return true;
+    }
+};
+
+class UdevGadget
+{
+    using Printer = utils::FilePrinter;
+
+  public:
+    // This force-triggers udev change events for nbd[0-3] devices, which
+    // prevents from disconnection on first mount event after reboot. The actual
+    // rootcause is related with kernel changes that occured between 5.10.67 and
+    // 5.14.11. This lead will continue to be investigated in order to provide
+    // proper fix.
+    static bool forceUdevChange()
+    {
+        std::string changeStr = "change";
+        try
+        {
+            Printer::echo("/sys/block/nbd0/uevent", changeStr);
+            Printer::echo("/sys/block/nbd1/uevent", changeStr);
+            Printer::echo("/sys/block/nbd2/uevent", changeStr);
+            Printer::echo("/sys/block/nbd3/uevent", changeStr);
+        }
+        catch (std::ofstream::failure& e)
+        {
+            LogMsg(Logger::Error, "[App]: UdevGadget: ", e.what());
+            return false;
+        }
+
+        return true;
+    }
 };
