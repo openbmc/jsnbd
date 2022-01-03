@@ -4,8 +4,12 @@
 #include <sys/ioctl.h>
 #include <unistd.h>
 
+#include <boost/asio/io_context.hpp>
+#include <boost/process/async_pipe.hpp>
 #include <boost/system/error_code.hpp>
+#include <boost/type_traits/has_dereference.hpp>
 #include <sdbusplus/exception.hpp>
+#include <sdbusplus/message.hpp>
 
 #include <algorithm>
 #include <chrono>
@@ -144,6 +148,65 @@ class CredentialsProvider
 
   private:
     Credentials credentials;
+};
+
+// Wrapper for boost::async_pipe ensuring proper pipe cleanup
+template <typename Buffer>
+class NamedPipe
+{
+  public:
+    using unix_fd = sdbusplus::message::unix_fd;
+
+    NamedPipe(boost::asio::io_context& io, const std::string name,
+              Buffer&& buffer) :
+        name(name),
+        impl(io, name), buffer{std::move(buffer)}
+    {}
+
+    ~NamedPipe()
+    {
+        // Named pipe needs to be explicitly removed
+        impl.close();
+        ::unlink(name.c_str());
+    }
+
+    unix_fd fd()
+    {
+        return unix_fd{impl.native_sink()};
+    }
+
+    const std::string& file() const
+    {
+        return name;
+    }
+
+    template <typename WriteHandler>
+    void async_write(WriteHandler&& handler)
+    {
+        impl.async_write_some(data(), std::forward<WriteHandler>(handler));
+    }
+
+  private:
+    // Specialization for pointer types
+    template <typename B = Buffer>
+    typename std::enable_if<boost::has_dereference<B>::value,
+                            boost::asio::const_buffer>::type
+        data()
+    {
+        return boost::asio::buffer(*buffer);
+    }
+
+    template <typename B = Buffer>
+    typename std::enable_if<!boost::has_dereference<B>::value,
+                            boost::asio::const_buffer>::type
+        data()
+    {
+        return boost::asio::buffer(buffer);
+    }
+
+    const std::string name;
+    boost::process::async_pipe impl;
+    Buffer buffer;
 };
 
 class FileObject
