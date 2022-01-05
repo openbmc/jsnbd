@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cf1711e_af1cd88f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2022-01-05T13:59:33Z",
+      "side": 1,
+      "message": "FYI, I\u0027ll be OOO till 01/10/22.",
+      "revId": "86811d2d655ebc7e7abeefbc37cc6ef9141c0670",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
