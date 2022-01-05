@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": true,
       "key": {
         "uuid": "0cbbb69d_0658aba0",
         "filename": "CMakeLists.txt",
@@ -14,10 +15,28 @@
       "side": 1,
       "message": "Can we do Meson please?  New code is expected to be in meson.",
       "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ad65400_79c27a3b",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2022-01-05T12:05:15Z",
+      "side": 1,
+      "message": "Meson will be added in the next patchset.",
+      "parentUuid": "0cbbb69d_0658aba0",
+      "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "ac4c6f35_4bc8a747",
         "filename": "OWNERS",
@@ -31,10 +50,28 @@
       "side": 1,
       "message": "I would prefer we do this as a separate commit at the end, once the review of this new feature is complete.  I don\u0027t want this repository to simply turn into another playground without review.",
       "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7519e104_2d6e0fd1",
+        "filename": "OWNERS",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2022-01-05T12:05:15Z",
+      "side": 1,
+      "message": "Ok, sounds reasonable.",
+      "parentUuid": "ac4c6f35_4bc8a747",
+      "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "9665e65e_4896a521",
         "filename": "src/configuration.hpp",
@@ -48,10 +85,28 @@
       "side": 1,
       "message": "I don\u0027t see anything here that uses boost/chrono.  Did I miss something?",
       "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7cc919b_91d1ccb5",
+        "filename": "src/configuration.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2022-01-05T12:05:15Z",
+      "side": 1,
+      "message": "nice catch. Will use \u003cchrono\u003e.",
+      "parentUuid": "9665e65e_4896a521",
+      "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "dcd85775_3c6e8949",
         "filename": "src/configuration.hpp",
@@ -71,10 +126,34 @@
         "endChar": 24
       },
       "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "05f7a2d7_0e0aa455",
+        "filename": "src/configuration.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2022-01-05T12:05:15Z",
+      "side": 1,
+      "message": "ok",
+      "parentUuid": "dcd85775_3c6e8949",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 24
+      },
+      "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "a6da2f25_807e7114",
         "filename": "src/configuration.hpp",
@@ -94,10 +173,34 @@
         "endChar": 21
       },
       "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e258179_3eebb851",
+        "filename": "src/configuration.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2022-01-05T12:05:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6da2f25_807e7114",
+      "range": {
+        "startLine": 58,
+        "startChar": 4,
+        "endLine": 58,
+        "endChar": 21
+      },
+      "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "a712b75f_fcef3048",
         "filename": "src/configuration.hpp",
@@ -111,10 +214,28 @@
       "side": 1,
       "message": "Can we just use std::map or std::unordered_map?  I really don\u0027t think there is as much advantage of using boost::..::flat_map as often as people attempt to use it.",
       "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "de5d2cbc_024b94a4",
+        "filename": "src/configuration.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2022-01-05T12:05:15Z",
+      "side": 1,
+      "message": "This it just the pattern we use. This could be changed to unordered_map.",
+      "parentUuid": "a712b75f_fcef3048",
+      "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "12f79a96_c96697c4",
         "filename": "src/configuration.hpp",
@@ -134,10 +255,34 @@
         "endChar": 9
       },
       "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e1dfa63_8a9ef5bc",
+        "filename": "src/configuration.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2022-01-05T12:05:15Z",
+      "side": 1,
+      "message": "This can be changed to catch generic exception and print reason added to current message.",
+      "parentUuid": "12f79a96_c96697c4",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 9
+      },
+      "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "1b217c2a_de2419f5",
         "filename": "src/configuration.hpp",
@@ -157,10 +302,34 @@
         "endChar": 50
       },
       "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6bf370b_b24d0026",
+        "filename": "src/configuration.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2022-01-05T12:05:15Z",
+      "side": 1,
+      "message": "This is the easiest and exceptionless getting of json values of given type.\nPointer in this case could be validated in opposite to reference. In case of type mismatch, get_ref\u003c\u003e() will throw nlohmann::type_error exception, so we must use try/catch block; get_ptr\u003c\u003e() will just return null pointer then. \n\nWe use this pattern very often in bmcweb while parsing redfish input.",
+      "parentUuid": "1b217c2a_de2419f5",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 128,
+        "endChar": 50
+      },
+      "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "313dd7f9_8d10b06f",
         "filename": "src/configuration.hpp",
@@ -180,10 +349,34 @@
         "endChar": 25
       },
       "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "b094a1de_435dca91",
+        "filename": "src/configuration.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2022-01-05T12:05:15Z",
+      "side": 1,
+      "message": "see above",
+      "parentUuid": "313dd7f9_8d10b06f",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 130,
+        "endChar": 25
+      },
+      "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "27ae56fb_b36df7a3",
         "filename": "src/configuration.hpp",
@@ -203,10 +396,34 @@
         "endChar": 69
       },
       "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c12a55f6_2f564b87",
+        "filename": "src/configuration.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2022-01-05T12:05:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27ae56fb_b36df7a3",
+      "range": {
+        "startLine": 131,
+        "startChar": 43,
+        "endLine": 131,
+        "endChar": 69
+      },
+      "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "a57e029c_f28a2b74",
         "filename": "src/configuration.hpp",
@@ -220,10 +437,28 @@
       "side": 1,
       "message": "This is fairly non-obvious to me.  Having a struct cast to bool to indicate \"invalid parsing\".",
       "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4fde17e_8e4d5d0f",
+        "filename": "src/configuration.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2022-01-05T12:05:15Z",
+      "side": 1,
+      "message": "Added dedicated method on the object",
+      "parentUuid": "a57e029c_f28a2b74",
+      "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "8a684507_7e21b24f",
         "filename": "src/configuration.hpp",
@@ -243,10 +478,34 @@
         "endChar": 25
       },
       "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0fa7d21_59f8935a",
+        "filename": "src/configuration.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2022-01-05T12:05:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8a684507_7e21b24f",
+      "range": {
+        "startLine": 139,
+        "startChar": 0,
+        "endLine": 144,
+        "endChar": 25
+      },
+      "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "2420f971_b9292d6b",
         "filename": "src/configuration.hpp",
@@ -266,10 +525,34 @@
         "endChar": 22
       },
       "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba542805_d3ad6920",
+        "filename": "src/configuration.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2022-01-05T12:05:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2420f971_b9292d6b",
+      "range": {
+        "startLine": 145,
+        "startChar": 21,
+        "endLine": 145,
+        "endChar": 22
+      },
+      "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "f583716a_ec19e6db",
         "filename": "src/configuration.hpp",
@@ -289,10 +572,34 @@
         "endChar": 21
       },
       "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1c692b7_c178202a",
+        "filename": "src/configuration.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2022-01-05T12:05:15Z",
+      "side": 1,
+      "message": "Made a getConfig wrapper but left required/not required to the code flow. \nIt looks better now.",
+      "parentUuid": "f583716a_ec19e6db",
+      "range": {
+        "startLine": 146,
+        "startChar": 0,
+        "endLine": 162,
+        "endChar": 21
+      },
+      "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "2342f224_43c2a6f4",
         "filename": "src/configuration.hpp",
@@ -312,10 +619,34 @@
         "endChar": 29
       },
       "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "03ed4763_0694dbf9",
+        "filename": "src/configuration.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2022-01-05T12:05:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2342f224_43c2a6f4",
+      "range": {
+        "startLine": 218,
+        "startChar": 0,
+        "endLine": 233,
+        "endChar": 29
+      },
+      "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "be864d98_43485be5",
         "filename": "src/configuration.hpp",
@@ -329,10 +660,28 @@
       "side": 1,
       "message": "mountPoints.emplace(mountpoint.key(), std::move(mp));",
       "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9544b9d6_3790edaa",
+        "filename": "src/configuration.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2022-01-05T12:05:15Z",
+      "side": 1,
+      "message": "ok",
+      "parentUuid": "be864d98_43485be5",
+      "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "ac75b1fb_c4627df0",
         "filename": "src/logger.hpp",
@@ -346,10 +695,28 @@
       "side": 1,
       "message": "Please use phosphor-logging::lg2 and not make up your own logger.",
       "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "59549253_f16a1675",
+        "filename": "src/logger.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2022-01-05T12:05:15Z",
+      "side": 1,
+      "message": "Is this really necessary? I consider phosphor logging heavy and not easy in use (with limitations).",
+      "parentUuid": "ac75b1fb_c4627df0",
+      "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "f972e656_62712f5a",
         "filename": "src/main.cpp",
@@ -363,10 +730,28 @@
       "side": 1,
       "message": "In what contexts is this used?  I would have guessed test cases, but this is main.cpp.",
       "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0cbb41b_6e05a28f",
+        "filename": "src/main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2022-01-05T12:05:15Z",
+      "side": 1,
+      "message": "It is a part to simplify debugging. Removed.",
+      "parentUuid": "f972e656_62712f5a",
+      "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "bf8d13ae_1c71eaf4",
         "filename": "src/main.cpp",
@@ -386,10 +771,34 @@
         "endChar": 73
       },
       "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e1fb111_ea00fd4e",
+        "filename": "src/main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2022-01-05T12:05:15Z",
+      "side": 1,
+      "message": "ok",
+      "parentUuid": "bf8d13ae_1c71eaf4",
+      "range": {
+        "startLine": 30,
+        "startChar": 49,
+        "endLine": 30,
+        "endChar": 73
+      },
+      "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "ae4ca469_e494f72b",
         "filename": "src/main.cpp",
@@ -409,10 +818,10 @@
         "endChar": 49
       },
       "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "7eef31f6_d34745ac",
         "filename": "src/main.cpp",
@@ -426,10 +835,52 @@
       "side": 1,
       "message": "Why virtual-media.conf stored in the /etc that is rwfs? Does we desire the VM-endpoints might be configured at runtime on the field mode? I\u0027d prefer to store that config at the /usr/share/virtual-media/",
       "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d93e221_2ea5f503",
+        "filename": "src/main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2022-01-05T12:05:15Z",
+      "side": 1,
+      "message": "I would prefer to make it configurable on the fly. Modification of eg. timeout could be beneficial for some use cases.",
+      "parentUuid": "7eef31f6_d34745ac",
+      "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de30b310_23330374",
+        "filename": "src/main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2022-01-05T12:05:15Z",
+      "side": 1,
+      "message": "seems reasonable.",
+      "parentUuid": "ae4ca469_e494f72b",
+      "range": {
+        "startLine": 44,
+        "startChar": 31,
+        "endLine": 44,
+        "endChar": 49
+      },
+      "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "c3befceb_dcbcb731",
         "filename": "src/main.cpp",
@@ -449,10 +900,10 @@
         "endChar": 61
       },
       "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "cee95152_65d877f4",
         "filename": "src/main.cpp",
@@ -473,10 +924,34 @@
         "endChar": 61
       },
       "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed0c1e1a_c60a6e3a",
+        "filename": "src/main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2022-01-05T12:05:15Z",
+      "side": 1,
+      "message": "Yes, this has been changed recently. Will backport that.",
+      "parentUuid": "cee95152_65d877f4",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 61
+      },
+      "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "a3df72c7_26892084",
         "filename": "src/main.cpp",
@@ -496,10 +971,34 @@
         "endChar": 6
       },
       "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa64b50d_2d27e68f",
+        "filename": "src/main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2022-01-05T12:05:15Z",
+      "side": 1,
+      "message": "The use case is by running it on x86 platform natively (for debugging eg.) but with dbus tunneled to bmc platform.\nI will remove it in favor of DBUS_STARTER_BUS_TYPE\u003d\"x\" and DBUS_STARTER_ADDRESS\u003d\"unix:abstract\u003d/tmp/socket\" what does the same, actually.",
+      "parentUuid": "a3df72c7_26892084",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 6
+      },
+      "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "50a1367b_65303cd0",
         "filename": "src/main.cpp",
@@ -513,10 +1012,28 @@
       "side": 1,
       "message": "Any reason you\u0027re not using the sdbusplus code here?",
       "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cb05aa4_2c7ea8d3",
+        "filename": "src/main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2022-01-05T12:05:15Z",
+      "side": 1,
+      "message": "This is just for making remote dbus possible. Not needed anymore.",
+      "parentUuid": "50a1367b_65303cd0",
+      "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "a7079abd_96ef5606",
         "filename": "src/system.hpp",
@@ -536,10 +1053,34 @@
         "endChar": 51
       },
       "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c536b8bc_8fad00ee",
+        "filename": "src/system.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2022-01-05T12:05:15Z",
+      "side": 1,
+      "message": "Removed according to another suggestion",
+      "parentUuid": "a7079abd_96ef5606",
+      "range": {
+        "startLine": 20,
+        "startChar": 25,
+        "endLine": 21,
+        "endChar": 51
+      },
+      "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "f4ece81e_e25bd73b",
         "filename": "src/system.hpp",
@@ -559,10 +1100,34 @@
         "endChar": 6
       },
       "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab07cf11_bd147702",
+        "filename": "src/system.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2022-01-05T12:05:15Z",
+      "side": 1,
+      "message": "This class has been prepared to handler different nbd nodes on request. There was a problem with kernel implementation when device sometimes (rather rarely) couldn\u0027t be reused for some reason. We end up with this ready for future expansions when the problem will occur more often. In the end, the bug hasn\u0027t recurred (for \u003e1year).\n\nThe mitigation for the problem was when requesting for some node it could return the other one that is free at the moment (that\u0027s why \"isReady\" function exists but is not used). This will be easier to manage with internal enum representation.\n\nI would recommend to leave some of this functionality (may be used), but indeed I will probably resign from using enum inside as it seems redundant at this moment.",
+      "parentUuid": "f4ece81e_e25bd73b",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 6
+      },
+      "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "e7ac1070_147206d1",
         "filename": "src/system.hpp",
@@ -576,10 +1141,28 @@
       "side": 1,
       "message": "As mentioned above, it isn\u0027t obvious to me why we want to do this search operation.",
       "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "14d38f0d_78d9ab8a",
+        "filename": "src/system.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2022-01-05T12:05:15Z",
+      "side": 1,
+      "message": "see above",
+      "parentUuid": "e7ac1070_147206d1",
+      "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "5e19e43b_f1c1e3b5",
         "filename": "src/system.hpp",
@@ -593,10 +1176,28 @@
       "side": 1,
       "message": "Prefer to use range-find whenever possible now.\n\nstd::range:find(nameMatching, nbdName);",
       "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1ae267a_ed464c27",
+        "filename": "src/system.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2022-01-05T12:05:15Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5e19e43b_f1c1e3b5",
+      "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "3b47d7dd_d2d1ba38",
         "filename": "src/system.hpp",
@@ -616,10 +1217,34 @@
         "endChar": 43
       },
       "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b35bd96_742969b4",
+        "filename": "src/system.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2022-01-05T12:05:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b47d7dd_d2d1ba38",
+      "range": {
+        "startLine": 45,
+        "startChar": 24,
+        "endLine": 45,
+        "endChar": 43
+      },
+      "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "a3e55340_042f19d2",
         "filename": "src/system.hpp",
@@ -639,10 +1264,34 @@
         "endChar": 5
       },
       "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9f17044_0c55eaff",
+        "filename": "src/system.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2022-01-05T12:05:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3e55340_042f19d2",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 5
+      },
+      "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "68e26e83_1c9b9d72",
         "filename": "src/system.hpp",
@@ -656,10 +1305,28 @@
       "side": 1,
       "message": "This sounds expensive.  Can we simply check for dev node presence?  Maybe we\u0027re doing it infrequently enough that it doesn\u0027t matter.",
       "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "a34c19b2_d0955b50",
+        "filename": "src/system.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2022-01-05T12:05:15Z",
+      "side": 1,
+      "message": "For the reason I mentioned above, this could help determine if device could be used.",
+      "parentUuid": "68e26e83_1c9b9d72",
+      "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "1cf9ef93_5cf14062",
         "filename": "src/system.hpp",
@@ -673,10 +1340,28 @@
       "side": 1,
       "message": "This is all the more reason why I don\u0027t understand why you want to store as an enum and do this conversion back and forth all the time.",
       "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "05aacaa6_33c1f9c6",
+        "filename": "src/system.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2022-01-05T12:05:15Z",
+      "side": 1,
+      "message": "Changed the internal representation to std::string.",
+      "parentUuid": "1cf9ef93_5cf14062",
+      "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "cbf1e6f2_bcdb3788",
         "filename": "src/system.hpp",
@@ -696,10 +1381,34 @@
         "endChar": 48
       },
       "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d1fbd94_c77e4f4d",
+        "filename": "src/system.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2022-01-05T12:05:15Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "cbf1e6f2_bcdb3788",
+      "range": {
+        "startLine": 137,
+        "startChar": 0,
+        "endLine": 137,
+        "endChar": 48
+      },
+      "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "1c8a9be6_39a9ab75",
         "filename": "virtual-media.json",
@@ -713,10 +1422,28 @@
       "side": 1,
       "message": "This seems kind of silly.  Can we DRY up this configuration?  You\u0027ve had to repeat yourself 4 times for a \"default\" configuration: Slot_0, /nbd/0, nbd0, nbd0.sock.",
       "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "027f25f5_55721a51",
+        "filename": "virtual-media.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2022-01-05T12:05:15Z",
+      "side": 1,
+      "message": "Those names are chosen arbitrarily this way to show how to define such configs. They could (and should) be replaced to something more meaningful. \n\nI don\u0027t see anything wrong to have everything customizable.",
+      "parentUuid": "1c8a9be6_39a9ab75",
+      "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "01dec557_29fae87f",
         "filename": "xyz.openbmc_project.VirtualMedia.service",
@@ -730,8 +1457,25 @@
       "side": 1,
       "message": "We\u0027ve been moving a lot of executables we don\u0027t intend users to run into /usr/libexec.  See https://github.com/openbmc/docs/blob/master/anti-patterns.md#incorrect-placement-of-executables-in-sbin-usrsbin-or-bin-usrbin",
       "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5d6da47_748702b0",
+        "filename": "xyz.openbmc_project.VirtualMedia.service",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2022-01-05T12:05:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01dec557_29fae87f",
+      "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
