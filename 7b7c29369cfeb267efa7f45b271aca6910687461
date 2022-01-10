@@ -34,6 +34,24 @@
       "parentUuid": "d6f88dc7_254e26cb",
       "revId": "7b7c29369cfeb267efa7f45b271aca6910687461",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87dbf837_af436d3c",
+        "filename": "nbd-proxy.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000675
+      },
+      "writtenOn": "2022-01-10T08:00:30Z",
+      "side": 0,
+      "message": "\u003e - some of the code will remain\n\nDid you plan to save the nbd-proxy feature by the next-time patchsets? I still don\u0027t understand how new feature that introduced by current patchset is concerned with the jsnbd(nbd-proxy) feature.\nI totally preferred to have a new separate repository for the virtual media, or we should include nbd-proxy in the current implementation (perhaps it should be built by a configure compile flag)",
+      "parentUuid": "527df803_bd69a168",
+      "revId": "7b7c29369cfeb267efa7f45b271aca6910687461",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }

@@ -882,6 +882,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "25b25e72_91485b02",
+        "filename": "src/main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000675
+      },
+      "writtenOn": "2022-01-10T08:00:30Z",
+      "side": 1,
+      "message": "I believe for the described case the config should be split into modifiable fields and persistent configuration. Changing a set of the virtual-media endpoints that is used to attach usb-gadget might incapacitate the rest features, e.g. kvm-hid devices(virtual keyboard and mouse).",
+      "parentUuid": "9d93e221_2ea5f503",
+      "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c3befceb_dcbcb731",
         "filename": "src/main.cpp",
         "patchSetId": 1
