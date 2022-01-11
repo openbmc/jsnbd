@@ -70,6 +70,24 @@
       "parentUuid": "87dbf837_af436d3c",
       "revId": "7b7c29369cfeb267efa7f45b271aca6910687461",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e206d0d1_f5624fec",
+        "filename": "nbd-proxy.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2022-01-11T07:56:09Z",
+      "side": 0,
+      "message": "Just to clarify my input on the mailing list: I have no preference on whether we keep using this repository or replace it with a different one. If it makes more sense to completely replace the \u0027jsnbd\u0027 name with your new server code, that\u0027s totally fine with me.\n\nMy main point is that we don\u0027t just add a whole new virtual media implementation *alongside* the exiting one - we want a complete replacement.\n\nIn terms of your \"some of the code will remain\" reference, I understand that to be just the javascript parts, which is a very small amount of code; if you copy that into a new repo and lose the history, that\u0027s fine by me too.\n\nIgor: there\u0027s no real \"proxy\" feature that will be missing by this change; the nbd-proxy.c file is just named for the service that proxies data between the websocket and the nbd device - it is not related to the proxy VM feature mentioned elsewhere, but implements the entire js-websocket-to-nbd channel.",
+      "parentUuid": "382e53b4_c2b613a5",
+      "revId": "7b7c29369cfeb267efa7f45b271aca6910687461",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
