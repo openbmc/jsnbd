@@ -124,6 +124,24 @@
       "parentUuid": "568b2686_f91cfc84",
       "revId": "7b7c29369cfeb267efa7f45b271aca6910687461",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2ade0aa_c60634c2",
+        "filename": "nbd-proxy.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000675
+      },
+      "writtenOn": "2022-01-11T09:28:22Z",
+      "side": 0,
+      "message": "Don\u0027t take me the wrong way, the current case is required a little bit more than simple synchronization. \nCurrently, bmcweb has a two ways to communicate with NBD-endpoints:\n* By the nbd-proxy application(old-base jsnbd), in the bmcweb terms that is called vm-weboscket which is provided `/vm/0/X` ws-resource\n* By the vm-nbdproxy (works on the unix-sockets), which is provided `/nbd/X` ws resource.\n\nIf jsnbd old-base will be removed that does mean the bmcweb vm-websocket feature never be worked and all appropriate frontend WebUI application can\u0027t be used/vm/0/X resource. \n\nI guess a lot of WebUI implementations are still based on the old-base VM-feature and the total rejection of old-base implementation will incapacitate virtual-media on a frontend. My opinion here is that it might be more gradual, by introducing a new virtual-media implementation and after markin old-base implementation as obsolete, the jsnbd(nbd-proxy) might be subsequently removed.",
+      "parentUuid": "f9afb93d_01e370a5",
+      "revId": "7b7c29369cfeb267efa7f45b271aca6910687461",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
