@@ -88,6 +88,24 @@
       "parentUuid": "382e53b4_c2b613a5",
       "revId": "7b7c29369cfeb267efa7f45b271aca6910687461",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "568b2686_f91cfc84",
+        "filename": "nbd-proxy.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000675
+      },
+      "writtenOn": "2022-01-11T08:44:00Z",
+      "side": 0,
+      "message": "Jeremy,\nThanks for the explanation. \n\nYes, I understand that current changes are implemented the approved new VM-design that includes Proxying nbd-server from the browser(that is brought up to the bmcweb by the websocket) to the nbd device endpoint. \nMy point is the new implementation has a new API in relation to bmcweb, which is directly called the `nbd-proxy` application with specific flags. \nThe incoming implementation also has the described feature, but it works on the unix-sockets, which will be served by a stand-alone dbus-service. That is incompatible with the bmcweb VM-WebSocket feature.",
+      "parentUuid": "e206d0d1_f5624fec",
+      "revId": "7b7c29369cfeb267efa7f45b271aca6910687461",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
