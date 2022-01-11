@@ -71,6 +71,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b6180f2_e868b59a",
+        "filename": "OWNERS",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2022-01-11T03:08:16Z",
+      "side": 1,
+      "message": "(and at that point, feel free to remove me from owners; this will be almost all your code :) )",
+      "parentUuid": "7519e104_2d6e0fd1",
+      "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9665e65e_4896a521",
