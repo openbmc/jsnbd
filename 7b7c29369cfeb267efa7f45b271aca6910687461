@@ -52,6 +52,24 @@
       "parentUuid": "527df803_bd69a168",
       "revId": "7b7c29369cfeb267efa7f45b271aca6910687461",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "382e53b4_c2b613a5",
+        "filename": "nbd-proxy.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000675
+      },
+      "writtenOn": "2022-01-11T07:46:38Z",
+      "side": 0,
+      "message": "Now I saw the conversation on the maillist. \nOk, if the community remained of that view, I don\u0027t give any questions. But it seems to me that several manufacturers will be very surprised when they can\u0027t find the nbd-proxy feature.",
+      "parentUuid": "87dbf837_af436d3c",
+      "revId": "7b7c29369cfeb267efa7f45b271aca6910687461",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
