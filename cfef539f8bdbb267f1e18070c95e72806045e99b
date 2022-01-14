@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1dc271fe_421c91e7",
+        "filename": "config/config.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2022-01-14T14:27:50Z",
+      "side": 1,
+      "message": "This is propagated as name to dbus/rf/UI interface. There are four possible slots with USB Gadget, each one can have specific name.",
+      "parentUuid": "ee5fbd7a_2f17714e",
+      "revId": "cfef539f8bdbb267f1e18070c95e72806045e99b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1cc83ab6_f63c28c5",
         "filename": "src/system.hpp",
         "patchSetId": 2
@@ -48,6 +66,24 @@
       "writtenOn": "2022-01-11T03:08:16Z",
       "side": 1,
       "message": "Why does this need to be one of the fixed nbd names from nameMatching? Is there any issue with allowing arbitrary paths here?\n\nOr, given you\u0027re requiring the \u0027nbd\u0027 prefix in call cases, just make this an index instead?",
+      "revId": "cfef539f8bdbb267f1e18070c95e72806045e99b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9e5c98e_a205c697",
+        "filename": "src/system.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2022-01-14T14:27:50Z",
+      "side": 1,
+      "message": "I have changed it, as previously enum was internal representation for this class. \nThis class may do more in the future as I wrote in this comment:\n\nhttps://gerrit.openbmc-project.xyz/c/openbmc/jsnbd/+/49944/comment/f4ece81e_e25bd73b/",
+      "parentUuid": "1cc83ab6_f63c28c5",
       "revId": "cfef539f8bdbb267f1e18070c95e72806045e99b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
