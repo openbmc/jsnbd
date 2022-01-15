@@ -954,6 +954,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1ec464e8_1dd8fccc",
+        "filename": "src/main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000879
+      },
+      "writtenOn": "2022-01-15T07:59:06Z",
+      "side": 1,
+      "message": "This kind of debugging is a part of developing and, IMHO, can be done by changing parameter in the image and reflashing BMC. Alternatively for testing on live machine you can mount ramfs overlay on top of /usr/share and temporary change parameters you want.\nIt is definitely not worth to break configuration on two files in different locations just because of this.\nAlso you can make this path configurable with meson build options.",
+      "parentUuid": "8702aa09_a31c29e1",
+      "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c3befceb_dcbcb731",
         "filename": "src/main.cpp",
         "patchSetId": 1
