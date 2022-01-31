@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e96111b1_03efbfea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2022-01-31T21:39:51Z",
+      "side": 1,
+      "message": "Sorry, I missed this one previously.\nMount point here is a high level idea of an slot that could be used to connect an external resource of some kind and virtually attach it to an emulated USB device. \"Connect\" used here is exchangeable with \"mount\" as general idea is similar to local mount.\nThis slot (aka. mount point) exposed in d-bus, Redfish, and UI, is identified by name and characterized by a bunch of parameters ie. mode (legacy/proxy), device, socket etc. \n\nActually, we do mount external share only for CIFS in order to access ISO/img located there.",
+      "parentUuid": "79d91c84_ea8be01a",
+      "revId": "cfef539f8bdbb267f1e18070c95e72806045e99b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ee5fbd7a_2f17714e",
         "filename": "config/config.json",
         "patchSetId": 2
@@ -101,6 +119,24 @@
       "writtenOn": "2022-01-11T03:08:16Z",
       "side": 1,
       "message": "It looks like you\u0027re just checking whether the device node exists, is that correct? if so, an `access()` would work, or a `stat()` if you want to check that it\u0027s a proper nbd device (chardev, with major NBD_MAJOR).\n\nIs there a reason this needs to be an O_EXCL, but the main open() below does not?",
+      "revId": "cfef539f8bdbb267f1e18070c95e72806045e99b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4492b595_ad4e7beb",
+        "filename": "src/system.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2022-01-31T21:39:51Z",
+      "side": 1,
+      "message": "This exclusive open was needed in order to check if the device is still available to use. \nThere are cases where previously used device is held by linux kernel for some reason (I haven\u0027t seen such behavior for some time) and can\u0027t be used.",
+      "parentUuid": "cdf7731f_d836f01e",
       "revId": "cfef539f8bdbb267f1e18070c95e72806045e99b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
