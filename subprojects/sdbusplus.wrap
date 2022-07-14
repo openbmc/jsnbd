@@ -1,0 +1,8 @@
+[wrap-git]
+url = https://github.com/openbmc/sdbusplus.git
+revision = ae01928016f2983aa44f1279a2575572514953f7
+
+; diff_files = 0001-fix-sdbusplus-compile-problems.patch
+
+[provide]
+sdbusplus = sdbusplus_dep
