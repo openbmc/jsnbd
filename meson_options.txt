@@ -2,5 +2,12 @@ option(
     'tests',
     type: 'feature',
     value: 'enabled',
-    description: 'Build unit tests',
+    description: 'Build unit tests.'
+)
+
+option(
+    'verbose-nbdkit-logs',
+    type: 'feature',
+    value: 'disabled',
+    description:'Enable very verbose logs for nbdkit.'
 )
