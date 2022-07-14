@@ -1,0 +1,35 @@
+From a4265316ae52bf8e535bb7f0fa5f9f4ce762cd74 Mon Sep 17 00:00:00 2001
+From: Przemyslaw Czarnowski <przemyslaw.hawrylewicz.czarnowski@intel.com>
+Date: Thu, 10 Nov 2022 12:50:56 +0100
+Subject: [PATCH] fix sdbusplus compile problems
+
+---
+ meson.build   | 1 +
+ src/event.cpp | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/meson.build b/meson.build
+index 448d167..229121c 100644
+--- a/meson.build
++++ b/meson.build
+@@ -40,6 +40,7 @@ libsdbusplus = library(
+     'sdbusplus',
+     libsdbusplus_src,
+     include_directories: root_inc,
++    link_args: ['-lpthread'],
+     dependencies: libsystemd_pkg,
+     version: meson.project_version(),
+     install: true,
+diff --git a/src/event.cpp b/src/event.cpp
+index badd43a..209bac6 100644
+--- a/src/event.cpp
++++ b/src/event.cpp
+@@ -1,4 +1,5 @@
+ #include <sys/eventfd.h>
++#include <unistd.h>
+ 
+ #include <sdbusplus/event.hpp>
+ #include <sdbusplus/exception.hpp>
+-- 
+2.35.3
+
