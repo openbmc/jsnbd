@@ -1,0 +1,5 @@
+[wrap-git]
+url = https://github.com/apriorit/gmock-global
+revision = 6552faa2a94250ed0192dbd62e608d37fafcc216
+
+patch_directory = gmock-global
