@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecb593da_63fe0f3d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2022-11-09T00:07:45Z",
+      "side": 1,
+      "message": "Hi again.\n\nAfter (rather long) break I\u0027d like to return to upstream work.\nI have refreshed 4 patches with UT added, I will submit the rest of patches shortly.\n\nI have left old jsnbd files this time. They will be removed at the end as last commit - this will allow for an easier transition I believe, but I see adding .clang-format made CI failure on nbd-proxy.c...\n\nTODO: change logging to phosphor-logging. I have prepared separate commit adding that. \n",
+      "revId": "28b427a4de4325f1fff2995ddc230001cd673942",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
