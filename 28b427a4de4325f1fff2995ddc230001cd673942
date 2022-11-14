@@ -16,6 +16,24 @@
       "message": "Hi again.\n\nAfter (rather long) break I\u0027d like to return to upstream work.\nI have refreshed 4 patches with UT added, I will submit the rest of patches shortly.\n\nI have left old jsnbd files this time. They will be removed at the end as last commit - this will allow for an easier transition I believe, but I see adding .clang-format made CI failure on nbd-proxy.c...\n\nTODO: change logging to phosphor-logging. I have prepared separate commit adding that. \n",
       "revId": "28b427a4de4325f1fff2995ddc230001cd673942",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5960f4e9_65cbf5ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2022-11-14T07:42:13Z",
+      "side": 1,
+      "message": "Hi Przemyslaw,\n\nGiven this is a fairly comprehensive rewrite of the NBD infrastructure, I\u0027ll recuse myself from the review of the new code here: i\u0027ll assume it\u0027s working for your use case, and those with hardware to test can do so.\n\nHowever, I\u0027m not clear on why you\u0027re doing the work in this repo; it\u0027s a complete replacement, the name \u0027jsnbd\u0027 no longer applies, and you don\u0027t seem to be removing the old code.\n\nMy only concern earlier was:\n\n\u003e My main point is that we don\u0027t just add a whole new virtual media implementation \n\u003e *alongside* the exiting one - we want a complete replacement.\n\nThat doesn\u0027t necessarily mean you need to work within this repository, just that we deprecate the existing code when adding your new implementation.",
+      "parentUuid": "ecb593da_63fe0f3d",
+      "revId": "28b427a4de4325f1fff2995ddc230001cd673942",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
