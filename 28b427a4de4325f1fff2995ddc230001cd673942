@@ -34,6 +34,24 @@
       "parentUuid": "ecb593da_63fe0f3d",
       "revId": "28b427a4de4325f1fff2995ddc230001cd673942",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2c2ab10_f80830ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2022-11-14T11:28:28Z",
+      "side": 1,
+      "message": "I started the first attempt to upstream with a request to create a brand-new repository. But this has been changed as suggested by Ed and Patrick as js part of nbd server is still used \"as is\". If you don\u0027t feel good with it, please bring old VM topic alive to open the discussion again.",
+      "parentUuid": "5960f4e9_65cbf5ad",
+      "revId": "28b427a4de4325f1fff2995ddc230001cd673942",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
