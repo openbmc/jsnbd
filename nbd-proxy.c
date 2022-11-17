@@ -156,6 +156,7 @@ static int start_nbd_client(struct ctx *ctx)
 		execlp("nbd-client", "nbd-client",
 				"-u", ctx->sock_path,
 				"-n",
+				"-L",
 				"-t", timeout_str,
 				ctx->config->nbd_device,
 				NULL);
