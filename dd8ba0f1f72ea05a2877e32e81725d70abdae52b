@@ -16,6 +16,24 @@
       "message": "Looks reasonable to me, but the commit title and log might benefit from some more detail. Can you expand on the issue with the use of netlink? Are you seeing an error there?\n\nNot sure what\u0027s up with the CI here though...",
       "revId": "dd8ba0f1f72ea05a2877e32e81725d70abdae52b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb52409f_fe5a3ea0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001371
+      },
+      "writtenOn": "2022-11-23T10:08:52Z",
+      "side": 1,
+      "message": "\u003e Not sure what\u0027s up with the CI here though...\nI checked the ci script, they only handler the bootstrap script, maybe we can add a `bootstrap` script too,\nhttps://github.com/openbmc/openbmc-build-scripts/blob/master/scripts/unit-test.py#L688\nand there has an another error after configure, the docker missing json-c\nI\u0027ll add a patch \n```\n--- a/scripts/build-unit-test-docker\n+++ b/scripts/build-unit-test-docker\n@@ -829,7 +829,8 @@ RUN apt-get update \u0026\u0026 apt-get dist-upgrade -yy \u0026\u0026 apt-get install -yy \\\n     libxml2-utils \\\n     libxml-simple-perl \\\n     rsync \\\n-    libcryptsetup-dev\n+    libcryptsetup-dev \\\n+    libjson-c-dev \\\n\n```",
+      "parentUuid": "3143b400_4f0662b4",
+      "revId": "dd8ba0f1f72ea05a2877e32e81725d70abdae52b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
