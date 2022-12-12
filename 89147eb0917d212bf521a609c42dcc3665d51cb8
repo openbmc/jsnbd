@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac597fab_fff2197f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2022-12-12T12:45:48Z",
+      "side": 1,
+      "message": "In terms of process for this - since you\u0027re replacing the existing code wholesale, I don\u0027t see any requirement for a review from me; feel free to merge as you see fit, but you\u0027ll probably want to update OWNERS to suit.",
+      "revId": "89147eb0917d212bf521a609c42dcc3665d51cb8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
