@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5faaf2ed_89cac9ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2022-12-13T15:06:29Z",
+      "side": 1,
+      "message": "Still have a problems with unit test part of the build system...\n",
+      "revId": "980374ad37963b25644f54bcc89b04752109aa77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
