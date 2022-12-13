@@ -736,6 +736,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cba5ed45_681bb1e7",
+        "filename": "src/logger.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000675
+      },
+      "writtenOn": "2022-12-13T14:11:11Z",
+      "side": 1,
+      "message": "The stdout way to write log entries has a big issue that is the level of their. All lines that you are writing by the current engine will be included into journald with INFO level, that are independent of your specified  level. It seems to me this will bring to excess entries in the journald and mixing logs with different levels",
+      "parentUuid": "59549253_f16a1675",
+      "revId": "1c9a6f9bc9eb4d9cacfaa585f3135f816c1603d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f972e656_62712f5a",
         "filename": "src/main.cpp",
         "patchSetId": 1

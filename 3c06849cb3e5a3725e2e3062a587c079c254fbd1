@@ -33,6 +33,23 @@
       "message": "Is the work still in-progress?",
       "revId": "3c06849cb3e5a3725e2e3062a587c079c254fbd1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3c8a973_3c297c90",
+        "filename": "src/logger.hpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000675
+      },
+      "writtenOn": "2022-12-13T14:11:11Z",
+      "side": 1,
+      "message": "What is the reason for introducing a new logging way? Might we use the `phosphor-logging` instead of directly printing to the stdout? \nI guess it might be included in the current point with the appropriate log level.\nAdditionally, the logging way might be switching between phosphor-logging and stdout by meson build env-var",
+      "revId": "3c06849cb3e5a3725e2e3062a587c079c254fbd1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
