@@ -3,12 +3,12 @@
 namespace utils
 {
 
-const std::string GadgetDirs::gadgetPrefix()
+std::string GadgetDirs::gadgetPrefix()
 {
     return {"tests/mass-storage-"};
 }
 
-const std::string GadgetDirs::busPrefix()
+std::string GadgetDirs::busPrefix()
 {
     return {"tests/bus"};
 }

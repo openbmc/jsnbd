@@ -9,12 +9,14 @@
 #include <chrono>
 
 #include <gmock-global/gmock-global.h>
+#include <gmock/gmock-actions.h>
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
 using ::testing::_;
 using ::testing::Eq;
 using ::testing::HasSubstr;
+using ::testing::Invoke;
 using ::testing::Ne;
 using ::testing::Not;
 using ::testing::Return;
@@ -43,15 +45,16 @@ class NotificationWrapperTest : public ::testing::Test
 
     void notify(const std::error_code& ec)
     {
-        boost::asio::spawn(ioc, [this, ec](boost::asio::yield_context yield) {
-            boost::asio::steady_timer tmr{ioc};
-            boost::system::error_code ignoredEc;
+        boost::asio::spawn(
+            ioc, [this, ec](const boost::asio::yield_context& yield) {
+                boost::asio::steady_timer tmr{ioc};
+                boost::system::error_code ignoredEc;
 
-            tmr.expires_from_now(std::chrono::milliseconds(500));
-            tmr.async_wait(yield[ignoredEc]);
+                tmr.expires_from_now(std::chrono::milliseconds(500));
+                tmr.async_wait(yield[ignoredEc]);
 
-            wrapper->notify(ec);
-        });
+                wrapper->notify(ec);
+            });
     }
 
     void run(std::chrono::seconds timeout = std::chrono::seconds(1))

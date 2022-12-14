@@ -5,7 +5,6 @@
 #include "state/ready_state.hpp"
 #include "state_machine_test_base.hpp"
 
-using ::testing::Eq;
 /*
  Scheme for states and transitions
 

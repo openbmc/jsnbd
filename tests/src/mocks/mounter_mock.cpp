@@ -7,6 +7,7 @@
 namespace utils
 {
 
+extern int result;
 int result = -1;
 
 Mounter::Mounter([[maybe_unused]] const char* source, const char* target,

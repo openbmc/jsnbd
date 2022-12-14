@@ -342,7 +342,7 @@ class UsbGadgetTest : public ::testing::Test
         fs::create_directories(portPath);
     }
 
-    ~UsbGadgetTest()
+    ~UsbGadgetTest() override
     {
         fs::remove_all(GadgetDirs::busPrefix());
     }

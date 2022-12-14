@@ -9,13 +9,13 @@ namespace utils
 
 Udev::Udev() = default;
 
-Udev::~Udev() = default;
+Udev::~Udev() = default; // NOLINT
 
 UdevMonitor::UdevMonitor([[maybe_unused]] const Udev& udev,
                          [[maybe_unused]] const std::string& name)
 {}
 
-UdevMonitor::~UdevMonitor() = default;
+UdevMonitor::~UdevMonitor() = default; // NOLINT
 
 int UdevMonitor::addFilter([[maybe_unused]] const std::string& subsystem,
                            [[maybe_unused]] const std::string& devType)
@@ -36,7 +36,7 @@ int UdevMonitor::getFd()
 UdevDevice::UdevDevice([[maybe_unused]] const UdevMonitor& monitor)
 {}
 
-UdevDevice::~UdevDevice() = default;
+UdevDevice::~UdevDevice() = default; // NOLINT
 
 std::string UdevDevice::getAction()
 {

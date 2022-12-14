@@ -2,7 +2,7 @@
 #include "state_machine_test_base.hpp"
 #include "types/dbus_types.hpp"
 
-using ::testing::_;
+using ::testing::_; // NOLINT
 using ::testing::Eq;
 
 class StateMachineTest : public StateMachineTestBase, public ::testing::Test

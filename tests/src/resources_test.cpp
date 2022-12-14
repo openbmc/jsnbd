@@ -9,8 +9,6 @@
 
 using ::testing::_;
 using ::testing::AtLeast;
-using ::testing::HasSubstr;
-using ::testing::Not;
 using ::testing::Return;
 using namespace resource;
 
@@ -81,7 +79,7 @@ class GadgetTest : public ::testing::Test
         mpsm.changeState(std::move(newState));
     }
 
-    ~GadgetTest()
+    ~GadgetTest() override
     {
         fs::remove_all(utils::GadgetDirs::busPrefix());
     }

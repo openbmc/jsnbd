@@ -7,7 +7,7 @@ namespace utils
 {
 
 StreamDescriptor::StreamDescriptor(boost::asio::io_context& ioc, int fd) :
-    ioc(ioc), sd(ioc)
+    sd(ioc)
 {
     sd.assign(fd);
 }

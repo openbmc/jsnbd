@@ -16,7 +16,6 @@ class StreamDescriptor
                    boost::asio::yield_context&& yield);
 
   private:
-    boost::asio::io_context& ioc;
     boost::asio::posix::stream_descriptor sd;
 };
 
