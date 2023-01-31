@@ -16,6 +16,23 @@
       "message": "Design for reference:\nhttps://github.com/openbmc/docs/blob/master/designs/virtual-media.md",
       "revId": "86db8588074c4cb49c972316a8b4f43535baecb8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d868206_b6afd291",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2023-01-31T22:34:23Z",
+      "side": 1,
+      "message": "Generalized comments here:\nThe formatting across the board is a problem.  Tabs are injected into files that should be space delimited.  Formatting changes are applied in the same commit as non-formatting changes.  At the very least those could be broken out.\n\nLots of odd design patterns.  There appears to be a subproject patch to sdbusplus that needs merged to get this on master.  There\u0027s a script to copy things to /tmp that it\u0027s not clear why it\u0027s there.\n\nThe config file needs some work.  There are things in it (like the path) that should not be configured per platform.  Most things in the config file could go away in leui of a simple \"number of slots\" setting in meson_options.",
+      "revId": "86db8588074c4cb49c972316a8b4f43535baecb8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
