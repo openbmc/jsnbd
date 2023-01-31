@@ -16,6 +16,23 @@
       "message": "Hi,\nCould you please take a look at the updated patches? \n- logger switched to phosphor-logging (but with wrapper)\n- UT added",
       "revId": "5593ce802b5bc009ec7839530050aec8a21c76eb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "890a7de4_422b4a62",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2023-01-31T06:18:33Z",
+      "side": 1,
+      "message": "Hi Przemyslaw,\n\nThanks for the continued work on this. As I mentioned above, I\u0027m okay with switching over to  new infrastructure, as long as you\u0027re okay with taking on maintenance.\n\nA couple of overall notes:\n\n - I\u0027m a little confused to the references to \"legacy mode\"; why is this legacy? Users may not have the context about what is legacy and what isn\u0027t, and the existing nbd code doesn\u0027t implement it anyway (what is it a legacy from?). Perhaps something more descriptive would be useful here, like \"client mode\" vs \"browser mode\" ?\n \n - There seems to be a bit of confusion around build infrastructure: you\u0027re using meson, but the bootstrap.sh references an autotools build, and the README references a CMake build.",
+      "revId": "5593ce802b5bc009ec7839530050aec8a21c76eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
