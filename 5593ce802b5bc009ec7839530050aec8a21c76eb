@@ -33,6 +33,24 @@
       "message": "Hi Przemyslaw,\n\nThanks for the continued work on this. As I mentioned above, I\u0027m okay with switching over to  new infrastructure, as long as you\u0027re okay with taking on maintenance.\n\nA couple of overall notes:\n\n - I\u0027m a little confused to the references to \"legacy mode\"; why is this legacy? Users may not have the context about what is legacy and what isn\u0027t, and the existing nbd code doesn\u0027t implement it anyway (what is it a legacy from?). Perhaps something more descriptive would be useful here, like \"client mode\" vs \"browser mode\" ?\n \n - There seems to be a bit of confusion around build infrastructure: you\u0027re using meson, but the bootstrap.sh references an autotools build, and the README references a CMake build.",
       "revId": "5593ce802b5bc009ec7839530050aec8a21c76eb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d63f7e0_bda79385",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2023-01-31T14:34:16Z",
+      "side": 1,
+      "message": "Sure, I will take the maintenance after those patches will be accepted. \n\nRegarding the naming scheme, those are proposed just to distinguish. Legacy means that it follows assumptions of Virtual Media schema of redfish. This could be named as URL based (or similarly). For me Legacy sounds OK, origin is also covered by the design papers. \nFor proxy, the name is self-descriptive as BMC works as proxy between nbd server provided by user and host.\n\nFor the bootstrap.sh file (and other autotool files) - for the time by all patches defining a new service will be accepted, both implementations must co-exist. That\u0027s why I left all old files. They will be removed by the last patch in the series, right after OpenBMC Yocto recipes will enable the new solution. This is a consequence of the decision to reuse jsnbd repository.\n\nAnd last (but no least) - references to CMake are leftovers from the transition to meson from CMake used initially by the project. I have removed them in the next version of patches.",
+      "parentUuid": "890a7de4_422b4a62",
+      "revId": "5593ce802b5bc009ec7839530050aec8a21c76eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
