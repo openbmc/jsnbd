@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "18d6b8ac_36142524",
+        "filename": "config/config.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2023-02-01T17:14:57Z",
+      "side": 1,
+      "message": "+1 to Jeremys comment.  Most of these could just be replaced by an index.",
+      "parentUuid": "1dc271fe_421c91e7",
+      "revId": "cfef539f8bdbb267f1e18070c95e72806045e99b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1cc83ab6_f63c28c5",
         "filename": "src/system.hpp",
         "patchSetId": 2
