@@ -52,6 +52,23 @@
       "parentUuid": "cb52409f_fe5a3ea0",
       "revId": "dd8ba0f1f72ea05a2877e32e81725d70abdae52b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5f57a5e_9cf1ef5f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000272
+      },
+      "writtenOn": "2023-02-10T07:17:41Z",
+      "side": 1,
+      "message": "Verified. This patch fixes the virtual media failed to mount issue.",
+      "revId": "dd8ba0f1f72ea05a2877e32e81725d70abdae52b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
