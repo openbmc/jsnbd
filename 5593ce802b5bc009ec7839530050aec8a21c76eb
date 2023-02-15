@@ -51,6 +51,29 @@
       "parentUuid": "890a7de4_422b4a62",
       "revId": "5593ce802b5bc009ec7839530050aec8a21c76eb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed343c55_987d2ac0",
+        "filename": "meson.build",
+        "patchSetId": 19
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2023-02-15T17:57:41Z",
+      "side": 1,
+      "message": "nit, tabs.\n\nNon nit.  Most of these boost modules are explicitly disallowed by the coding standard due to impacts they have on the quality of the output binary.  coroutine is allowed, but there are c++ std replacements for the other ones.\n\niostreams -\u003e use std::iostreams, or ideally avoid streams altogether.\nfilesystem -\u003e use std::filesystem\nprogram_options -\u003e use CLI11\nregex -\u003e use std::regex, or replace with basic state machines\nsystem -\u003e Set BOOST_SYSTEM_NO_DEPRECATED",
+      "range": {
+        "startLine": 150,
+        "startChar": 0,
+        "endLine": 150,
+        "endChar": 3
+      },
+      "revId": "5593ce802b5bc009ec7839530050aec8a21c76eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
