@@ -16,6 +16,23 @@
       "message": "Should we keep stdout too, under the same rationale?",
       "revId": "aa2cf2f7939cc37024da9ca69dfcf030abedd718",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6e0fe90_84b136cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000733
+      },
+      "writtenOn": "2023-02-16T07:19:01Z",
+      "side": 1,
+      "message": "If this gets merged (and openbmc/openbmc SRCREV-bumped) without https://gerrit.openbmc.org/c/openbmc/openbmc/+/60996 it\u0027ll be a bit noisy until that goes in as well.",
+      "revId": "aa2cf2f7939cc37024da9ca69dfcf030abedd718",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
