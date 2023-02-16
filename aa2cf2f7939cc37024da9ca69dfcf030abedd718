@@ -69,6 +69,23 @@
       "parentUuid": "e75edbca_3e2c62f2",
       "revId": "aa2cf2f7939cc37024da9ca69dfcf030abedd718",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2d49c62_767589ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000733
+      },
+      "writtenOn": "2023-02-16T08:16:55Z",
+      "side": 1,
+      "message": "Not sure what the expectation is regarding CI here; from what I can see of unit-test.py it runs autoconf on configure.ac but doesn\u0027t actually ever create the configure script itself from it, so I\u0027m not sure how it\u0027s supposed to work (or if it has in the past?).",
+      "revId": "aa2cf2f7939cc37024da9ca69dfcf030abedd718",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
