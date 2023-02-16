@@ -33,6 +33,24 @@
       "message": "If this gets merged (and openbmc/openbmc SRCREV-bumped) without https://gerrit.openbmc.org/c/openbmc/openbmc/+/60996 it\u0027ll be a bit noisy until that goes in as well.",
       "revId": "aa2cf2f7939cc37024da9ca69dfcf030abedd718",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e75edbca_3e2c62f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000733
+      },
+      "writtenOn": "2023-02-16T07:32:48Z",
+      "side": 1,
+      "message": "I considered it, and semi-arbitrarily went with leaving it discarded -- for one thing `nbd-client` prints a warning to stdout every time we run it (https://github.com/NetworkBlockDevice/nbd/blob/90dc1adc9ba196fca84a9b4f7d85fdfdd9fc4d5b/nbd-client.c#L1201) that I don\u0027t think we\u0027re terribly interested in logging, and for another I figure output that\u0027s useful for debugging is much more likely to be sent to stderr (assuming the things we invoke exercise good judgement in what output to send where, of course).  I wouldn\u0027t be opposed to also un-blackholing stdout if you\u0027d prefer though.\n\nGranted, if we\u0027re going to do that, maybe we should just skip all redirection entirely -- I don\u0027t think anything we\u0027re invoking is going be consuming anything from stdin, and even so in the normal expected execution context we\u0027re already inheriting /dev/null as stdin anyway, so...shrug?",
+      "parentUuid": "1dd9213b_405e3b80",
+      "revId": "aa2cf2f7939cc37024da9ca69dfcf030abedd718",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
