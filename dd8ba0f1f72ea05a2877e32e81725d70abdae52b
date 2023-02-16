@@ -86,6 +86,24 @@
       "message": "I actually just spent a few hours debugging this and developed an identical patch which I was about to push to gerrit for review when I saw that this was already here.\n\nAs for the commit message, here\u0027s what I wrote, FWIW:\n\n```\nnbd-proxy:  Disable nbd-client\u0027s netlink support\n\nWhen openbmc/openbmc updated the nbd package from 3.20 to 3.24 [1], it\nalso added libnl as a dependency, enabling nbd\u0027s HAVE_NETLINK feature.\nWhen using netlink instead of the older ioctl interface, the nbd-client\nprocess exits immediately after setting up the connection, which\nconfuses nbd-proxy.  A more thorough, long-term solution would be to\nrestructure nbd-proxy around the newer nbd-client netlink behavior\n(nbd-client\u0027s support for the ioctl interface is slated to be removed at\nsome unspecified point in the future [2]), but as a simpler fix for the\ntime being we can just disable netlink support via nbd-client\u0027s -L\ncommand-line flag.\n\n[1] https://github.com/openbmc/openbmc/commit/78b727985e7571e0b196561e44427690f04d57d9#diff-452e7c988a0afa8d4d41dc2c7710a379997ef7c6d37def5b588bd7593ae694c0\n[2] https://github.com/NetworkBlockDevice/nbd/blob/90dc1adc9ba196fca84a9b4f7d85fdfdd9fc4d5b/man/nbd-client.8.in.sgml#L258-L260\n```",
       "revId": "dd8ba0f1f72ea05a2877e32e81725d70abdae52b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6418796_88d14e95",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2023-02-16T04:50:52Z",
+      "side": 1,
+      "message": "Ah, thanks Zev, great explanation.\n\n@Jian: can you incorporate this into your commit message? With that, I think we\u0027re good to submit given Zev\u0027s confirmation here.",
+      "parentUuid": "276a9419_fc6329cb",
+      "revId": "dd8ba0f1f72ea05a2877e32e81725d70abdae52b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
