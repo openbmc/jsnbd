@@ -150,7 +150,6 @@ static int start_nbd_client(struct ctx *ctx)
 
 		dup2(fd, STDIN_FILENO);
 		dup2(fd, STDOUT_FILENO);
-		dup2(fd, STDERR_FILENO);
 		close(fd);
 
 		execlp("nbd-client", "nbd-client",
@@ -406,7 +405,6 @@ static int run_state_hook(struct ctx *ctx, const char *action, bool wait)
 
 		dup2(fd, STDIN_FILENO);
 		dup2(fd, STDOUT_FILENO);
-		dup2(fd, STDERR_FILENO);
 		execl(state_hook_path, argv0, action, ctx->config->name, NULL);
 		exit(EXIT_FAILURE);
 	}
