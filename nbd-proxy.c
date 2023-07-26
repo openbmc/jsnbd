@@ -14,7 +14,7 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-
+// NOLINTBEGIN
 #define _GNU_SOURCE
 
 #include "config.h"
@@ -345,7 +345,6 @@ static int process_signal_pipe(struct ctx* ctx, bool* exit)
 static int wait_for_nbd_client(struct ctx* ctx)
 {
     struct pollfd pollfds[2];
-    int rc;
 
     pollfds[0].fd = ctx->sock;
     pollfds[0].events = POLLIN;
@@ -355,6 +354,7 @@ static int wait_for_nbd_client(struct ctx* ctx)
     for (;;)
     {
         errno = 0;
+        int rc;
         rc = poll(pollfds, 2, -1);
         if (rc < 0)
         {
@@ -390,7 +390,7 @@ static int wait_for_nbd_client(struct ctx* ctx)
 
 static int run_state_hook(struct ctx* ctx, const char* action, bool wait)
 {
-    int status, rc, fd;
+    int status, rc;
     pid_t pid;
 
     /* if the hook isn't present or executable, that's not necessarily
@@ -413,6 +413,7 @@ static int run_state_hook(struct ctx* ctx, const char* action, bool wait)
         if (!argv0)
             argv0 = state_hook_path;
 
+        int fd;
         fd = open("/dev/null", O_RDWR | O_CLOEXEC);
         if (fd < 0)
             exit(EXIT_FAILURE);
@@ -759,7 +760,7 @@ static int config_select(struct ctx* ctx, const char* name)
 {
     struct config* config;
     struct stat statbuf;
-    int i, rc;
+    int rc;
 
     config = NULL;
 
@@ -776,7 +777,7 @@ static int config_select(struct ctx* ctx, const char* name)
     else
     {
         /* find a matching config... */
-        for (i = 0; i < ctx->n_configs; i++)
+        for (int i = 0; i < ctx->n_configs; i++)
         {
             if (!strcmp(ctx->configs[i].name, name))
             {
@@ -930,3 +931,5 @@ out_free:
     free(ctx->buf);
     return rc ? EXIT_FAILURE : EXIT_SUCCESS;
 }
+
+// NOLINTEND
