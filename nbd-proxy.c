@@ -450,7 +450,7 @@ static int udev_init(struct ctx* ctx)
     int rc;
 
     ctx->udev = udev_new();
-    if (!ctx)
+    if (!ctx->udev)
     {
         warn("can't create udev object");
         return -1;
