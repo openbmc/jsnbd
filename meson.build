@@ -41,6 +41,8 @@ add_project_arguments([
   '-Wno-pedantic',
 ], language : 'c')
 
+subdir('newnbd')
+
 executable(
   'nbd-proxy',
   'nbd-proxy.c',
