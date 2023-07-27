@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ffb1428_07379fa1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2023-07-27T01:35:51Z",
+      "side": 1,
+      "message": "All LTGM.\n\nThe declarations in the for-loop initialiser is not really conventional for the kernel coding style (which was the preferred style at the time this was written), but we seem to be moving away from that anyway.",
+      "revId": "c456ce0534bc245c95ed889bbf5cd3184672fa20",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
