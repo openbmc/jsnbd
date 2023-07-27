@@ -34,6 +34,24 @@
       "parentUuid": "60b17fba_e8c7b0dd",
       "revId": "dd1bb60c895ae5a9cf89944ac8561fd028b364dd",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb21f839_4d14af14",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2023-07-27T01:47:27Z",
+      "side": 1,
+      "message": "\u003e it keeps CI passing, so I think yes.\n\nmore that you could just add the .clang-format file when you do the replacement; but either way works for me.",
+      "parentUuid": "89b88769_f1997bb4",
+      "revId": "dd1bb60c895ae5a9cf89944ac8561fd028b364dd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
