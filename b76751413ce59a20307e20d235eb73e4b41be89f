@@ -121,6 +121,24 @@
       "parentUuid": "d9da0a80_12d98f06",
       "revId": "b76751413ce59a20307e20d235eb73e4b41be89f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4c1b5cb_e08853b4",
+        "filename": "meson.build",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2023-07-27T01:50:55Z",
+      "side": 1,
+      "message": "This seems to work for us for `mctp`:\n\nhttps://github.com/CodeConstruct/mctp/blob/main/meson.build#L24",
+      "parentUuid": "ac4e3c88_33f60c0e",
+      "revId": "b76751413ce59a20307e20d235eb73e4b41be89f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
