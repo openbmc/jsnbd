@@ -53,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcdd1f7d_38dcab2f",
+        "filename": "meson.build",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2023-07-27T15:42:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c587f5eb_eab0339d",
+      "revId": "b76751413ce59a20307e20d235eb73e4b41be89f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3d45ddd7_3b90348f",
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "ACK will remove for now.",
       "parentUuid": "3d45ddd7_3b90348f",
+      "revId": "b76751413ce59a20307e20d235eb73e4b41be89f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22c33d56_9a44e933",
+        "filename": "meson.build",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2023-07-27T15:42:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "844bc356_9703006e",
       "revId": "b76751413ce59a20307e20d235eb73e4b41be89f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -155,6 +191,24 @@
       "side": 1,
       "message": "... and you\u0027ll probably need a definition to set `HAVE_SPLICE` in the config.",
       "parentUuid": "e4c1b5cb_e08853b4",
+      "revId": "b76751413ce59a20307e20d235eb73e4b41be89f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "acf075e4_3d687c8c",
+        "filename": "meson.build",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2023-07-27T15:42:54Z",
+      "side": 1,
+      "message": "Changed.  Thanks for the pointer.",
+      "parentUuid": "f5479f79_eadd7b12",
       "revId": "b76751413ce59a20307e20d235eb73e4b41be89f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
