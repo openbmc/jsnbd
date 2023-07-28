@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b2c5b82_6b28fa93",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2023-07-28T03:00:23Z",
+      "side": 1,
+      "message": "Once?",
+      "revId": "735e68b9fd7655c6878d516f27cf4986f05515e4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d57ba49b_dcf04f70",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2023-07-28T03:00:23Z",
+      "side": 1,
+      "message": "All fine with the removal, but you may want to clarify the commit message there?",
+      "revId": "735e68b9fd7655c6878d516f27cf4986f05515e4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
