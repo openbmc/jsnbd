@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c356513_910b9a33",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2023-08-24T00:24:41Z",
+      "side": 1,
+      "message": "LGTM, but are we okay with this breaking \"external\" (ie, using distro tools) builds of these components?\n\nAs of today, meson 1.1 distribution support is at:\n\n* Debian: requires testing or unstable (ie, not in stable)\n* Fedora: requires 39 and later\n* Ubuntu: requires 23.10 (ie, no available release)",
+      "revId": "c77fd4b0a8b8b414670c161fe29ffbf34ca0249e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
