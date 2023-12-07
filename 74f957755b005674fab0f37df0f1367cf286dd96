@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f21be7b9_8ac5eb10",
+        "filename": "src/system.hpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1001743
+      },
+      "writtenOn": "2023-12-07T15:07:19Z",
+      "side": 1,
+      "message": "I guess the usb-gadget name should be related to the Slot_X that it will be mounted for.\nThe current way doesn\u0027t allow to mount several (web-proxy and legacy-device) at the same time because their usb-gadget names will be `usb0` for both slots.",
+      "revId": "74f957755b005674fab0f37df0f1367cf286dd96",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef6333c0_8f61cabc",
+        "filename": "src/system.hpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1001743
+      },
+      "writtenOn": "2023-12-07T15:07:19Z",
+      "side": 1,
+      "message": "Could the `manufacturer` and the `product` strings be adjusted via configuration file or DBus-object?",
+      "revId": "74f957755b005674fab0f37df0f1367cf286dd96",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c52c0cab_f65b607c",
+        "filename": "src/system.hpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1001743
+      },
+      "writtenOn": "2023-12-07T15:07:19Z",
+      "side": 1,
+      "message": "I guess there should be a way to specify kind of VM (VM-type): USB-Stick or CD/DVD-ROM. But I guess this might be added by another PR (I already have a proposal and patches for this feature).",
+      "revId": "74f957755b005674fab0f37df0f1367cf286dd96",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1689fc14_54104e6d",
+        "filename": "src/system.hpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1001743
+      },
+      "writtenOn": "2023-12-07T15:07:19Z",
+      "side": 1,
+      "message": "What if the found port will be p0 or p1 that is not yet binded by iKVM feature (virtual HID)? \nI can figure out a case where KVMIP will be broken:\n* KVMIP session is not yet activated\n* User try to mount some VM-device and this code part binds the vhub:p0\n  This operation goes success.\n* The user try to activate KVMIP session, this leads to take a attempt to bind virtual mouse on vhub:p0 and virtul keyboard on vhub:p1.\n  The vhub:p0 already binded by VM-session and this leads to broken virtual-mouse for KVMIP feature.\n  \nIs I describing the real case or am I missing something?",
+      "revId": "74f957755b005674fab0f37df0f1367cf286dd96",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
