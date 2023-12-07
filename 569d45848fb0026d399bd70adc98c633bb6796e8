@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8c99702_51fdaa3a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2023-12-07T22:05:55Z",
+      "side": 1,
+      "message": "Can you start by basing it on this patch so we get some tidy static analysis run on the code?  https://gerrit.openbmc.org/c/openbmc/jsnbd/+/65440",
+      "revId": "569d45848fb0026d399bd70adc98c633bb6796e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
