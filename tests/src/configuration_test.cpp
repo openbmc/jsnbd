@@ -34,7 +34,8 @@ class ConfigurationTest : public ::testing::Test
   public:
     static std::string constructPath(const std::string& file)
     {
-        return "/tmp/" + file;
+        std::string dataDir = TEST_DATA_DIR;
+        return dataDir + "/" + file;
     }
 
     static void corruptJsonFile(const std::string& filePath)

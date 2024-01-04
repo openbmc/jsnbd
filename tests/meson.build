@@ -15,20 +15,6 @@ gmock_dep = dependency(
     include_type: 'system',
 )
 
-
-configs = [
-    'virtual-media-missing-nbd.json',
-    'virtual-media-nbd15.json',
-    'virtual-media-nbd16.json',
-    'virtual-media.json',
-]
-
-copy = find_program('res/copy_to_tmp.py')
-
-foreach c : configs
-    run_command(copy, join_paths('res', c), c, check: true)
-endforeach
-
 test(
     'virtual-media-ut',
     executable(
@@ -48,7 +34,7 @@ test(
             phosphor_logging
         ],
         include_directories: ['../src', 'src'],
-        cpp_args : '-DINJECT_MOCKS'
+        cpp_args : ['-DINJECT_MOCKS', '-DTEST_DATA_DIR="' + meson.current_source_dir() + '/res"']
     ),
     timeout: 120,
 )
