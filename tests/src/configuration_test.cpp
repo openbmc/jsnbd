@@ -3,6 +3,8 @@
 #include <array>
 #include <filesystem>
 #include <fstream>
+#include <optional>
+#include <string>
 
 #include <gtest/gtest.h>
 
