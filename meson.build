@@ -177,28 +177,25 @@ systemd_system_unit_dir = systemd.get_variable(pkgconfig:
     'systemdsystemunitdir'
 )
 
-configure_file(input: 'xyz.openbmc_project.VirtualMedia.service',
-               output: 'xyz.openbmc_project.VirtualMedia.service',
-               install_dir: systemd_system_unit_dir,
-               copy: true,
-               install: true)
+conf_data = configuration_data()
 
-configure_file(input : 'tmpfiles.d/virtual-media.conf',
-               output : 'virtual-media.conf',
-               copy : true,
-               install_dir: '/etc/tmpfiles.d',
-               install : true)
+conf_data.set('MESON_INSTALL_PREFIX', get_option('prefix'))
 
-configure_file(input : 'config/config.json',
-               output : 'config.json',
-               copy : true,
-               install_dir: '/usr/share/virtual-media/',
-               install : true)
+configure_file(
+   input: 'xyz.openbmc_project.VirtualMedia.service',
+   output: 'xyz.openbmc_project.VirtualMedia.service',
+   install_dir: systemd_system_unit_dir,
+   install: true,
+   configuration: conf_data,
+)
 
-srcfiles_app = [ 'src/main.cpp',
-               ]
+install_data(
+    'config/config.json',
+    install_dir: '/etc/virtual-media',
+)
+srcfiles_app = ['src/main.cpp']
 
-bindir = get_option('prefix') + '/' +get_option('libexecdir')
+bindir = get_option('prefix') + '/' + get_option('bindir')
 
 if get_option('legacy-mode').enabled()
     add_project_arguments(

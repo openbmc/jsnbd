@@ -3,7 +3,8 @@ Description=Virtual Media Service
 After=dbus.service
 
 [Service]
-ExecStart=/usr/libexec/virtual-media
+ExecStart=@MESON_INSTALL_PREFIX@/bin/virtual-media
+RuntimeDirectory=virtual-media
 Restart=always
 Type=simple
 
