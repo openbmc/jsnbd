@@ -138,15 +138,9 @@ udev = dependency('udev', required: true)
 # this will add appopriate udev library linkage to executable.
 udev_lib_dep = declare_dependency(link_args: ['-ludev'])
 
-if cxx.has_header('nlohmann/json.hpp')
-    nlohmann_json = declare_dependency()
-else
-    nlohmann_json_proj = subproject('nlohmann', required: true)
-    nlohmann_json = nlohmann_json_proj.get_variable('nlohmann_json_dep')
-    nlohmann_json = nlohmann_json.as_system('system')
-endif
+nlohmann_json = dependency('nlohmann_json', version: '>=3.11.2', include_type: 'system')
 
-boost = dependency('boost', modules: ['coroutine'], required: false)
+boost = dependency('boost', modules: ['coroutine'], required: false, include_type: 'system')
 if not boost.found()
     boost_proj = subproject('boost', required: true)
     boost = boost_proj.get_variable('boost_dep')

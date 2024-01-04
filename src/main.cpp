@@ -44,11 +44,11 @@ int main()
     try
     {
         boost::asio::io_context ioc;
+        App app(ioc);
+
         boost::asio::signal_set signals(ioc, SIGINT, SIGTERM);
         signals.async_wait([&ioc](const boost::system::error_code&,
                                   const int&) { ioc.stop(); });
-
-        App app(ioc);
 
         ioc.run();
 

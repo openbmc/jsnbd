@@ -3,13 +3,18 @@ gtest_dep = dependency(
     version: '>=1.11.0',
     fallback: ['gtest', 'gtest_main_dep'],
     main: true,
-    required: true)
+    required: true,
+    include_type: 'system',
+)
 
 gmock_dep = dependency(
     'gmock',
     version: '>=1.11.0',
     fallback: ['gtest', 'gmock_dep'],
-    required: true)
+    required: true,
+    include_type: 'system',
+)
+
 
 configs = [
     'virtual-media-missing-nbd.json',
