@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d92ab3e_155499a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2024-01-05T05:28:12Z",
+      "side": 1,
+      "message": "All fine with these changes, but not really my place to review once the restructure is committed.\n\nJust a comment on the service configuration.",
+      "revId": "2e02a93cea100da7a0e4d8ae6de9a465a5c42dbe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34d46625_397e2cc8",
+        "filename": "xyz.openbmc_project.VirtualMedia.service",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2024-01-05T05:28:12Z",
+      "side": 1,
+      "message": "`bindir` might better reflect the intention here.",
+      "revId": "2e02a93cea100da7a0e4d8ae6de9a465a5c42dbe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
