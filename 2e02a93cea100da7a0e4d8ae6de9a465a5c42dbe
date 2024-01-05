@@ -18,6 +18,69 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b22d59e6_79441d7f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-01-05T15:50:44Z",
+      "side": 1,
+      "message": "I\u0027m generally OK with this change, adding two concerns regarding new file locations.",
+      "revId": "2e02a93cea100da7a0e4d8ae6de9a465a5c42dbe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f84a7839_9b65a23e",
+        "filename": "meson.build",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-01-05T15:50:44Z",
+      "side": 1,
+      "message": "I don\u0027t mind changing location of this file, as it stores only initial values for DBus properties. The thing is though that it was earlier requested to move from /etc to /usr/share and I don\u0027t want to restore that change behind anyone\u0027s back.\n\n@Igor, @Andrei, You were opting for /usr/share location earlier. Could You please state Your opinion about restoring it to /etc?",
+      "range": {
+        "startLine": 194,
+        "startChar": 18,
+        "endLine": 194,
+        "endChar": 37
+      },
+      "revId": "2e02a93cea100da7a0e4d8ae6de9a465a5c42dbe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18b0eda5_486e8191",
+        "filename": "meson.build",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-01-05T15:50:44Z",
+      "side": 1,
+      "message": "Why moving the app to `bindir` instead of `libexecdir`? This is supposed to be a service which is intended not to be directly executed by users. Hence /usr/libexec seems to be more reasonable, in accordance to this doc: https://github.com/openbmc/docs/blob/master/anti-patterns.md#incorrect-placement-of-executables-in-sbin-usrsbin-or-bin-usrbin",
+      "range": {
+        "startLine": 198,
+        "startChar": 50,
+        "endLine": 198,
+        "endChar": 56
+      },
+      "revId": "2e02a93cea100da7a0e4d8ae6de9a465a5c42dbe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "34d46625_397e2cc8",
