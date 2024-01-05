@@ -120,6 +120,24 @@
       "message": "`bindir` might better reflect the intention here.",
       "revId": "2e02a93cea100da7a0e4d8ae6de9a465a5c42dbe",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "433bca1c_40e15385",
+        "filename": "xyz.openbmc_project.VirtualMedia.service",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2024-01-05T17:01:17Z",
+      "side": 1,
+      "message": "ACK.  It sounds like this is going to get dropped on the squash, and libexec was the right place to put this in the first place (which I didn\u0027t realize).",
+      "parentUuid": "34d46625_397e2cc8",
+      "revId": "2e02a93cea100da7a0e4d8ae6de9a465a5c42dbe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
