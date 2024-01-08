@@ -127,6 +127,24 @@
       "parentUuid": "d8554e51_253f34a7",
       "revId": "5593ce802b5bc009ec7839530050aec8a21c76eb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5da07bdc_37652530",
+        "filename": "tests/res/copy_to_tmp.py",
+        "patchSetId": 19
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-01-08T15:00:45Z",
+      "side": 1,
+      "message": "I\u0027ll use this fix here, thank You!",
+      "parentUuid": "3fe5800f_83af6996",
+      "revId": "5593ce802b5bc009ec7839530050aec8a21c76eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }

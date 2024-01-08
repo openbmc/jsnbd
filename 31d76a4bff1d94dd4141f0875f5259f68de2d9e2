@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "314fde0a_ba42b31d",
+        "filename": ".clang-tidy-ignore",
+        "patchSetId": 22
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-01-08T15:00:45Z",
+      "side": 1,
+      "message": "These are sources from old service code and they\u0027ve caused clang-tidy to fail. Since the default behavior of clang-tidy for Meson has been recently changed to scan only diffs instead of whole files, this might not be needed anymore. Will verify that.",
+      "parentUuid": "84e3fe9f_63f10ac6",
+      "revId": "31d76a4bff1d94dd4141f0875f5259f68de2d9e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b3106635_14638d60",
         "filename": "meson.build",
         "patchSetId": 22
@@ -31,6 +49,30 @@
       "writtenOn": "2024-01-05T16:59:59Z",
       "side": 1,
       "message": "These aren\u0027t required for meson anymore.  meson supports lto directly.",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 5
+      },
+      "revId": "31d76a4bff1d94dd4141f0875f5259f68de2d9e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77ada9a3_acf1730c",
+        "filename": "meson.build",
+        "patchSetId": 22
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-01-08T15:00:45Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b3106635_14638d60",
       "range": {
         "startLine": 26,
         "startChar": 0,
@@ -66,6 +108,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ae657763_f60c575b",
+        "filename": "meson.build",
+        "patchSetId": 22
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-01-08T15:00:45Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "363f4182_78f66b3e",
+      "range": {
+        "startLine": 115,
+        "startChar": 0,
+        "endLine": 132,
+        "endChar": 5
+      },
+      "revId": "31d76a4bff1d94dd4141f0875f5259f68de2d9e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "67d6ada8_06983138",
         "filename": "meson.build",
         "patchSetId": 22
@@ -77,6 +143,30 @@
       "writtenOn": "2024-01-05T16:59:59Z",
       "side": 1,
       "message": "I see no uses of coroutine in this patch?",
+      "range": {
+        "startLine": 149,
+        "startChar": 39,
+        "endLine": 149,
+        "endChar": 48
+      },
+      "revId": "31d76a4bff1d94dd4141f0875f5259f68de2d9e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36c62010_6b3f1875",
+        "filename": "meson.build",
+        "patchSetId": 22
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-01-08T15:00:45Z",
+      "side": 1,
+      "message": "Code which is using coroutines is added in next patches. I can remove it for now and add that module later, if You find this more readable.",
+      "parentUuid": "67d6ada8_06983138",
       "range": {
         "startLine": 149,
         "startChar": 39,
@@ -112,6 +202,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6224ad67_fbf4c030",
+        "filename": "meson.build",
+        "patchSetId": 22
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-01-08T15:00:45Z",
+      "side": 1,
+      "message": "It\u0027s not needed anymore, will remove.",
+      "parentUuid": "1f20f7c5_60ce193e",
+      "range": {
+        "startLine": 158,
+        "startChar": 0,
+        "endLine": 158,
+        "endChar": 50
+      },
+      "revId": "31d76a4bff1d94dd4141f0875f5259f68de2d9e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f547ad00_411864de",
         "filename": "meson.build",
         "patchSetId": 22
@@ -129,6 +243,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3996ee96_f874e232",
+        "filename": "meson.build",
+        "patchSetId": 22
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-01-08T15:00:45Z",
+      "side": 1,
+      "message": "Will do, thanks for the effort!",
+      "parentUuid": "f547ad00_411864de",
+      "revId": "31d76a4bff1d94dd4141f0875f5259f68de2d9e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "051989d4_a2098270",
         "filename": "meson.build",
         "patchSetId": 22
@@ -140,6 +272,30 @@
       "writtenOn": "2024-01-05T16:59:59Z",
       "side": 1,
       "message": "What are we using tempfiles.d for?  Do we do that anywhere else?",
+      "range": {
+        "startLine": 192,
+        "startChar": 0,
+        "endLine": 197,
+        "endChar": 0
+      },
+      "revId": "31d76a4bff1d94dd4141f0875f5259f68de2d9e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c66205db_5a965da0",
+        "filename": "meson.build",
+        "patchSetId": 22
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-01-08T15:00:45Z",
+      "side": 1,
+      "message": "Will probably drop, need to test first if Your solution with `RuntimeDirectory\u003d` in service file (https://gerrit.openbmc.org/c/openbmc/jsnbd/+/68606) doesn\u0027t break anything.",
+      "parentUuid": "051989d4_a2098270",
       "range": {
         "startLine": 192,
         "startChar": 0,
@@ -175,6 +331,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "049ce73a_94950030",
+        "filename": "meson.build",
+        "patchSetId": 22
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-01-08T15:00:45Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "841f8c36_a672190d",
+      "range": {
+        "startLine": 204,
+        "startChar": 0,
+        "endLine": 205,
+        "endChar": 16
+      },
+      "revId": "31d76a4bff1d94dd4141f0875f5259f68de2d9e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bfede329_2fdb397c",
         "filename": "meson.build",
         "patchSetId": 22
@@ -186,6 +366,30 @@
       "writtenOn": "2024-01-05T16:59:59Z",
       "side": 1,
       "message": "You don\u0027t need get supported arguments here.  -D is just ignored, as it\u0027s supported on all compilers.  Ideally you\u0027d use add_project_arguments, but I realize the example you copied from doesn\u0027t have that.",
+      "range": {
+        "startLine": 218,
+        "startChar": 8,
+        "endLine": 218,
+        "endChar": 36
+      },
+      "revId": "31d76a4bff1d94dd4141f0875f5259f68de2d9e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "056d3181_47bde563",
+        "filename": "meson.build",
+        "patchSetId": 22
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-01-08T15:00:45Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "bfede329_2fdb397c",
       "range": {
         "startLine": 218,
         "startChar": 8,
@@ -221,6 +425,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9eca5c11_165384ed",
+        "filename": "src/configuration.hpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-01-08T15:00:45Z",
+      "side": 1,
+      "message": "Will move to local scope where it is used.",
+      "parentUuid": "9fd26aaa_3dcae708",
+      "range": {
+        "startLine": 32,
+        "startChar": 28,
+        "endLine": 32,
+        "endChar": 40
+      },
+      "revId": "31d76a4bff1d94dd4141f0875f5259f68de2d9e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "758be753_ea9c4cb6",
         "filename": "src/configuration.hpp",
         "patchSetId": 22
@@ -232,6 +460,30 @@
       "writtenOn": "2024-01-05T16:59:59Z",
       "side": 1,
       "message": "shouldn\u0027t this be initted to defaultTimeout?",
+      "range": {
+        "startLine": 41,
+        "startChar": 27,
+        "endLine": 41,
+        "endChar": 34
+      },
+      "revId": "31d76a4bff1d94dd4141f0875f5259f68de2d9e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b61a143c_4d86d1fc",
+        "filename": "src/configuration.hpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-01-08T15:00:45Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "758be753_ea9c4cb6",
       "range": {
         "startLine": 41,
         "startChar": 27,
@@ -267,6 +519,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6c085ff7_50ab104f",
+        "filename": "src/configuration.hpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-01-08T15:00:45Z",
+      "side": 1,
+      "message": "Will be used in code introduced by later patches.",
+      "parentUuid": "f0bb0fee_efafdabf",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 68
+      },
+      "revId": "31d76a4bff1d94dd4141f0875f5259f68de2d9e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4b16d6cc_8772ca39",
         "filename": "src/configuration.hpp",
         "patchSetId": 22
@@ -278,6 +554,30 @@
       "writtenOn": "2024-01-05T16:59:59Z",
       "side": 1,
       "message": "Probably want to return a reference here?  Or just return a pointer with nullptr meaning not found.  No sense in doing both a pointer and optional",
+      "range": {
+        "startLine": 54,
+        "startChar": 34,
+        "endLine": 54,
+        "endChar": 35
+      },
+      "revId": "31d76a4bff1d94dd4141f0875f5259f68de2d9e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b46168d_d4b78016",
+        "filename": "src/configuration.hpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-01-08T15:00:45Z",
+      "side": 1,
+      "message": "Initially this was returning a pointer. Patrick suggested to change it to `std::optional\u003cconst MountPoint\u0026\u003e`, but I see it got finally changed to what we have here, probably because proposed type wouldn\u0027t compile.",
+      "parentUuid": "4b16d6cc_8772ca39",
       "range": {
         "startLine": 54,
         "startChar": 34,
@@ -313,6 +613,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1ee73216_36f1c26f",
+        "filename": "src/configuration.hpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-01-08T15:00:45Z",
+      "side": 1,
+      "message": "Related with Your proposal of using boost file_posix interface. Will take a look on that.",
+      "parentUuid": "da850b0e_3ee21f81",
+      "range": {
+        "startLine": 76,
+        "startChar": 8,
+        "endLine": 76,
+        "endChar": 39
+      },
+      "revId": "31d76a4bff1d94dd4141f0875f5259f68de2d9e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a7377252_700f6192",
         "filename": "src/configuration.hpp",
         "patchSetId": 22
@@ -336,6 +660,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ec356232_2fd1cd6c",
+        "filename": "src/configuration.hpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-01-08T15:00:45Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a7377252_700f6192",
+      "range": {
+        "startLine": 85,
+        "startChar": 12,
+        "endLine": 85,
+        "endChar": 16
+      },
+      "revId": "31d76a4bff1d94dd4141f0875f5259f68de2d9e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "49df6de4_eabf52e9",
         "filename": "src/configuration.hpp",
         "patchSetId": 22
@@ -347,6 +695,24 @@
       "writtenOn": "2024-01-05T16:59:59Z",
       "side": 1,
       "message": "nit, inverting this check would make the code clearer by handling errors early, and save you an indent.",
+      "revId": "31d76a4bff1d94dd4141f0875f5259f68de2d9e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "029ad0fa_cefbdfce",
+        "filename": "src/configuration.hpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-01-08T15:00:45Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "49df6de4_eabf52e9",
       "revId": "31d76a4bff1d94dd4141f0875f5259f68de2d9e2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -400,6 +766,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "46645f25_4b64fe9a",
+        "filename": "src/configuration.hpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-01-08T15:00:45Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "95beb962_cf097b51",
+      "range": {
+        "startLine": 125,
+        "startChar": 35,
+        "endLine": 125,
+        "endChar": 51
+      },
+      "revId": "31d76a4bff1d94dd4141f0875f5259f68de2d9e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "93d2bb31_e70bf92c",
         "filename": "src/configuration.hpp",
         "patchSetId": 22
@@ -411,6 +801,30 @@
       "writtenOn": "2024-01-05T16:59:59Z",
       "side": 1,
       "message": "this has the potential to have the nbddevice partially constructed if any of the other checks fail.  Should this be done at line 207?",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 56
+      },
+      "revId": "31d76a4bff1d94dd4141f0875f5259f68de2d9e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc09f9c3_8f23005d",
+        "filename": "src/configuration.hpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-01-08T15:00:45Z",
+      "side": 1,
+      "message": "In that case I think nbdDevice will be destroyed before moving to next `for` iteration. I don\u0027t see problem with delaying moment of object construction though, so I\u0027ll move that to line 207.",
+      "parentUuid": "93d2bb31_e70bf92c",
       "range": {
         "startLine": 131,
         "startChar": 0,
@@ -446,6 +860,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eafeb02b_71839016",
+        "filename": "src/configuration.hpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-01-08T15:00:45Z",
+      "side": 1,
+      "message": "I agree, representing these as strings in JSON should be more readable for others in the future.",
+      "parentUuid": "59602abe_2fc5ec75",
+      "range": {
+        "startLine": 188,
+        "startChar": 29,
+        "endLine": 188,
+        "endChar": 30
+      },
+      "revId": "31d76a4bff1d94dd4141f0875f5259f68de2d9e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "498002f9_a8a93d15",
         "filename": "src/main.cpp",
         "patchSetId": 22
@@ -457,6 +895,30 @@
       "writtenOn": "2024-01-05T16:59:59Z",
       "side": 1,
       "message": "neither of these appear to be used as shared_ptr anywhere.  Can they just be values?",
+      "range": {
+        "startLine": 29,
+        "startChar": 4,
+        "endLine": 29,
+        "endChar": 20
+      },
+      "revId": "31d76a4bff1d94dd4141f0875f5259f68de2d9e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fee30ab_14a612d4",
+        "filename": "src/main.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-01-08T15:00:45Z",
+      "side": 1,
+      "message": "Will do for `objManager`. `objServer` pointer will be used though by other objects in following patches.",
+      "parentUuid": "498002f9_a8a93d15",
       "range": {
         "startLine": 29,
         "startChar": 4,
@@ -492,6 +954,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "67070c8b_eed55d93",
+        "filename": "src/main.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-01-08T15:00:45Z",
+      "side": 1,
+      "message": "/etc/virtual-media was initial location for this, but was changed after a review.\n\n@Igor, @Andrei, could You please share Your thoughts on this?",
+      "parentUuid": "5fd318ed_0efcb20b",
+      "range": {
+        "startLine": 35,
+        "startChar": 31,
+        "endLine": 35,
+        "endChar": 36
+      },
+      "revId": "31d76a4bff1d94dd4141f0875f5259f68de2d9e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "df5e548c_34948530",
         "filename": "src/main.cpp",
         "patchSetId": 22
@@ -503,6 +989,30 @@
       "writtenOn": "2024-01-05T16:59:59Z",
       "side": 1,
       "message": "Why?  Presumably we should be setting this on created files at the call site, not setting a umask?  Also, where does this application create files?",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 71
+      },
+      "revId": "31d76a4bff1d94dd4141f0875f5259f68de2d9e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2785629c_8104973f",
+        "filename": "src/main.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-01-08T15:00:45Z",
+      "side": 1,
+      "message": "Application creates socket files in locations specified by `UnixSocket` properties. It\u0027s implemented in later patches.",
+      "parentUuid": "df5e548c_34948530",
       "range": {
         "startLine": 41,
         "startChar": 0,
@@ -538,6 +1048,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c0d1cc29_9c4985ef",
+        "filename": "src/main.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-01-08T15:00:45Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2f52cb64_d959a162",
+      "range": {
+        "startLine": 48,
+        "startChar": 34,
+        "endLine": 48,
+        "endChar": 66
+      },
+      "revId": "31d76a4bff1d94dd4141f0875f5259f68de2d9e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fa4b2978_14d390d5",
         "filename": "src/system.hpp",
         "patchSetId": 22
@@ -549,6 +1083,30 @@
       "writtenOn": "2024-01-05T16:59:59Z",
       "side": 1,
       "message": "Why are we redefining these?  Shouldn\u0027t these be pulled from nbd.h?",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 35
+      },
+      "revId": "31d76a4bff1d94dd4141f0875f5259f68de2d9e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08304d3d_c4cebdee",
+        "filename": "src/system.hpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-01-08T15:00:45Z",
+      "side": 1,
+      "message": "Could be. Will use these from `\u003clinux/nbd.h\u003e`",
+      "parentUuid": "fa4b2978_14d390d5",
       "range": {
         "startLine": 17,
         "startChar": 0,
@@ -584,6 +1142,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "16dd1002_5607cd60",
+        "filename": "src/system.hpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-01-08T15:00:45Z",
+      "side": 1,
+      "message": "It\u0027s used only once in final code, where isValid() could be used as well. Will remove.",
+      "parentUuid": "2306add1_8e37a69b",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 5
+      },
+      "revId": "31d76a4bff1d94dd4141f0875f5259f68de2d9e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "51aa24f2_29479dbd",
         "filename": "src/system.hpp",
         "patchSetId": 22
@@ -595,6 +1177,30 @@
       "writtenOn": "2024-01-05T16:59:59Z",
       "side": 1,
       "message": "This seems a little extreme to have a lookup table for something that amounts to nbd + index.  I would assume we just want to parse out the slot number?",
+      "range": {
+        "startLine": 121,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 78
+      },
+      "revId": "31d76a4bff1d94dd4141f0875f5259f68de2d9e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2f267b4_9856c513",
+        "filename": "src/system.hpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-01-08T15:00:45Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "51aa24f2_29479dbd",
       "range": {
         "startLine": 121,
         "startChar": 0,
@@ -630,6 +1236,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "76d987fe_c6c217f6",
+        "filename": "src/system.hpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-01-08T15:00:45Z",
+      "side": 1,
+      "message": "I was getting error about missing template deduction guide for `NBDDevice` when running clang-tidy. However it stopped appearing on latest docker build, so I think it might be removed now.",
+      "parentUuid": "efc5f6f0_70f1c8b7",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 60
+      },
+      "revId": "31d76a4bff1d94dd4141f0875f5259f68de2d9e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7d35a7bd_8f45018e",
         "filename": "src/utils/log-wrapper.hpp",
         "patchSetId": 22
@@ -641,6 +1271,24 @@
       "writtenOn": "2024-01-05T16:59:59Z",
       "side": 1,
       "message": "This looks like it was copied from bmcweb.  Please take a look at the current state of bmcweb http/logging.hpp.  It has improved considerably compared to this stream/macro version.\n\nFWIW, the one this copied from originally came from crow, so it didn\u0027t follow the coding standard.  We should avoid duplicating it.",
+      "revId": "31d76a4bff1d94dd4141f0875f5259f68de2d9e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60ecc451_b0708518",
+        "filename": "src/utils/log-wrapper.hpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-01-08T15:00:45Z",
+      "side": 1,
+      "message": "I\u0027m aware of that. Was planning to rework logger in a similar manner later, but I could do this now as well, since it\u0027s probably going to take some time to resolve current issues.",
+      "parentUuid": "7d35a7bd_8f45018e",
       "revId": "31d76a4bff1d94dd4141f0875f5259f68de2d9e2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -664,6 +1312,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8f02ad2c_3df4f4e0",
+        "filename": "src/utils/utils.hpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-01-08T15:00:45Z",
+      "side": 1,
+      "message": "Will take a look, thanks for suggestion.",
+      "parentUuid": "7d9e36b9_fc875b99",
+      "revId": "31d76a4bff1d94dd4141f0875f5259f68de2d9e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "444004d2_5522cdde",
         "filename": "src/utils/utils.hpp",
         "patchSetId": 22
@@ -675,6 +1341,30 @@
       "writtenOn": "2024-01-05T16:59:59Z",
       "side": 1,
       "message": "You probably want to just put NOLINTNEXTLINE on the calls you expect to fail, instead of exempting the entire class.",
+      "range": {
+        "startLine": 20,
+        "startChar": 7,
+        "endLine": 20,
+        "endChar": 18
+      },
+      "revId": "31d76a4bff1d94dd4141f0875f5259f68de2d9e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "981016fe_f48ed6d0",
+        "filename": "src/utils/utils.hpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-01-08T15:00:45Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "444004d2_5522cdde",
       "range": {
         "startLine": 20,
         "startChar": 7,
@@ -710,6 +1400,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "66bc4205_c3b14336",
+        "filename": "src/utils/utils.hpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-01-08T15:00:45Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b6d2fdff_9d64177d",
+      "range": {
+        "startLine": 21,
+        "startChar": 4,
+        "endLine": 21,
+        "endChar": 12
+      },
+      "revId": "31d76a4bff1d94dd4141f0875f5259f68de2d9e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "94699fbc_54e9516d",
         "filename": "subprojects/nlohmann.wrap",
         "patchSetId": 22
@@ -727,6 +1441,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3f596904_7e3b862d",
+        "filename": "subprojects/nlohmann.wrap",
+        "patchSetId": 22
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-01-08T15:00:45Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "94699fbc_54e9516d",
+      "revId": "31d76a4bff1d94dd4141f0875f5259f68de2d9e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1c46b996_f69df410",
         "filename": "subprojects/packagefiles/boost/meson.build",
         "patchSetId": 22
@@ -738,6 +1470,30 @@
       "writtenOn": "2024-01-05T16:59:59Z",
       "side": 1,
       "message": "Please just use the cmake boost variant like bmcweb does.\n\nIt\u0027s easier, and it doesn\u0027t involve mixing build commands in the configure phase, nor does it involve having to build b2, and passes compiler flags down to the build properly.\n\nhttps://github.com/openbmc/bmcweb/blob/master/subprojects/boost.wrap",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 59
+      },
+      "revId": "31d76a4bff1d94dd4141f0875f5259f68de2d9e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ca5ddef_e2dd20bf",
+        "filename": "subprojects/packagefiles/boost/meson.build",
+        "patchSetId": 22
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-01-08T15:00:45Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1c46b996_f69df410",
       "range": {
         "startLine": 8,
         "startChar": 0,
@@ -773,6 +1529,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "231a10de_8164b9d5",
+        "filename": "subprojects/phosphor-logging.wrap",
+        "patchSetId": 22
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-01-08T15:00:45Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "55ecf5bc_092471af",
+      "range": {
+        "startLine": 3,
+        "startChar": 11,
+        "endLine": 3,
+        "endChar": 51
+      },
+      "revId": "31d76a4bff1d94dd4141f0875f5259f68de2d9e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dda9e137_9825ee86",
         "filename": "subprojects/sdbusplus.wrap",
         "patchSetId": 22
@@ -796,6 +1576,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "72f46069_832bffc2",
+        "filename": "subprojects/sdbusplus.wrap",
+        "patchSetId": 22
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-01-08T15:00:45Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "dda9e137_9825ee86",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 51
+      },
+      "revId": "31d76a4bff1d94dd4141f0875f5259f68de2d9e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3e2a7168_14d0eb00",
         "filename": "subprojects/sdbusplus.wrap",
         "patchSetId": 22
@@ -807,6 +1611,30 @@
       "writtenOn": "2024-01-05T16:59:59Z",
       "side": 1,
       "message": "This patch isn\u0027t present in the diff, and definitely wouldn\u0027t be accepted as is.  Please submit your patches to sdbusplus directly.",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 56
+      },
+      "revId": "31d76a4bff1d94dd4141f0875f5259f68de2d9e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0ac3745_0b9cd63a",
+        "filename": "subprojects/sdbusplus.wrap",
+        "patchSetId": 22
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-01-08T15:00:45Z",
+      "side": 1,
+      "message": "It\u0027s not needed anymore, will drop.",
+      "parentUuid": "3e2a7168_14d0eb00",
       "range": {
         "startLine": 5,
         "startChar": 0,
