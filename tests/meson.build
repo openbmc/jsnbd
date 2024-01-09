@@ -31,10 +31,13 @@ test(
             sdbusplus,
             udev,
             udev_lib_dep,
-            phosphor_logging
+            phosphor_logging,
         ],
         include_directories: ['../src', 'src'],
-        cpp_args : ['-DINJECT_MOCKS', '-DTEST_DATA_DIR="' + meson.current_source_dir() + '/res"']
+        cpp_args: [
+            '-DINJECT_MOCKS',
+            '-DTEST_DATA_DIR="' + meson.current_source_dir() + '/res"',
+        ],
     ),
     timeout: 120,
 )
