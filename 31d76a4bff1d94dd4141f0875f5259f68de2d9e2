@@ -1026,6 +1026,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4d7f793f_9f8bd951",
+        "filename": "src/main.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2024-01-19T08:45:38Z",
+      "side": 1,
+      "message": "\u003e /etc is for configuration. /usr/share is for examples\n\nIn general, /usr/share is for storing architecture independent data. (see eg. https://tldp.org/LDP/Linux-Filesystem-Hierarchy/html/usr.html).\n \n\u003e Also, if it\u0027s not intended to be modified, why not just encode the configuration as part of the binary at configure time?  I really suspect that most of the configuration could be boiled down to two parameters, number_of_legacy_slots, and number_of_proxy_slots, and the whole config file could be dropped, which would simplify the code a ton.\n\nAgree that it would simplify the code base, but for the sake of readability and ease of configuration JSON is way better. Also, this will require considerable effort, which we want to avoid.",
+      "parentUuid": "9d284905_e15385c6",
+      "range": {
+        "startLine": 35,
+        "startChar": 31,
+        "endLine": 35,
+        "endChar": 36
+      },
+      "revId": "31d76a4bff1d94dd4141f0875f5259f68de2d9e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "df5e548c_34948530",
         "filename": "src/main.cpp",
         "patchSetId": 22
