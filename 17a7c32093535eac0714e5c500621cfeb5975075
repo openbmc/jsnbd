@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ed9109e_c447f24a",
+        "filename": ".clang-tidy",
+        "patchSetId": 1
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-01-23T10:49:36Z",
+      "side": 1,
+      "message": "I don\u0027t know if keeping this permanently is a good solution, because clang-tidy tends to fix this by including files which we should probably omit, like: `\u003cboost/system/detail/error_code.hpp\u003e` or `\u003cnlohmann/json_fwd.hpp\u003e`. I\u0027d personally opt for temporarily adding this chick during development time, and then remove it right before push. Apart from several strange include resolutions, it still provides support during development.",
+      "range": {
+        "startLine": 240,
+        "startChar": 0,
+        "endLine": 240,
+        "endChar": 20
+      },
+      "revId": "17a7c32093535eac0714e5c500621cfeb5975075",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0558148_500da945",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-01-23T10:49:36Z",
+      "side": 1,
+      "message": "Includes merged into https://gerrit.openbmc.org/c/openbmc/jsnbd/+/49944/23. Left one question regarding added clang-tidy check.",
+      "revId": "17a7c32093535eac0714e5c500621cfeb5975075",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
