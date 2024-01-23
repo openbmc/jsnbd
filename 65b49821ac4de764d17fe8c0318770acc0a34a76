@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bf1361e_4f533c6d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-01-23T10:53:14Z",
+      "side": 1,
+      "message": "Merged into https://gerrit.openbmc.org/c/openbmc/jsnbd/+/49944/23. Can be closed.",
+      "revId": "65b49821ac4de764d17fe8c0318770acc0a34a76",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
