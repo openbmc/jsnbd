@@ -1,0 +1,469 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44338781_aa942cdf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 24
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2024-02-09T20:58:53Z",
+      "side": 1,
+      "message": "no longer true in the latest patch.",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 53
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5d28750_98bc16e5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 24
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2024-02-09T20:58:53Z",
+      "side": 1,
+      "message": "seems like that wouldn\u0027t be enough to be a replacement daemon?\n\nWhich patch in the series needs approved before the series is functionally (user facing wise) equivalent to the old daemon?\n\nI suspect that that series needs to be merged all at once, so we don\u0027t break anything that exists.",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 55
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b9375ed_7c334a1f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 24
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2024-02-09T20:58:53Z",
+      "side": 1,
+      "message": "Ran out of time.  Partial review below.\n\nI don\u0027t see any code for handling launching this directly to connect to a port:\n\nhttps://github.com/openbmc/bmcweb/blob/b66551019cf3c31186877c30a91ff8622454f342/include/vm_websocket.hpp#L59\n\nam I missing that, or is this not a complete replacement for the existing proxy mode?  What is required such that we can move to this new daemon without breaking anyone?  any changes to bmcweb required?",
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "357bdd4b_f90ea6fc",
+        "filename": "README.md",
+        "patchSetId": 24
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2024-02-09T20:58:53Z",
+      "side": 1,
+      "message": "Pretty sure we don\u0027t need this now that this is built into the webui?",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 59
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bb3a848_d6425e6a",
+        "filename": "README.md",
+        "patchSetId": 24
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2024-02-09T20:58:53Z",
+      "side": 1,
+      "message": "Can we call this something other than \"legacy\"?  Calling it legacy seems to be an opinion not shared by DMTF.  If your goal is to get this mode deprecated by Redfish, please start this discussion, otherwise can we call these modes\n\nNBD_PROXY\nand\nDIRECT\n\nI\u0027m open to other options, but the name \"legacy\" implies need to exist anymore.",
+      "range": {
+        "startLine": 19,
+        "startChar": 2,
+        "endLine": 19,
+        "endChar": 8
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6cd4d4a_88e65584",
+        "filename": "README.md",
+        "patchSetId": 24
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2024-02-09T20:58:53Z",
+      "side": 1,
+      "message": "is it possible to fix the word wrapping on this.  It clearly goes over our limit.\n\nI suspect this could just be made a normal markdown list, rather than a table.",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 175
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8e6f770_71d2195e",
+        "filename": "README.md",
+        "patchSetId": 24
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2024-02-09T20:58:53Z",
+      "side": 1,
+      "message": "nit, this daemon doesn\u0027t expose the redfish schema, bmcweb does.  Also, can you list which schemas?",
+      "range": {
+        "startLine": 31,
+        "startChar": 2,
+        "endLine": 31,
+        "endChar": 24
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5602d841_125fe6bf",
+        "filename": "README.md",
+        "patchSetId": 24
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2024-02-09T20:58:53Z",
+      "side": 1,
+      "message": "Again, THIS daemon doesn\u0027t expose a websocket, bmcweb does.",
+      "range": {
+        "startLine": 32,
+        "startChar": 2,
+        "endLine": 32,
+        "endChar": 23
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "275aa33a_5ba4b745",
+        "filename": "README.md",
+        "patchSetId": 24
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2024-02-09T20:58:53Z",
+      "side": 1,
+      "message": "What does this mean?  This daemon doesn\u0027t have anything to do with authentication?",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 77
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46ca602c_c09cb0e3",
+        "filename": "README.md",
+        "patchSetId": 24
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2024-02-09T20:58:53Z",
+      "side": 1,
+      "message": "Remove.",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 0
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "584161f3_8d943932",
+        "filename": "README.md",
+        "patchSetId": 24
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2024-02-09T20:58:53Z",
+      "side": 1,
+      "message": "what is \"systemd devel\" ?\n\nlibsystemd?  I don\u0027t think that\u0027s used directly here, only through sdbusplus.  No need to call out systemds dependencies.",
+      "range": {
+        "startLine": 78,
+        "startChar": 10,
+        "endLine": 78,
+        "endChar": 15
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc3c9a98_4ead9273",
+        "filename": "README.md",
+        "patchSetId": 24
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2024-02-09T20:58:53Z",
+      "side": 1,
+      "message": "Are going to result in a folder structure of jsondb/build/build, which I\u0027m almost certain isn\u0027t intended.  It just looks like they were copied from the instructions.  I suspect they can be just removed, but if you want to keep them, the instructions would be\n\n```\nmeson build\nmeson compile -C build\n```\n\n(please double check these work, I just typed them out from memory)",
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae4f0826_1768100a",
+        "filename": "meson.build",
+        "patchSetId": 24
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2024-02-09T20:58:53Z",
+      "side": 1,
+      "message": "We\u0027re waiting on compiler support for c++23 + sdbusplus.",
+      "range": {
+        "startLine": 7,
+        "startChar": 20,
+        "endLine": 7,
+        "endChar": 22
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63436280_5e52dc40",
+        "filename": "meson.build",
+        "patchSetId": 24
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2024-02-09T20:58:53Z",
+      "side": 1,
+      "message": "I think all of this can go away?",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 5
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cea9805a_b8d0be02",
+        "filename": "meson.build",
+        "patchSetId": 24
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2024-02-09T20:58:53Z",
+      "side": 1,
+      "message": "like we talked about, remove.",
+      "range": {
+        "startLine": 140,
+        "startChar": 15,
+        "endLine": 140,
+        "endChar": 24
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a25f816a_fdd6daf9",
+        "filename": "meson.build",
+        "patchSetId": 24
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2024-02-09T20:58:53Z",
+      "side": 1,
+      "message": "This was copied from bmcweb.  I\u0027m fairly certain this doesn\u0027t use beast (the http encoding library).  Please put some thought into this.  Remove all the dependencies, and add them back one at a time as needed.",
+      "range": {
+        "startLine": 150,
+        "startChar": 40,
+        "endLine": 150,
+        "endChar": 70
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a33d001_de77f5b4",
+        "filename": "meson.build",
+        "patchSetId": 24
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2024-02-09T20:58:53Z",
+      "side": 1,
+      "message": "This doesn\u0027t use phosphor-logging (it invents its own logger).  Why is it added as a dependency?",
+      "range": {
+        "startLine": 189,
+        "startChar": 0,
+        "endLine": 197,
+        "endChar": 46
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "435ca9e4_316a25e8",
+        "filename": "meson.build",
+        "patchSetId": 24
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2024-02-09T20:58:53Z",
+      "side": 1,
+      "message": "I don\u0027t think we have to explicitly set this.  The defaults should work now?",
+      "range": {
+        "startLine": 222,
+        "startChar": 0,
+        "endLine": 222,
+        "endChar": 62
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10dbc6c3_e7f85a11",
+        "filename": "meson_options.txt",
+        "patchSetId": 24
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2024-02-09T20:58:53Z",
+      "side": 1,
+      "message": "unmatched brace.\n\nAlso, can we get some better description of \"legacy\" mode?  Presumably all uses of virtual media will be through HTTPS in bmcweb, so getting a better description of what disabling this disallows would be good.  Is it related to either of the two bmcweb options?",
+      "range": {
+        "startLine": 2,
+        "startChar": 89,
+        "endLine": 2,
+        "endChar": 91
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3687ebb_5c2c9285",
+        "filename": "meson_options.txt",
+        "patchSetId": 24
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2024-02-09T20:58:53Z",
+      "side": 1,
+      "message": "Please format this so it\u0027s readable.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 118
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0d8708d_d2ad0cfc",
+        "filename": "src/main.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2024-02-09T20:58:53Z",
+      "side": 1,
+      "message": "I don\u0027t see any code for handling launching this directly to connect to a port:\n\nhttps://github.com/openbmc/bmcweb/blob/b66551019cf3c31186877c30a91ff8622454f342/include/vm_websocket.hpp#L59\n\nam I missing that, or is this not a complete replacement for the existing proxy mode?  What is required such that we can move to this new daemon without breaking anyone?  Changes to bmcweb requried?",
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
