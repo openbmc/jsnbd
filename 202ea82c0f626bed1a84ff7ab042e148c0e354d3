@@ -66,6 +66,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7273ad98_51737049",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 24
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2024-02-09T21:17:43Z",
+      "side": 1,
+      "message": "A quick look shows webui-vue is still using /vm/0/0\n\nhttps://github.com/openbmc/webui-vue/blob/1b417cd406ce65401dcb8d695fe5424287092cb1/src/store/modules/Operations/VirtualMediaStore.js#L42\n\nIf I\u0027m not mistaken, /vm/0/0 is compatible with /nbd/0, the only difference would be in URL, right?  Could we just register /vm/0/0 in the nbd-proxy handler AS WELL as /nbd/0, and would that keep compatibility for users of the existing url?",
+      "parentUuid": "7b9375ed_7c334a1f",
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "357bdd4b_f90ea6fc",
         "filename": "README.md",
         "patchSetId": 24
