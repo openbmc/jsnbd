@@ -112,6 +112,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "37775fde_41e1d75b",
+        "filename": "README.md",
+        "patchSetId": 24
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2024-02-09T21:03:09Z",
+      "side": 1,
+      "message": "\"I\u0027m open to other options, but the name \"legacy\" implies the mode doesn\u0027t need to exist anymore.\"",
+      "parentUuid": "0bb3a848_d6425e6a",
+      "range": {
+        "startLine": 19,
+        "startChar": 2,
+        "endLine": 19,
+        "endChar": 8
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d6cd4d4a_88e65584",
         "filename": "README.md",
         "patchSetId": 24
@@ -267,6 +291,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8c06a5fd_eb92f405",
+        "filename": "README.md",
+        "patchSetId": 24
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2024-02-09T21:03:09Z",
+      "side": 1,
+      "message": "\"These are going to result...\"",
+      "parentUuid": "cc3c9a98_4ead9273",
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ae4f0826_1768100a",
         "filename": "meson.build",
         "patchSetId": 24
@@ -416,6 +458,30 @@
       "writtenOn": "2024-02-09T20:58:53Z",
       "side": 1,
       "message": "unmatched brace.\n\nAlso, can we get some better description of \"legacy\" mode?  Presumably all uses of virtual media will be through HTTPS in bmcweb, so getting a better description of what disabling this disallows would be good.  Is it related to either of the two bmcweb options?",
+      "range": {
+        "startLine": 2,
+        "startChar": 89,
+        "endLine": 2,
+        "endChar": 91
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4cf2c42_11331be9",
+        "filename": "meson_options.txt",
+        "patchSetId": 24
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2024-02-09T21:03:09Z",
+      "side": 1,
+      "message": "nvm for the second, legacy mode is described in the readme.\n\nWhat does need to go here is why someone would want to set this option?  Presumably we don\u0027t need support for this in BOTH the config file and compile time?  Unless there\u0027s a significant advantage in binary size to not having legacy mode?",
+      "parentUuid": "10dbc6c3_e7f85a11",
       "range": {
         "startLine": 2,
         "startChar": 89,
