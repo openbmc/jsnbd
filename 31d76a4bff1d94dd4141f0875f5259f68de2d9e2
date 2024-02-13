@@ -269,6 +269,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "112f2586_15f0975f",
+        "filename": "meson.build",
+        "patchSetId": 22
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-02-13T14:48:35Z",
+      "side": 1,
+      "message": "To be more specific, the code is using boost::asio::spawn. I\u0027m aware of this function being a wrapper for boost::coroutine, but there was a need to provide a way for asynchronous code written in synchronous manner and this turned out to be the most convenient solution. Besides, from what I\u0027ve seen, this function is still used within the project, for example inside sdbusplus\u0027s object_server object. I could look for different solution here, but this would require significant amount of time for additional R\u0026D, to make sure everything works as before, which is something I\u0027d like to avoid for now.\n\nFor now I\u0027ll remove \u0027coroutine\u0027 module and restore it in patch introducing first usage of spawn.",
+      "parentUuid": "355ecf8b_5bbbe8d8",
+      "range": {
+        "startLine": 149,
+        "startChar": 39,
+        "endLine": 149,
+        "endChar": 48
+      },
+      "revId": "31d76a4bff1d94dd4141f0875f5259f68de2d9e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1f20f7c5_60ce193e",
         "filename": "meson.build",
         "patchSetId": 22

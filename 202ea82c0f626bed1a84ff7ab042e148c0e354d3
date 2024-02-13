@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2aff3ee6_e944dc9b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 24
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-02-13T14:48:35Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "44338781_aa942cdf",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 53
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c5d28750_98bc16e5",
         "filename": "/COMMIT_MSG",
         "patchSetId": 24
@@ -37,6 +61,30 @@
       "writtenOn": "2024-02-09T20:58:53Z",
       "side": 1,
       "message": "seems like that wouldn\u0027t be enough to be a replacement daemon?\n\nWhich patch in the series needs approved before the series is functionally (user facing wise) equivalent to the old daemon?\n\nI suspect that that series needs to be merged all at once, so we don\u0027t break anything that exists.",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 55
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01d8a360_317e9c92",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 24
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-02-13T14:48:35Z",
+      "side": 1,
+      "message": "The new service should cover all functionalities of the old one after this patch: https://gerrit.openbmc.org/c/openbmc/jsnbd/+/59599/9.\n\nI agree that all should be merged at once. Once this patch is in decent shape, I\u0027ll start rebasing the remaining ones.",
+      "parentUuid": "c5d28750_98bc16e5",
       "range": {
         "startLine": 28,
         "startChar": 0,
@@ -119,6 +167,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "20a58c7c_c3714035",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 24
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-02-13T14:48:35Z",
+      "side": 1,
+      "message": "Thank You, we\u0027ll take a look on it.\n\nRegarding WebUI, I think it all comes to a `VUE_APP_VIRTUAL_MEDIA_LIST_ENABLED` knob (https://github.com/openbmc/webui-vue/blob/1b417cd406ce65401dcb8d695fe5424287092cb1/.env.intel#L8). If false, only /vm/0/0 will be used, otherwise, its OEM-dependent, in this case this will be /nbd/x.",
+      "parentUuid": "90289b45_ea608e1d",
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "357bdd4b_f90ea6fc",
         "filename": "README.md",
         "patchSetId": 24
@@ -130,6 +196,30 @@
       "writtenOn": "2024-02-09T20:58:53Z",
       "side": 1,
       "message": "Pretty sure we don\u0027t need this now that this is built into the webui?",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 59
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ebf3a09_4533edb9",
+        "filename": "README.md",
+        "patchSetId": 24
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-02-13T14:48:35Z",
+      "side": 1,
+      "message": "I agree, this can be removed.",
+      "parentUuid": "357bdd4b_f90ea6fc",
       "range": {
         "startLine": 5,
         "startChar": 0,
@@ -189,6 +279,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "00a2a7b2_9d8f7f7e",
+        "filename": "README.md",
+        "patchSetId": 24
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-02-13T14:48:35Z",
+      "side": 1,
+      "message": "How about \"Standard\"? \"Direct\" doesn\u0027t exactly match how it works, because established connection is not direct at all. We\u0027re specifying remote location of image to be served in accordance with Redfish schema (https://redfish.dmtf.org/schemas/v1/VirtualMedia.v1_6_3.json).",
+      "parentUuid": "37775fde_41e1d75b",
+      "range": {
+        "startLine": 19,
+        "startChar": 2,
+        "endLine": 19,
+        "endChar": 8
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d6cd4d4a_88e65584",
         "filename": "README.md",
         "patchSetId": 24
@@ -200,6 +314,30 @@
       "writtenOn": "2024-02-09T20:58:53Z",
       "side": 1,
       "message": "is it possible to fix the word wrapping on this.  It clearly goes over our limit.\n\nI suspect this could just be made a normal markdown list, rather than a table.",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 175
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86996379_1a4c8cd0",
+        "filename": "README.md",
+        "patchSetId": 24
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-02-13T14:48:35Z",
+      "side": 1,
+      "message": "Will change this to bullet list",
+      "parentUuid": "d6cd4d4a_88e65584",
       "range": {
         "startLine": 15,
         "startChar": 0,
@@ -259,6 +397,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a0e75c1f_6031b6e7",
+        "filename": "README.md",
+        "patchSetId": 24
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-02-13T14:48:35Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "45a31936_6fb56391",
+      "range": {
+        "startLine": 31,
+        "startChar": 2,
+        "endLine": 31,
+        "endChar": 24
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5602d841_125fe6bf",
         "filename": "README.md",
         "patchSetId": 24
@@ -270,6 +432,30 @@
       "writtenOn": "2024-02-09T20:58:53Z",
       "side": 1,
       "message": "Again, THIS daemon doesn\u0027t expose a websocket, bmcweb does.",
+      "range": {
+        "startLine": 32,
+        "startChar": 2,
+        "endLine": 32,
+        "endChar": 23
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a376e5e_f1d47653",
+        "filename": "README.md",
+        "patchSetId": 24
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-02-13T14:48:35Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5602d841_125fe6bf",
       "range": {
         "startLine": 32,
         "startChar": 2,
@@ -305,6 +491,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "95c50f4e_4beee076",
+        "filename": "README.md",
+        "patchSetId": 24
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-02-13T14:48:35Z",
+      "side": 1,
+      "message": "Will remove",
+      "parentUuid": "275aa33a_5ba4b745",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 77
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "46ca602c_c09cb0e3",
         "filename": "README.md",
         "patchSetId": 24
@@ -328,6 +538,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "762c744b_bd56f874",
+        "filename": "README.md",
+        "patchSetId": 24
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-02-13T14:48:35Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "46ca602c_c09cb0e3",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 0
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "584161f3_8d943932",
         "filename": "README.md",
         "patchSetId": 24
@@ -339,6 +573,30 @@
       "writtenOn": "2024-02-09T20:58:53Z",
       "side": 1,
       "message": "what is \"systemd devel\" ?\n\nlibsystemd?  I don\u0027t think that\u0027s used directly here, only through sdbusplus.  No need to call out systemds dependencies.",
+      "range": {
+        "startLine": 78,
+        "startChar": 10,
+        "endLine": 78,
+        "endChar": 15
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88b89a12_8cb8eab0",
+        "filename": "README.md",
+        "patchSetId": 24
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-02-13T14:48:35Z",
+      "side": 1,
+      "message": "I think final name should be \"libsystemd-devel\". Description is wrong though, as we\u0027re using it for udev API, not DBus. Will correct.",
+      "parentUuid": "584161f3_8d943932",
       "range": {
         "startLine": 78,
         "startChar": 10,
@@ -386,6 +644,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c67970cb_19a3ed2a",
+        "filename": "README.md",
+        "patchSetId": 24
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-02-13T14:48:35Z",
+      "side": 1,
+      "message": "Ack. Some weird mixup must have happened after switching from CMake. Will correct that.",
+      "parentUuid": "8c06a5fd_eb92f405",
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ae4f0826_1768100a",
         "filename": "meson.build",
         "patchSetId": 24
@@ -397,6 +673,30 @@
       "writtenOn": "2024-02-09T20:58:53Z",
       "side": 1,
       "message": "We\u0027re waiting on compiler support for c++23 + sdbusplus.",
+      "range": {
+        "startLine": 7,
+        "startChar": 20,
+        "endLine": 7,
+        "endChar": 22
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "738d12e6_23db706a",
+        "filename": "meson.build",
+        "patchSetId": 24
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-02-13T14:48:35Z",
+      "side": 1,
+      "message": "Ack. Most probably it\u0027ll be resolved by the time this series is ready to merge.",
+      "parentUuid": "ae4f0826_1768100a",
       "range": {
         "startLine": 7,
         "startChar": 20,
@@ -432,6 +732,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c5c61ab5_e0cf8cef",
+        "filename": "meson.build",
+        "patchSetId": 24
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-02-13T14:48:35Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "63436280_5e52dc40",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 5
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cea9805a_b8d0be02",
         "filename": "meson.build",
         "patchSetId": 24
@@ -443,6 +767,30 @@
       "writtenOn": "2024-02-09T20:58:53Z",
       "side": 1,
       "message": "like we talked about, remove.",
+      "range": {
+        "startLine": 140,
+        "startChar": 15,
+        "endLine": 140,
+        "endChar": 24
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c9f0c25_1c4ff905",
+        "filename": "meson.build",
+        "patchSetId": 24
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-02-13T14:48:35Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "cea9805a_b8d0be02",
       "range": {
         "startLine": 140,
         "startChar": 15,
@@ -478,6 +826,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1e7e5505_3ea57f49",
+        "filename": "meson.build",
+        "patchSetId": 24
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-02-13T14:48:35Z",
+      "side": 1,
+      "message": "- beast is needed for file_posix object.\n- callable_traits is needed by sdbusplus::asio.\n- process is used in later patches. Will remove this for now.",
+      "parentUuid": "a25f816a_fdd6daf9",
+      "range": {
+        "startLine": 150,
+        "startChar": 40,
+        "endLine": 150,
+        "endChar": 70
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0a33d001_de77f5b4",
         "filename": "meson.build",
         "patchSetId": 24
@@ -501,6 +873,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1943dd2e_bc5fad38",
+        "filename": "meson.build",
+        "patchSetId": 24
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-02-13T14:48:35Z",
+      "side": 1,
+      "message": "Logger serves as a wrapper for phosphor::logging::log: https://gerrit.openbmc.org/plugins/gitiles/openbmc/jsnbd/+/202ea82c0f626bed1a84ff7ab042e148c0e354d3/src/utils/log-wrapper.hpp#58",
+      "parentUuid": "0a33d001_de77f5b4",
+      "range": {
+        "startLine": 189,
+        "startChar": 0,
+        "endLine": 197,
+        "endChar": 46
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "435ca9e4_316a25e8",
         "filename": "meson.build",
         "patchSetId": 24
@@ -512,6 +908,30 @@
       "writtenOn": "2024-02-09T20:58:53Z",
       "side": 1,
       "message": "I don\u0027t think we have to explicitly set this.  The defaults should work now?",
+      "range": {
+        "startLine": 222,
+        "startChar": 0,
+        "endLine": 222,
+        "endChar": 62
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d63fcf80_2790583c",
+        "filename": "meson.build",
+        "patchSetId": 24
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-02-13T14:48:35Z",
+      "side": 1,
+      "message": "Default install directory is set to /usr/bin, so unfortunately we need to point this explicitly.",
+      "parentUuid": "435ca9e4_316a25e8",
       "range": {
         "startLine": 222,
         "startChar": 0,
@@ -571,6 +991,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0e53a842_7baf8ea3",
+        "filename": "meson_options.txt",
+        "patchSetId": 24
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-02-13T14:48:35Z",
+      "side": 1,
+      "message": "Initial design assumed legacy mode to be an extension for existing nbd-proxy mode. Nowadays I think that both could be available without the need to disable it in compile time. I\u0027ll compare binary sizes in our downstream implementation with and without that option. If there\u0027s no significant difference, I\u0027ll remove it.\nBesides, I think that this will be handled anyway by \"LegacyMountPoints\" value in config. One could simply set it to 0 in case of not wanting support for legacy mode.",
+      "parentUuid": "e4cf2c42_11331be9",
+      "range": {
+        "startLine": 2,
+        "startChar": 89,
+        "endLine": 2,
+        "endChar": 91
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a3687ebb_5c2c9285",
         "filename": "meson_options.txt",
         "patchSetId": 24
@@ -594,6 +1038,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2c331129_2aa20c85",
+        "filename": "meson_options.txt",
+        "patchSetId": 24
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-02-13T14:48:35Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a3687ebb_5c2c9285",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 118
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d0d8708d_d2ad0cfc",
         "filename": "src/main.cpp",
         "patchSetId": 24
@@ -605,6 +1073,24 @@
       "writtenOn": "2024-02-09T20:58:53Z",
       "side": 1,
       "message": "I don\u0027t see any code for handling launching this directly to connect to a port:\n\nhttps://github.com/openbmc/bmcweb/blob/b66551019cf3c31186877c30a91ff8622454f342/include/vm_websocket.hpp#L59\n\nam I missing that, or is this not a complete replacement for the existing proxy mode?  What is required such that we can move to this new daemon without breaking anyone?  Changes to bmcweb requried?",
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b55a94ba_1e1ec4f2",
+        "filename": "src/main.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-02-13T14:48:35Z",
+      "side": 1,
+      "message": "As mentioned in other comment, this is implemented in another patch.",
+      "parentUuid": "d0d8708d_d2ad0cfc",
       "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
