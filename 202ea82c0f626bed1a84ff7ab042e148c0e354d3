@@ -185,6 +185,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f6e8316c_de7679d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 24
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2024-02-13T18:30:00Z",
+      "side": 1,
+      "message": "So, as written, if we move to this, everyones implementations break?  Why did this change the url?",
+      "parentUuid": "20a58c7c_c3714035",
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "357bdd4b_f90ea6fc",
         "filename": "README.md",
         "patchSetId": 24
@@ -291,6 +309,30 @@
       "side": 1,
       "message": "How about \"Standard\"? \"Direct\" doesn\u0027t exactly match how it works, because established connection is not direct at all. We\u0027re specifying remote location of image to be served in accordance with Redfish schema (https://redfish.dmtf.org/schemas/v1/VirtualMedia.v1_6_3.json).",
       "parentUuid": "37775fde_41e1d75b",
+      "range": {
+        "startLine": 19,
+        "startChar": 2,
+        "endLine": 19,
+        "endChar": 8
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91320330_d7854716",
+        "filename": "README.md",
+        "patchSetId": 24
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2024-02-13T18:30:00Z",
+      "side": 1,
+      "message": "\u003e How about \"Standard\"? \"Direct\" doesn\u0027t exactly match how it works, because established connection is not direct at all. \n\n\"Standard\" implies that there\u0027s a standard it\u0027s meeting up to.  It\u0027s better than legacy, but not terribly descriptive.  Seems reasonable.\n\nDirect was meant to describe virtual_mediad -\u003e File share, instead of virtual_mediad -\u003e bmcweb -\u003e file share, but I could see how that would be confusing.\n\n\u003e We\u0027re specifying remote location of image to be served in accordance with Redfish schema (https://redfish.dmtf.org/schemas/v1/VirtualMedia.v1_6_3.json).",
+      "parentUuid": "00a2a7b2_9d8f7f7e",
       "range": {
         "startLine": 19,
         "startChar": 2,
@@ -609,6 +651,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "34010c3c_6a5bd482",
+        "filename": "README.md",
+        "patchSetId": 24
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2024-02-13T18:30:00Z",
+      "side": 1,
+      "message": "I think the package is \"libsystemd-dev\", but even libsystemd-devel is more descriptive.",
+      "parentUuid": "88b89a12_8cb8eab0",
+      "range": {
+        "startLine": 78,
+        "startChar": 10,
+        "endLine": 78,
+        "endChar": 15
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cc3c9a98_4ead9273",
         "filename": "README.md",
         "patchSetId": 24
@@ -697,6 +763,30 @@
       "side": 1,
       "message": "Ack. Most probably it\u0027ll be resolved by the time this series is ready to merge.",
       "parentUuid": "ae4f0826_1768100a",
+      "range": {
+        "startLine": 7,
+        "startChar": 20,
+        "endLine": 7,
+        "endChar": 22
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df4d396a_c8c56b01",
+        "filename": "meson.build",
+        "patchSetId": 24
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2024-02-13T18:30:00Z",
+      "side": 1,
+      "message": "Hard to say, but just be aware of it.",
+      "parentUuid": "738d12e6_23db706a",
       "range": {
         "startLine": 7,
         "startChar": 20,
@@ -848,6 +938,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "12d47b76_9542253d",
+        "filename": "meson.build",
+        "patchSetId": 24
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2024-02-13T18:30:00Z",
+      "side": 1,
+      "message": "Ack.",
+      "parentUuid": "1e7e5505_3ea57f49",
+      "range": {
+        "startLine": 150,
+        "startChar": 40,
+        "endLine": 150,
+        "endChar": 70
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0a33d001_de77f5b4",
@@ -897,6 +1011,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8c619c77_e2194daf",
+        "filename": "meson.build",
+        "patchSetId": 24
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2024-02-13T18:30:00Z",
+      "side": 1,
+      "message": "Wait, if you\u0027re using phosphor-logging, why put anything in Logging.hpp at all?",
+      "parentUuid": "1943dd2e_bc5fad38",
+      "range": {
+        "startLine": 189,
+        "startChar": 0,
+        "endLine": 197,
+        "endChar": 46
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "435ca9e4_316a25e8",
         "filename": "meson.build",
         "patchSetId": 24
@@ -932,6 +1070,30 @@
       "side": 1,
       "message": "Default install directory is set to /usr/bin, so unfortunately we need to point this explicitly.",
       "parentUuid": "435ca9e4_316a25e8",
+      "range": {
+        "startLine": 222,
+        "startChar": 0,
+        "endLine": 222,
+        "endChar": 62
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97525838_b84d2382",
+        "filename": "meson.build",
+        "patchSetId": 24
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2024-02-13T18:30:00Z",
+      "side": 1,
+      "message": "ACK.",
+      "parentUuid": "d63fcf80_2790583c",
       "range": {
         "startLine": 222,
         "startChar": 0,
@@ -1003,6 +1165,30 @@
       "side": 1,
       "message": "Initial design assumed legacy mode to be an extension for existing nbd-proxy mode. Nowadays I think that both could be available without the need to disable it in compile time. I\u0027ll compare binary sizes in our downstream implementation with and without that option. If there\u0027s no significant difference, I\u0027ll remove it.\nBesides, I think that this will be handled anyway by \"LegacyMountPoints\" value in config. One could simply set it to 0 in case of not wanting support for legacy mode.",
       "parentUuid": "e4cf2c42_11331be9",
+      "range": {
+        "startLine": 2,
+        "startChar": 89,
+        "endLine": 2,
+        "endChar": 91
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57dae8a7_73783b11",
+        "filename": "meson_options.txt",
+        "patchSetId": 24
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2024-02-13T18:30:00Z",
+      "side": 1,
+      "message": "\u003e Initial design assumed legacy mode to be an extension for existing nbd-proxy mode. Nowadays I think that both could be available without the need to disable it in compile time. I\u0027ll compare binary sizes in our downstream implementation with and without that option. If there\u0027s no significant difference, I\u0027ll remove it.\n\nSounds good.\n\n\u003e Besides, I think that this will be handled anyway by \"LegacyMountPoints\" value in config. One could simply set it to 0 in case of not wanting support for legacy mode.\n\nYep, that\u0027s kinda what I meant by supporting it in both.",
+      "parentUuid": "0e53a842_7baf8ea3",
       "range": {
         "startLine": 2,
         "startChar": 89,
@@ -1091,6 +1277,24 @@
       "side": 1,
       "message": "As mentioned in other comment, this is implemented in another patch.",
       "parentUuid": "d0d8708d_d2ad0cfc",
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97463628_3ee09be0",
+        "filename": "src/main.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2024-02-13T18:30:00Z",
+      "side": 1,
+      "message": "Closing this out, we can follow up on the other comment.",
+      "parentUuid": "b55a94ba_1e1ec4f2",
       "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
