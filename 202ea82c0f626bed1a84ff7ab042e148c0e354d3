@@ -203,6 +203,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "941c8be5_e20defbc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 24
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-02-14T15:06:56Z",
+      "side": 1,
+      "message": "That\u0027s definitely not our intention to break anyone\u0027s existing implementation. Studying deeper into VirtualMediaStore.js and how the flag works:\n- if false, only `/vm/0/0` endpoint will be created (https://github.com/openbmc/webui-vue/blob/master/src/store/modules/Operations/VirtualMediaStore.js#L39-L46)\n- otherwise, the list of endpoints will be created. Their names will be based on contents of collection in `/redfish/v1/Managers/bmc/VirtualMedia`, more specifically, from \"WebSocketEndpoint\" value for each item (vue: https://github.com/openbmc/webui-vue/blob/master/src/store/modules/Operations/VirtualMediaStore.js#L63, bmcweb: https://github.com/openbmc/bmcweb/blob/master/redfish-core/lib/virtual_media.hpp#L174-L176).\n\nRight now \"WebSocketEndpoint\" value is taken from mount point\u0027s \"EndpointId\" property (https://gerrit.openbmc.org/plugins/gitiles/openbmc/jsnbd/+/202ea82c0f626bed1a84ff7ab042e148c0e354d3/config/config.json#4). So, in order to maintain compatibility with previous service, this would need to be set to \"/vm/0/0\". Furthermore, since config is going to be reduced just to store number of proxy and legacy slots, we could simply hardcode this value into `/vm/0/\u003cstr\u003e`, where \u003cstr\u003e would be an iterator over proxy slot list. I hope this should allow us to maintain compatibility with old service.",
+      "parentUuid": "f6e8316c_de7679d4",
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "357bdd4b_f90ea6fc",
         "filename": "README.md",
         "patchSetId": 24
@@ -1023,6 +1041,30 @@
       "side": 1,
       "message": "Wait, if you\u0027re using phosphor-logging, why put anything in Logging.hpp at all?",
       "parentUuid": "1943dd2e_bc5fad38",
+      "range": {
+        "startLine": 189,
+        "startChar": 0,
+        "endLine": 197,
+        "endChar": 46
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c8a5025_273b92b6",
+        "filename": "meson.build",
+        "patchSetId": 24
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-02-14T15:06:56Z",
+      "side": 1,
+      "message": "I think switch to phosphor-logging was made to address these comments:\nhttps://gerrit.openbmc.org/c/openbmc/jsnbd/+/49944/1..24/src/logger.hpp#b1\nhttps://gerrit.openbmc.org/c/openbmc/jsnbd/+/49944/3..24/src/logger.hpp#b77\n\nFunctions from log-wrapper.hpp provide more convenient way to log than direct calls of phosphor::logging::log. Is that approach acceptable or would You rather expect to call the function from phosphor-logging directly in our code, without any wrapping?\n\nOne thing I\u0027ve noticed now is that we\u0027re using **log** instead of **lg2**, as Patrick suggested back then. Is that OK, or would You like to change it as well?",
+      "parentUuid": "8c619c77_e2194daf",
       "range": {
         "startLine": 189,
         "startChar": 0,
