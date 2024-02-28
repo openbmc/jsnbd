@@ -145,6 +145,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9070f94f_096fd514",
+        "filename": "config/config.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-02-28T12:20:03Z",
+      "side": 1,
+      "message": "Changed config format to the new one, proposed by @Ed. Configuration module needed to be changed alongside as well. The overall outcome seems to be the same as previously. What was previously present in .json is now used as mount point parameters. Mount points\u0027 count to create is determined from what we provide in the new version of .json file.",
+      "parentUuid": "8ccff7b0_e38fa3bc",
+      "revId": "cfef539f8bdbb267f1e18070c95e72806045e99b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1cc83ab6_f63c28c5",
         "filename": "src/system.hpp",
         "patchSetId": 2

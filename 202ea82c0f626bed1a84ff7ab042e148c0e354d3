@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5b9b569c_707b9990",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 24
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-02-28T12:20:03Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "2aff3ee6_e944dc9b",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 53
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c5d28750_98bc16e5",
         "filename": "/COMMIT_MSG",
         "patchSetId": 24
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "The new service should cover all functionalities of the old one after this patch: https://gerrit.openbmc.org/c/openbmc/jsnbd/+/59599/9.\n\nI agree that all should be merged at once. Once this patch is in decent shape, I\u0027ll start rebasing the remaining ones.",
       "parentUuid": "c5d28750_98bc16e5",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 55
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8fe2de6_fdf0b3d9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 24
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-02-28T12:20:03Z",
+      "side": 1,
+      "message": "Changed test description a little bit for clarification.",
+      "parentUuid": "01d8a360_317e9c92",
       "range": {
         "startLine": 28,
         "startChar": 0,
@@ -268,6 +316,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0c01e932_c27a261a",
+        "filename": "README.md",
+        "patchSetId": 24
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-02-28T12:20:03Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "7ebf3a09_4533edb9",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 59
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0bb3a848_d6425e6a",
         "filename": "README.md",
         "patchSetId": 24
@@ -363,6 +435,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1539d8cb_22e35af9",
+        "filename": "README.md",
+        "patchSetId": 24
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-02-28T12:20:03Z",
+      "side": 1,
+      "message": "Ok, Your explanations make sense as well. I was looking at this from user perspective, to whom providing image file to browser seems to be more direct than specifying image HTTPS/CIFS location. Changed the name to \"Standard\" for now, however I\u0027m still open for discussion if You come up with something new.",
+      "parentUuid": "91320330_d7854716",
+      "range": {
+        "startLine": 19,
+        "startChar": 2,
+        "endLine": 19,
+        "endChar": 8
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d6cd4d4a_88e65584",
         "filename": "README.md",
         "patchSetId": 24
@@ -398,6 +494,30 @@
       "side": 1,
       "message": "Will change this to bullet list",
       "parentUuid": "d6cd4d4a_88e65584",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 175
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e70f02a3_d53a317e",
+        "filename": "README.md",
+        "patchSetId": 24
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-02-28T12:20:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86996379_1a4c8cd0",
       "range": {
         "startLine": 15,
         "startChar": 0,
@@ -481,6 +601,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6ef9271f_5599f74d",
+        "filename": "README.md",
+        "patchSetId": 24
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-02-28T12:20:03Z",
+      "side": 1,
+      "message": "Updated whole `Capabilities` section.",
+      "parentUuid": "a0e75c1f_6031b6e7",
+      "range": {
+        "startLine": 31,
+        "startChar": 2,
+        "endLine": 31,
+        "endChar": 24
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5602d841_125fe6bf",
         "filename": "README.md",
         "patchSetId": 24
@@ -516,6 +660,30 @@
       "side": 1,
       "message": "Acknowledged",
       "parentUuid": "5602d841_125fe6bf",
+      "range": {
+        "startLine": 32,
+        "startChar": 2,
+        "endLine": 32,
+        "endChar": 23
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "381af48c_74b9b41e",
+        "filename": "README.md",
+        "patchSetId": 24
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-02-28T12:20:03Z",
+      "side": 1,
+      "message": "Updated whole `Capabilities` section.",
+      "parentUuid": "0a376e5e_f1d47653",
       "range": {
         "startLine": 32,
         "startChar": 2,
@@ -575,6 +743,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "787f0e3d_abc87dc8",
+        "filename": "README.md",
+        "patchSetId": 24
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-02-28T12:20:03Z",
+      "side": 1,
+      "message": "Updated whole `Capabilities` section.",
+      "parentUuid": "95c50f4e_4beee076",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 77
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "46ca602c_c09cb0e3",
         "filename": "README.md",
         "patchSetId": 24
@@ -610,6 +802,30 @@
       "side": 1,
       "message": "Acknowledged",
       "parentUuid": "46ca602c_c09cb0e3",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 0
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41acd371_34b31ea8",
+        "filename": "README.md",
+        "patchSetId": 24
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-02-28T12:20:03Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "762c744b_bd56f874",
       "range": {
         "startLine": 67,
         "startChar": 0,
@@ -693,6 +909,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9f30d630_8cff0c94",
+        "filename": "README.md",
+        "patchSetId": 24
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-02-28T12:20:03Z",
+      "side": 1,
+      "message": "Actually I was wrong: Udev API is already provided by `libudev-dev`, mentioned earlier in this section. Thus removed the `libsystemd-dev` point.",
+      "parentUuid": "34010c3c_6a5bd482",
+      "range": {
+        "startLine": 78,
+        "startChar": 10,
+        "endLine": 78,
+        "endChar": 15
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cc3c9a98_4ead9273",
         "filename": "README.md",
         "patchSetId": 24
@@ -740,6 +980,24 @@
       "side": 1,
       "message": "Ack. Some weird mixup must have happened after switching from CMake. Will correct that.",
       "parentUuid": "8c06a5fd_eb92f405",
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a77e136_ef971d09",
+        "filename": "README.md",
+        "patchSetId": 24
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-02-28T12:20:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c67970cb_19a3ed2a",
       "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -864,6 +1122,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "47a1dc4b_16e558ac",
+        "filename": "meson.build",
+        "patchSetId": 24
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-02-28T12:20:03Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "c5c61ab5_e0cf8cef",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 5
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cea9805a_b8d0be02",
         "filename": "meson.build",
         "patchSetId": 24
@@ -899,6 +1181,30 @@
       "side": 1,
       "message": "Acknowledged",
       "parentUuid": "cea9805a_b8d0be02",
+      "range": {
+        "startLine": 140,
+        "startChar": 15,
+        "endLine": 140,
+        "endChar": 24
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d208acc_89c44092",
+        "filename": "meson.build",
+        "patchSetId": 24
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-02-28T12:20:03Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "7c9f0c25_1c4ff905",
       "range": {
         "startLine": 140,
         "startChar": 15,
@@ -1243,6 +1549,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "51bd6bcc_f9543a94",
+        "filename": "meson_options.txt",
+        "patchSetId": 24
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-02-28T12:20:03Z",
+      "side": 1,
+      "message": "Removed the `legacy-mode` option at all. Its impact on binary size was minimal.",
+      "parentUuid": "57dae8a7_73783b11",
+      "range": {
+        "startLine": 2,
+        "startChar": 89,
+        "endLine": 2,
+        "endChar": 91
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a3687ebb_5c2c9285",
         "filename": "meson_options.txt",
         "patchSetId": 24
@@ -1278,6 +1608,30 @@
       "side": 1,
       "message": "Acknowledged",
       "parentUuid": "a3687ebb_5c2c9285",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 118
+      },
+      "revId": "202ea82c0f626bed1a84ff7ab042e148c0e354d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85643335_f534936c",
+        "filename": "meson_options.txt",
+        "patchSetId": 24
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-02-28T12:20:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c331129_2aa20c85",
       "range": {
         "startLine": 1,
         "startChar": 0,
