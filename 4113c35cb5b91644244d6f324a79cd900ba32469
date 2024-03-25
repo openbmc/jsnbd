@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5941e578_ff826798",
+        "filename": "src/resources.hpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-25T20:20:52Z",
+      "side": 1,
+      "message": "the order of these needs to be reversed, otherwise we attempt to remove the directory before the share is unmounted.",
+      "revId": "4113c35cb5b91644244d6f324a79cd900ba32469",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "521e7b98_32e51bfb",
         "filename": "src/state/activating_state.cpp",
         "patchSetId": 8
