@@ -56,6 +56,29 @@
       "message": "When I tried to use this patch, I found that mountPoint was never destroyed and thus the cifs share remains mounted in the filesystem even after the unmount dbus interface is called and the SM transitions back to ready state.  Subsequent attempts to use the slot then fail because the code doesn\u0027t expect the cifs share to be mounted already.\n\nI was not able to find any logic anywhere in the active-\u003edeactivating-\u003eready transition that destroys mountPoint or target so I suspect this might be a bug.",
       "revId": "4113c35cb5b91644244d6f324a79cd900ba32469",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53fd08c7_ac1019b4",
+        "filename": "src/utils/impl/mounter.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-03T13:01:05Z",
+      "side": 1,
+      "message": "unmount",
+      "range": {
+        "startLine": 32,
+        "startChar": 35,
+        "endLine": 32,
+        "endChar": 41
+      },
+      "revId": "4113c35cb5b91644244d6f324a79cd900ba32469",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
