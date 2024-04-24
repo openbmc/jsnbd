@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a1900cd_82637cbe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-04-24T13:14:25Z",
+      "side": 1,
+      "message": "Thanks Brad for Your input. We\u0027ll take a look at the issue You\u0027ve mentioned and provide a fix in case there\u0027s one needed. As for the rest issues, I\u0027d like to park them for now if You don\u0027t mind that. So far major review work is still done in the first patch of this series, which will require some effort later during rebasing. Therefore I\u0027d like to hold with remaining fixes until previous patches are fully reviewed.",
+      "revId": "4113c35cb5b91644244d6f324a79cd900ba32469",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5941e578_ff826798",
@@ -14,6 +31,24 @@
       "writtenOn": "2024-03-25T20:20:52Z",
       "side": 1,
       "message": "the order of these needs to be reversed, otherwise we attempt to remove the directory before the share is unmounted.",
+      "revId": "4113c35cb5b91644244d6f324a79cd900ba32469",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7f92232_6896b84f",
+        "filename": "src/resources.hpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-04-24T13:14:25Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5941e578_ff826798",
       "revId": "4113c35cb5b91644244d6f324a79cd900ba32469",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -43,6 +78,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f2c3d557_31ca9bf1",
+        "filename": "src/state/activating_state.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-04-24T13:14:25Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7fb9cd87_0d9d607a",
+      "range": {
+        "startLine": 98,
+        "startChar": 58,
+        "endLine": 98,
+        "endChar": 59
+      },
+      "revId": "4113c35cb5b91644244d6f324a79cd900ba32469",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "521e7b98_32e51bfb",
         "filename": "src/state/activating_state.cpp",
         "patchSetId": 8
@@ -60,6 +119,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d4142429_a2eb3155",
+        "filename": "src/state/activating_state.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-04-24T13:14:25Z",
+      "side": 1,
+      "message": "We will investigate that and provide temporary fix if there\u0027s indeed a bug.",
+      "parentUuid": "521e7b98_32e51bfb",
+      "revId": "4113c35cb5b91644244d6f324a79cd900ba32469",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "53fd08c7_ac1019b4",
         "filename": "src/utils/impl/mounter.cpp",
         "patchSetId": 8
@@ -71,6 +148,30 @@
       "writtenOn": "2024-04-03T13:01:05Z",
       "side": 1,
       "message": "unmount",
+      "range": {
+        "startLine": 32,
+        "startChar": 35,
+        "endLine": 32,
+        "endChar": 41
+      },
+      "revId": "4113c35cb5b91644244d6f324a79cd900ba32469",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eec722c7_eab1babe",
+        "filename": "src/utils/impl/mounter.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2024-04-24T13:14:25Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "53fd08c7_ac1019b4",
       "range": {
         "startLine": 32,
         "startChar": 35,
