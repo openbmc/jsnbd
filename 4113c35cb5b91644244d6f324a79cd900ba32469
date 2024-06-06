@@ -53,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "20923a81_a46e9545",
+        "filename": "src/resources.hpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1001555
+      },
+      "writtenOn": "2024-06-06T09:21:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7f92232_6896b84f",
+      "revId": "4113c35cb5b91644244d6f324a79cd900ba32469",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7fb9cd87_0d9d607a",
@@ -100,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0567ed0_7a5bfddc",
+        "filename": "src/state/activating_state.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1001555
+      },
+      "writtenOn": "2024-06-06T09:21:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2c3d557_31ca9bf1",
+      "range": {
+        "startLine": 98,
+        "startChar": 58,
+        "endLine": 98,
+        "endChar": 59
+      },
+      "revId": "4113c35cb5b91644244d6f324a79cd900ba32469",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "521e7b98_32e51bfb",
@@ -131,6 +173,24 @@
       "side": 1,
       "message": "We will investigate that and provide temporary fix if there\u0027s indeed a bug.",
       "parentUuid": "521e7b98_32e51bfb",
+      "revId": "4113c35cb5b91644244d6f324a79cd900ba32469",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10d76e12_b7342df2",
+        "filename": "src/state/activating_state.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1001555
+      },
+      "writtenOn": "2024-06-06T09:21:30Z",
+      "side": 1,
+      "message": "Reversing the order of mounter/directory variables turned out to be enough to allow subsequent mounts to be successful but share remained mounted even after unmount - the only thing that called the destructor was next mount, where unique pointer with mounter was being overwritten - added calling .reset() on it manually to unmount the share on unmount",
+      "parentUuid": "d4142429_a2eb3155",
       "revId": "4113c35cb5b91644244d6f324a79cd900ba32469",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -172,6 +232,30 @@
       "side": 1,
       "message": "Acknowledged",
       "parentUuid": "53fd08c7_ac1019b4",
+      "range": {
+        "startLine": 32,
+        "startChar": 35,
+        "endLine": 32,
+        "endChar": 41
+      },
+      "revId": "4113c35cb5b91644244d6f324a79cd900ba32469",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbed0453_85c38bd2",
+        "filename": "src/utils/impl/mounter.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1001555
+      },
+      "writtenOn": "2024-06-06T09:21:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eec722c7_eab1babe",
       "range": {
         "startLine": 32,
         "startChar": 35,
