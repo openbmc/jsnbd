@@ -254,7 +254,7 @@ static int setup_signals(struct ctx* ctx)
     rc = pipe2(ctx->signal_pipe, O_CLOEXEC);
     if (rc)
     {
-        warn("cant setup signal pipe");
+        warn("can't setup signal pipe");
         return -1;
     }
 
