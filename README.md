@@ -24,7 +24,7 @@ websocket endpoint, plus serve the static HTML+js client:
 
     sudo websocketd/websocketd --port=8000 --staticdir=web --binary ./nbd-proxy <config>
 
-- where <config> is a name of a configuration in the config.json file.
+- where `<config>` is a name of a configuration in the config.json file.
 
 Note that this type of invocation is very insecure, and intended just for
 experimentation. See the Security section below.
