@@ -16,6 +16,23 @@
       "message": "Hi @Brad.\nBolesław has pushed some changes that should fix issues You\u0027ve detected. Please verify them on You side for confirmation.",
       "revId": "cae137d9543c7f2c6f0c451fe6ab7f3e8bc5f106",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4639b216_12388e48",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001555
+      },
+      "writtenOn": "2024-08-20T10:04:45Z",
+      "side": 1,
+      "message": "Hi @Brad, could you let us know if the issues you have discovered have been resolved?",
+      "revId": "cae137d9543c7f2c6f0c451fe6ab7f3e8bc5f106",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
