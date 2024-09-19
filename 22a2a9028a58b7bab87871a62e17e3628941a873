@@ -1,0 +1,8 @@
+Verified+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Code-Review+2: Jeremy Kerr <jk@ozlabs.org>
+Submitted-by: George Liu <liuxiwei@ieisystem.com>
+Submitted-at: Thu, 19 Sep 2024 00:21:54 +0000
+Reviewed-on: https://gerrit.openbmc.org/c/openbmc/jsnbd/+/73312
+Comments-Total: 1
+Project: openbmc/jsnbd
+Branch: refs/heads/master
