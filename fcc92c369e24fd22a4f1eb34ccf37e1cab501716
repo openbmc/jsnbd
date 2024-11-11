@@ -16,6 +16,40 @@
       "message": "@jeremy - can you please take a look at this one ?",
       "revId": "fcc92c369e24fd22a4f1eb34ccf37e1cab501716",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b4c23aa_3f8eb304",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2024-11-11T05:15:40Z",
+      "side": 1,
+      "message": "All good to fix the nbd-proxy code, but we don\u0027t want to diverge from pkgconf\u0027s m4 macros here...",
+      "revId": "fcc92c369e24fd22a4f1eb34ccf37e1cab501716",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f44ac6b7_9a576195",
+        "filename": "m4/pkg.m4",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2024-11-11T05:15:40Z",
+      "side": 1,
+      "message": "This is provided by the pkgconf sources, we don\u0027t want to introduce deltas there.",
+      "revId": "fcc92c369e24fd22a4f1eb34ccf37e1cab501716",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
