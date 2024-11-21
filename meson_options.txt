@@ -1,4 +1,11 @@
 option(
+    'nbd-proxy',
+    type: 'feature',
+    value: 'enabled',
+    description: 'Build nbd-proxy application',
+)
+
+option(
     'tests',
     type: 'feature',
     value: 'enabled',
