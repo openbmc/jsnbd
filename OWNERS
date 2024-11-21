@@ -33,6 +33,7 @@
 
 owners:
 - jk@ozlabs.org
+- przemyslaw.hawrylewicz.czarnowski@intel.com
 
 reviewers:
 
@@ -42,3 +43,6 @@ openbmc:
 - name: Jeremy Kerr
   email: jk@ozlabs.org
   discord: jk-
+- name: Przemyslaw Hawrylewicz Czarnowski
+  email: przemyslaw.hawrylewicz.czarnowski@intel.com
+  discord: przemekcz
