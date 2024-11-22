@@ -22,13 +22,6 @@ conf_h_dep = declare_dependency(
         configuration: conf_data)
 )
 
-add_project_arguments(
-    [
-        '-Wno-pedantic',
-    ],
-    language: 'c',
-)
-
 executable(
     'nbd-proxy',
     'nbd-proxy.c',
