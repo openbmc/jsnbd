@@ -6,6 +6,13 @@ option(
 )
 
 option(
+    'virtual-media',
+    type: 'feature',
+    value: 'enabled',
+    description: 'Build virtual media service',
+)
+
+option(
     'tests',
     type: 'feature',
     value: 'enabled',
