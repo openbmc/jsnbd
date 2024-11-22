@@ -28,6 +28,16 @@ else
     virtual_media_dependencies += [boost_asio, boost_callable_traits, boost_system]
 endif
 
+phosphor_logging = dependency('phosphor-logging', required: false)
+if not phosphor_logging.found()
+    phosphor_logging_proj = subproject('phosphor-logging', required: true)
+    phosphor_logging = phosphor_logging_proj.get_variable(
+        'phosphor_logging_dep',
+    )
+    phosphor_logging = phosphor_logging.as_system('system')
+endif
+virtual_media_dependencies += phosphor_logging
+
 sdbusplus = dependency('sdbusplus', required: false)
 if not sdbusplus.found()
     sdbusplus_proj = subproject('sdbusplus', required: true)
