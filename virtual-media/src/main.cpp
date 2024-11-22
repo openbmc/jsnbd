@@ -1,3 +1,5 @@
+#include "utils/log-wrapper.hpp"
+
 #include <boost/asio/error.hpp>
 #include <boost/asio/io_context.hpp>
 #include <boost/asio/signal_set.hpp>
@@ -8,7 +10,6 @@
 
 #include <csignal>
 #include <exception>
-#include <iostream>
 #include <memory>
 
 class App
@@ -38,21 +39,20 @@ int main()
         boost::asio::signal_set signals(ioc, SIGINT, SIGTERM);
         signals.async_wait(
             [&ioc](const boost::system::error_code& ec, const int signal) {
-            if (ec)
-            {
-                std::cerr << "Error while waiting for signals: " << ec.what()
-                          << std::endl;
-                if (ec == boost::asio::error::operation_aborted)
+                if (ec)
                 {
-                    ioc.stop();
+                    LOGGER_ERROR("Error while waiting for signals: {}", ec);
+                    if (ec == boost::asio::error::operation_aborted)
+                    {
+                        ioc.stop();
+                    }
+
+                    return;
                 }
 
-                return;
-            }
-
-            std::cout << "Received signal " << signal << std::endl;
-            ioc.stop();
-        });
+                LOGGER_INFO("Received signal {}", signal);
+                ioc.stop();
+            });
 
         ioc.run();
 
@@ -60,12 +60,12 @@ int main()
     }
     catch (const std::exception& e)
     {
-        std::cerr << "Error thrown to main: " << e.what() << std::endl;
+        LOGGER_CRITICAL("Error thrown to main: {}", e.what());
         return -1;
     }
     catch (...)
     {
-        std::cerr << "Error thrown to main." << std::endl;
+        LOGGER_CRITICAL("Error thrown to main.");
         return -1;
     }
 }
