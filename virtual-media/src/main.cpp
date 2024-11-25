@@ -1,3 +1,4 @@
+#include "configuration.hpp"
 #include "utils/log-wrapper.hpp"
 
 #include <boost/asio/error.hpp>
@@ -30,6 +31,12 @@ class App
 
 int main()
 {
+    Configuration config("/usr/share/virtual-media/config.json");
+    if (!config.valid)
+    {
+        return -1;
+    }
+
     try
     {
         boost::asio::io_context ioc;
