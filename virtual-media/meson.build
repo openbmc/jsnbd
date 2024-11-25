@@ -20,13 +20,17 @@ if boost.found()
 else
     cmake = import('cmake')
     opt = cmake.subproject_options()
-    opt.add_cmake_defines({'BOOST_INCLUDE_LIBRARIES': 'asio;callable_traits;system'})
+    opt.add_cmake_defines({'BOOST_INCLUDE_LIBRARIES': 'asio;beast;callable_traits;system'})
     boost = cmake.subproject('boost', required: true, options: opt)
     boost_asio = boost.dependency('boost_asio').as_system()
+    boost_beast = boost.dependency('boost_beast').as_system()
     boost_callable_traits = boost.dependency('boost_callable_traits').as_system()
     boost_system = boost.dependency('boost_system').as_system()
-    virtual_media_dependencies += [boost_asio, boost_callable_traits, boost_system]
+    virtual_media_dependencies += [boost_asio, boost_beast, boost_callable_traits, boost_system]
 endif
+
+nlohmann_json = dependency('nlohmann_json', include_type: 'system')
+virtual_media_dependencies += nlohmann_json
 
 phosphor_logging = dependency('phosphor-logging', required: false)
 if not phosphor_logging.found()
@@ -60,6 +64,11 @@ configure_file(
     install_dir: systemd_system_unit_dir,
     install: true,
     configuration: conf_data,
+)
+
+install_data(
+    'config/config.json',
+    install_dir: '/usr/share/virtual-media',
 )
 
 srcfiles_app = ['src/main.cpp']
