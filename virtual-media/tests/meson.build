@@ -21,6 +21,7 @@ test(
         'virtual-media-ut',
         [
             'src/configuration_test.cpp',
+            'src/events_test.cpp',
             'src/system_test.cpp',
         ],
         dependencies: virtual_media_dependencies
