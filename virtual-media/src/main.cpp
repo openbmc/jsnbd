@@ -1,4 +1,5 @@
 #include "configuration.hpp"
+#include "state_machine.hpp"
 #include "utils/log-wrapper.hpp"
 
 #include <boost/asio/error.hpp>
@@ -12,19 +13,29 @@
 #include <csignal>
 #include <exception>
 #include <memory>
+#include <string>
+#include <unordered_map>
 
 class App
 {
   public:
-    explicit App(boost::asio::io_context& ioc) :
+    App(boost::asio::io_context& ioc, const Configuration& config) :
         bus(std::make_shared<sdbusplus::asio::connection>(ioc)),
         objServer(std::make_shared<sdbusplus::asio::object_server>(bus)),
         objManager(*bus, "/xyz/openbmc_project/VirtualMedia")
     {
         bus->request_name("xyz.openbmc_project.VirtualMedia");
+
+        for (const auto& [name, entry] : config.mountPoints)
+        {
+            mpsm.emplace(name, std::make_shared<MountPointStateMachine>(
+                                   ioc, name, entry));
+        }
     }
 
   private:
+    std::unordered_map<std::string, std::shared_ptr<MountPointStateMachine>>
+        mpsm;
     std::shared_ptr<sdbusplus::asio::connection> bus;
     std::shared_ptr<sdbusplus::asio::object_server> objServer;
     sdbusplus::server::manager_t objManager;
@@ -41,7 +52,7 @@ int main()
     try
     {
         boost::asio::io_context ioc;
-        App app(ioc);
+        App app(ioc, config);
 
         boost::asio::signal_set signals(ioc, SIGINT, SIGTERM);
         signals.async_wait(
