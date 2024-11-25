@@ -19,7 +19,10 @@ test(
     'virtual-media-ut',
     executable(
         'virtual-media-ut',
-        ['src/dummy_test.cpp'],
+        [
+            'src/configuration_test.cpp',
+            'src/system_test.cpp',
+        ],
         dependencies: virtual_media_dependencies
         + [
             gmock_dep,
