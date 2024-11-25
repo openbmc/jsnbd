@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "41378ff2_eda0d152",
+        "filename": "src/system.hpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2024-11-25T15:51:42Z",
+      "side": 1,
+      "message": "I am so sorry, that those comments hasn\u0027t been addressed so far, I just missed them. I\u0027ll try to answer them now, hoping it will still be helpful.\n\nGadget device is related to the directory that is created in the \"/sys/kernel/config/usb_gadget\" directory. We don\u0027t use multiple devices inside on gadget to simplify maintaining gadgets.",
+      "parentUuid": "f21be7b9_8ac5eb10",
+      "revId": "74f957755b005674fab0f37df0f1367cf286dd96",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ef6333c0_8f61cabc",
         "filename": "src/system.hpp",
         "patchSetId": 9
@@ -31,6 +49,24 @@
       "writtenOn": "2023-12-07T15:07:19Z",
       "side": 1,
       "message": "Could the `manufacturer` and the `product` strings be adjusted via configuration file or DBus-object?",
+      "revId": "74f957755b005674fab0f37df0f1367cf286dd96",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b006a23_45428432",
+        "filename": "src/system.hpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2024-11-25T15:51:42Z",
+      "side": 1,
+      "message": "Yes, this could be changed. We didn\u0027t have the obligation to differentiate devices that way, so we do not customize the name.",
+      "parentUuid": "ef6333c0_8f61cabc",
       "revId": "74f957755b005674fab0f37df0f1367cf286dd96",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -54,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "67f06c39_2b75b0f3",
+        "filename": "src/system.hpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2024-11-25T15:51:42Z",
+      "side": 1,
+      "message": "We haven\u0027t noticed any benefits with customizing this. No matter what type of mass storage we used, the device behaved the same way.",
+      "parentUuid": "c52c0cab_f65b607c",
+      "revId": "74f957755b005674fab0f37df0f1367cf286dd96",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1689fc14_54104e6d",
         "filename": "src/system.hpp",
         "patchSetId": 9
@@ -65,6 +119,24 @@
       "writtenOn": "2023-12-07T15:07:19Z",
       "side": 1,
       "message": "What if the found port will be p0 or p1 that is not yet binded by iKVM feature (virtual HID)? \nI can figure out a case where KVMIP will be broken:\n* KVMIP session is not yet activated\n* User try to mount some VM-device and this code part binds the vhub:p0\n  This operation goes success.\n* The user try to activate KVMIP session, this leads to take a attempt to bind virtual mouse on vhub:p0 and virtul keyboard on vhub:p1.\n  The vhub:p0 already binded by VM-session and this leads to broken virtual-mouse for KVMIP feature.\n  \nIs I describing the real case or am I missing something?",
+      "revId": "74f957755b005674fab0f37df0f1367cf286dd96",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34926397_30e56d3b",
+        "filename": "src/system.hpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1000460
+      },
+      "writtenOn": "2024-11-25T15:51:42Z",
+      "side": 1,
+      "message": "Yes, I think this could render a problem to use the same slot for different functionalities (if I understood you correctly). This could be handled using multifunction devices (when needed), but this would introduce some complexity to track status of gadget device on both sides (VM i KVM).",
+      "parentUuid": "1689fc14_54104e6d",
       "revId": "74f957755b005674fab0f37df0f1367cf286dd96",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
