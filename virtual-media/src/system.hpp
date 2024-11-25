@@ -116,3 +116,10 @@ class NBDDevice
 
     static constexpr size_t maxNbdCount = 16;
 };
+
+enum class StateChange
+{
+    notMonitored,
+    removed,
+    inserted
+};
