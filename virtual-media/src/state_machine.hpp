@@ -2,6 +2,7 @@
 
 #include "interfaces/mount_point_state_machine.hpp"
 #include "state/basic_state.hpp"
+#include "state/initial_state.hpp"
 #include "utils/log-wrapper.hpp"
 
 #include <boost/asio/io_context.hpp>
@@ -61,6 +62,12 @@ struct MountPointStateMachine : public interfaces::MountPointStateMachine
     void changeState(std::unique_ptr<BasicState> newState)
     {
         state = std::move(newState);
+        LOGGER_INFO("{} state changed to {}", name, state->getStateName());
+
+        if (auto nextState = state->onEnter())
+        {
+            changeState(std::move(nextState));
+        }
     }
 
     template <class EventT>
@@ -68,6 +75,36 @@ struct MountPointStateMachine : public interfaces::MountPointStateMachine
     {
         LOGGER_INFO("{} received {} while in {}", name, event.eventName,
                     state->getStateName());
+
+        if (auto newState = state->handleEvent(std::forward<EventT>(event)))
+        {
+            changeState(std::move(newState));
+        }
+    }
+
+    void emitRegisterDBusEvent(
+        std::shared_ptr<sdbusplus::asio::connection> bus,
+        std::shared_ptr<sdbusplus::asio::object_server> objServer) override
+    {
+        emitEvent(RegisterDbusEvent(bus, objServer));
+    }
+
+    void setMountPointInterface(
+        std::unique_ptr<sdbusplus::asio::dbus_interface> iface) override
+    {
+        mountPointIface = std::move(iface);
+    }
+
+    void setProcessInterface(
+        std::unique_ptr<sdbusplus::asio::dbus_interface> iface) override
+    {
+        processIface = std::move(iface);
+    }
+
+    void setServiceInterface(
+        std::unique_ptr<sdbusplus::asio::dbus_interface> iface) override
+    {
+        serviceIface = std::move(iface);
     }
 
     boost::asio::io_context& ioc;
@@ -75,6 +112,11 @@ struct MountPointStateMachine : public interfaces::MountPointStateMachine
     Configuration::MountPoint config;
 
     std::optional<Target> target;
-    std::unique_ptr<BasicState> state;
+    std::unique_ptr<BasicState> state = std::make_unique<InitialState>(*this);
     int exitCode = -1;
+
+  private:
+    std::unique_ptr<sdbusplus::asio::dbus_interface> mountPointIface;
+    std::unique_ptr<sdbusplus::asio::dbus_interface> processIface;
+    std::unique_ptr<sdbusplus::asio::dbus_interface> serviceIface;
 };

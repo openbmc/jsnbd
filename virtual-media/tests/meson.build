@@ -1,7 +1,7 @@
 gtest_dep = dependency(
-    'gtest_main',
+    'gtest',
     version: '>=1.11.0',
-    fallback: ['gtest', 'gtest_main_dep'],
+    fallback: ['gtest', 'gtest_dep'],
     main: true,
     required: true,
     include_type: 'system',
@@ -20,8 +20,11 @@ test(
     executable(
         'virtual-media-ut',
         [
+            'src/environments/dbus_environment.cpp',
             'src/configuration_test.cpp',
             'src/events_test.cpp',
+            'src/initial_state_test.cpp',
+            'src/main.cpp',
             'src/system_test.cpp',
         ],
         dependencies: virtual_media_dependencies

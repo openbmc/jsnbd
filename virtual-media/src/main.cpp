@@ -28,6 +28,7 @@ class App
         {
             mpsm.emplace(name, std::make_shared<MountPointStateMachine>(
                                    ioc, name, entry));
+            mpsm[name]->emitRegisterDBusEvent(bus, objServer);
         }
     }
 
