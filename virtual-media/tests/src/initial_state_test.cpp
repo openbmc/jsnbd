@@ -31,9 +31,10 @@ class ProxyMountPointScenario
 {
   public:
     ProxyMountPointScenario() :
-        nbdDev{"nbd0"}, mp{nbdDev, "tests/run/virtual-media/nbd0.sock",
-                           "/nbd/0", Configuration::Mode::proxy},
-        mpsm{ioc, "Slot_0", mp}
+        nbdDev{"nbd0"}, monitor{ioc},
+        mp{nbdDev, "tests/run/virtual-media/nbd0.sock", "/nbd/0",
+           Configuration::Mode::proxy},
+        mpsm{ioc, monitor, "Slot_0", mp}
     {
         mpsm.emitRegisterDBusEvent(DbusEnvironment::getBus(),
                                    DbusEnvironment::getObjServer());
@@ -65,6 +66,7 @@ class ProxyMountPointScenario
   private:
     boost::asio::io_context ioc;
     NBDDevice<> nbdDev;
+    DeviceMonitor monitor;
     Configuration::MountPoint mp;
     MountPointStateMachine mpsm;
 };
@@ -73,9 +75,10 @@ class StandardMountPointScenario
 {
   public:
     StandardMountPointScenario() :
-        nbdDev{"nbd2"}, mp{nbdDev, "tests/run/virtual-media/nbd2.sock", "",
-                           Configuration::Mode::standard},
-        mpsm{ioc, "Slot_2", mp}
+        nbdDev{"nbd2"}, monitor{ioc},
+        mp{nbdDev, "tests/run/virtual-media/nbd2.sock", "",
+           Configuration::Mode::standard},
+        mpsm{ioc, monitor, "Slot_2", mp}
     {
         mpsm.emitRegisterDBusEvent(DbusEnvironment::getBus(),
                                    DbusEnvironment::getObjServer());
@@ -108,6 +111,7 @@ class StandardMountPointScenario
   private:
     boost::asio::io_context ioc;
     NBDDevice<> nbdDev;
+    DeviceMonitor monitor;
     Configuration::MountPoint mp;
     MountPointStateMachine mpsm;
 };

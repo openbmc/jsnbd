@@ -43,6 +43,8 @@ struct MountPointStateMachine
     virtual void emitRegisterDBusEvent(
         std::shared_ptr<sdbusplus::asio::connection> bus,
         std::shared_ptr<sdbusplus::asio::object_server> objServer) = 0;
+    virtual void emitUdevStateChangeEvent(const NBDDevice<>& dev,
+                                          StateChange devState) = 0;
 
     virtual void setMountPointInterface(
         std::unique_ptr<sdbusplus::asio::dbus_interface>) = 0;

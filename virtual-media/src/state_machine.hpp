@@ -16,10 +16,12 @@
 struct MountPointStateMachine : public interfaces::MountPointStateMachine
 {
     MountPointStateMachine(boost::asio::io_context& ioc,
-                           const std::string& name,
+                           DeviceMonitor& devMonitor, const std::string& name,
                            const Configuration::MountPoint& config) :
         ioc{ioc}, name{name}, config{config}
-    {}
+    {
+        devMonitor.addDevice(config.nbdDevice);
+    }
 
     MountPointStateMachine(const MountPointStateMachine&) = delete;
     MountPointStateMachine(MountPointStateMachine&&) = delete;
@@ -87,6 +89,19 @@ struct MountPointStateMachine : public interfaces::MountPointStateMachine
         std::shared_ptr<sdbusplus::asio::object_server> objServer) override
     {
         emitEvent(RegisterDbusEvent(bus, objServer));
+    }
+
+    void emitUdevStateChangeEvent(const NBDDevice<>& dev,
+                                  StateChange devState) override
+    {
+        if (config.nbdDevice == dev)
+        {
+            emitEvent(UdevStateChangeEvent(devState));
+
+            return;
+        }
+
+        LOGGER_DEBUG("{} Ignoring request.", name);
     }
 
     void setMountPointInterface(

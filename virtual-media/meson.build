@@ -10,8 +10,16 @@ virtual_media_dependencies = []
 systemd = dependency('systemd', required: true)
 virtual_media_dependencies += systemd
 
+# pkg-config for udev does not contain Libs variable
+udev = dependency('udev', required: true)
+virtual_media_dependencies += udev
+# this will add appopriate udev library linkage to executable.
+udev_lib_dep = declare_dependency(link_args: ['-ludev'])
+virtual_media_dependencies += udev_lib_dep
+
 boost = dependency(
     'boost',
+    modules: ['coroutine'],
     required: false,
     include_type: 'system',
 )
@@ -20,13 +28,24 @@ if boost.found()
 else
     cmake = import('cmake')
     opt = cmake.subproject_options()
-    opt.add_cmake_defines({'BOOST_INCLUDE_LIBRARIES': 'asio;beast;callable_traits;system'})
+    opt.add_cmake_defines(
+        {
+            'BOOST_INCLUDE_LIBRARIES': 'asio;beast;callable_traits;process;system',
+        },
+    )
     boost = cmake.subproject('boost', required: true, options: opt)
     boost_asio = boost.dependency('boost_asio').as_system()
     boost_beast = boost.dependency('boost_beast').as_system()
     boost_callable_traits = boost.dependency('boost_callable_traits').as_system()
+    boost_process = boost.dependency('boost_process').as_system()
     boost_system = boost.dependency('boost_system').as_system()
-    virtual_media_dependencies += [boost_asio, boost_beast, boost_callable_traits, boost_system]
+    virtual_media_dependencies += [
+        boost_asio,
+        boost_beast,
+        boost_callable_traits,
+        boost_process,
+        boost_system,
+    ]
 endif
 
 nlohmann_json = dependency('nlohmann_json', include_type: 'system')
@@ -71,7 +90,13 @@ install_data(
     install_dir: '/usr/share/virtual-media',
 )
 
-srcfiles_app = ['src/main.cpp']
+srcfiles_app = [
+    'src/utils/impl/child.cpp',
+    'src/utils/impl/pipe_reader.cpp',
+    'src/utils/impl/stream_descriptor.cpp',
+    'src/utils/impl/udev.cpp',
+    'src/main.cpp',
+]
 
 bindir = get_option('prefix') + '/' + get_option('libexecdir')
 
