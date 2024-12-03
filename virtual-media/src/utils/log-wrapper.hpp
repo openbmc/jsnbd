@@ -7,6 +7,7 @@
 #include <source_location>
 #include <sstream>
 #include <string_view>
+#include <vector>
 
 static constexpr auto kCurrentLogLevel = phosphor::logging::level::DEBUG;
 
@@ -23,6 +24,29 @@ struct std::formatter<boost::system::error_code>
         return std::format_to(ctx.out(), "{}", ec.what());
     }
 };
+
+// The following allows convienient logging of objects packed in vector, at the
+// cost of modification of 'std' namespace. Ignore that warning.
+// NOLINTBEGIN(cert-dcl58-cpp)
+template <typename T>
+struct std::formatter<std::vector<T>>
+{
+    static constexpr auto parse(std::format_parse_context& ctx)
+    {
+        return ctx.begin();
+    }
+
+    auto format(const std::vector<T>& vec, auto& ctx) const
+    {
+        std::format_to(ctx.out(), "[ ");
+        for (const T& item : vec)
+        {
+            std::format_to(ctx.out(), "{} ", item);
+        }
+        return std::format_to(ctx.out(), "]");
+    }
+};
+// NOLINTEND(cert-dcl58-cpp)
 
 template <phosphor::logging::level level, typename... Args>
 inline void vlog(std::format_string<Args...>&& format, Args&&... args,
