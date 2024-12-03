@@ -64,6 +64,7 @@ if (get_option('virtual-media').enabled())
           '-Wno-overloaded-virtual',
           '-Wno-unused-macros',
           '-Wno-ctad-maybe-unsupported',
+          '-Wno-unused-private-field',
           '-Wunused-parameter',
           '-Wcovered-switch-default',
           '-Wcomma',

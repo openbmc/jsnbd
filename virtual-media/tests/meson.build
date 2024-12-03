@@ -21,6 +21,10 @@ test(
         'virtual-media-ut',
         [
             'src/environments/dbus_environment.cpp',
+            'src/fakes/child_fake.cpp',
+            'src/fakes/pipe_reader_fake.cpp',
+            'src/fakes/stream_descriptor_fake.cpp',
+            'src/fakes/udev_fake.cpp',
             'src/configuration_test.cpp',
             'src/events_test.cpp',
             'src/initial_state_test.cpp',
