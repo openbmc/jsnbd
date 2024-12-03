@@ -1,5 +1,6 @@
 #include "configuration.hpp"
 #include "state_machine.hpp"
+#include "system.hpp"
 #include "utils/log-wrapper.hpp"
 
 #include <boost/asio/error.hpp>
@@ -22,16 +23,23 @@ class App
     App(boost::asio::io_context& ioc, const Configuration& config) :
         bus(std::make_shared<sdbusplus::asio::connection>(ioc)),
         objServer(std::make_shared<sdbusplus::asio::object_server>(bus)),
-        objManager(*bus, "/xyz/openbmc_project/VirtualMedia")
+        objManager(*bus, "/xyz/openbmc_project/VirtualMedia"), devMonitor(ioc)
     {
         bus->request_name("xyz.openbmc_project.VirtualMedia");
 
         for (const auto& [name, entry] : config.mountPoints)
         {
             mpsm.emplace(name, std::make_shared<MountPointStateMachine>(
-                                   ioc, name, entry));
+                                   ioc, devMonitor, name, entry));
             mpsm[name]->emitRegisterDBusEvent(bus, objServer);
         }
+
+        devMonitor.run([this](const NBDDevice<>& device, StateChange change) {
+            for (auto& [name, entry] : mpsm)
+            {
+                entry->emitUdevStateChangeEvent(device, change);
+            }
+        });
     }
 
   private:
@@ -40,6 +48,7 @@ class App
     std::shared_ptr<sdbusplus::asio::connection> bus;
     std::shared_ptr<sdbusplus::asio::object_server> objServer;
     sdbusplus::server::manager_t objManager;
+    DeviceMonitor devMonitor;
 };
 
 int main()
