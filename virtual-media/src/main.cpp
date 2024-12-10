@@ -3,6 +3,9 @@
 #include "system.hpp"
 #include "utils/log-wrapper.hpp"
 
+#include <sys/stat.h>
+#include <sys/types.h>
+
 #include <boost/asio/error.hpp>
 #include <boost/asio/io_context.hpp>
 #include <boost/asio/signal_set.hpp>
@@ -58,6 +61,10 @@ int main()
     {
         return -1;
     }
+
+    // setup secure ownership for newly created files (always succeeds)
+    static constexpr mode_t defaultUmask = 077;
+    umask(defaultUmask);
 
     try
     {

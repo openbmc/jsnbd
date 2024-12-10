@@ -22,6 +22,8 @@ test(
         [
             'src/environments/dbus_environment.cpp',
             'src/fakes/child_fake.cpp',
+            'src/fakes/file_printer_fake.cpp',
+            'src/fakes/gadget_dirs_fake.cpp',
             'src/fakes/pipe_reader_fake.cpp',
             'src/fakes/stream_descriptor_fake.cpp',
             'src/fakes/udev_fake.cpp',
