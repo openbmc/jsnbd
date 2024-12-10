@@ -20,6 +20,7 @@ struct MountPointStateMachine
 {
     struct Target
     {
+        bool rw;
         std::unique_ptr<resource::Mount> mountPoint;
     };
 
@@ -43,6 +44,7 @@ struct MountPointStateMachine
     virtual void emitRegisterDBusEvent(
         std::shared_ptr<sdbusplus::asio::connection> bus,
         std::shared_ptr<sdbusplus::asio::object_server> objServer) = 0;
+    virtual void emitSubprocessStoppedEvent() = 0;
     virtual void emitUdevStateChangeEvent(const NBDDevice<>& dev,
                                           StateChange devState) = 0;
 

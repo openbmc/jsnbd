@@ -1,6 +1,8 @@
 #pragma once
 
 #include "utils/child.hpp"
+#include "utils/file_printer.hpp"
+#include "utils/gadget_dirs.hpp"
 #include "utils/log-wrapper.hpp"
 #include "utils/pipe_reader.hpp"
 #include "utils/stream_descriptor.hpp"
@@ -17,6 +19,7 @@
 #include <chrono>
 #include <cstddef>
 #include <filesystem>
+#include <fstream>
 #include <regex>
 #include <string>
 #include <system_error>
@@ -419,4 +422,148 @@ class Process : public std::enable_shared_from_this<Process>
     utils::Child child;
     utils::PipeReader reader;
     const NBDDevice<>& dev;
+};
+
+struct UsbGadget
+{
+  private:
+    using Printer = utils::FilePrinter;
+    using Dirs = utils::GadgetDirs;
+
+  public:
+    static int32_t configure(const std::string& name, const NBDDevice<>& nbd,
+                             StateChange change, const bool rw = false)
+    {
+        return configure(name, nbd.toPath(), change, rw);
+    }
+
+    static int32_t configure(const std::string& name,
+                             const std::filesystem::path& path,
+                             StateChange change, const bool rw = false)
+    {
+        LOGGER_INFO("[App]: Configure USB Gadget (name={}, path={}, State={})",
+                    name, path.string(), static_cast<uint32_t>(change));
+        bool success = true;
+
+        const std::filesystem::path gadgetDir = Dirs::gadgetPrefix() + name;
+        const std::filesystem::path funcMassStorageDir =
+            gadgetDir / "functions/mass_storage.usb0";
+        const std::filesystem::path stringsDir = gadgetDir / "strings/0x409";
+        const std::filesystem::path configDir = gadgetDir / "configs/c.1";
+        const std::filesystem::path massStorageDir = configDir /
+                                                     "mass_storage.usb0";
+        const std::filesystem::path configStringsDir = configDir /
+                                                       "strings/0x409";
+
+        if (change == StateChange::inserted)
+        {
+            try
+            {
+                Printer::createDirs(gadgetDir);
+                Printer::echo(gadgetDir / "idVendor", "0x1d6b");
+                Printer::echo(gadgetDir / "idProduct", "0x0104");
+                Printer::createDirs(stringsDir);
+                Printer::echo(stringsDir / "manufacturer", "OpenBMC");
+                Printer::echo(stringsDir / "product", "Virtual Media Device");
+                Printer::createDirs(configStringsDir);
+                Printer::echo(configStringsDir / "configuration", "config 1");
+                Printer::createDirs(funcMassStorageDir);
+                Printer::createDirs(funcMassStorageDir / "lun.0");
+                Printer::createDirSymlink(funcMassStorageDir, massStorageDir);
+                Printer::echo(funcMassStorageDir / "lun.0/removable", "1");
+                Printer::echo(funcMassStorageDir / "lun.0/ro", rw ? "0" : "1");
+                Printer::echo(funcMassStorageDir / "lun.0/cdrom", "0");
+                Printer::echo(funcMassStorageDir / "lun.0/file", path);
+
+                for (const auto& port :
+                     std::filesystem::directory_iterator(Dirs::busPrefix()))
+                {
+                    const std::string portId = port.path().filename();
+
+                    if (portId.find("1e6a0000.usb-vhub:p") != std::string::npos)
+                    {
+                        constexpr std::string_view portDelimiter = ":p";
+                        const std::string portNumber = portId.substr(
+                            portId.find(portDelimiter) + portDelimiter.size());
+
+                        // GadgetId is port number minus 1
+                        const int gadgetId = std::stoi(portNumber) - 1;
+
+                        if (Printer::isDir(port) && !Printer::isSymlink(port) &&
+                            !Printer::exists(
+                                port.path() /
+                                ("gadget." + std::to_string(gadgetId)) /
+                                "suspended"))
+                        {
+                            LOGGER_DEBUG("Use port : {}", portId);
+                            Printer::echo(gadgetDir / "UDC", portId);
+                            return 0;
+                        }
+                    }
+                }
+                // No ports available - clear success flag and go to cleanup
+                success = false;
+            }
+            catch (std::invalid_argument& e)
+            {
+                // Got error perform cleanup
+                LOGGER_ERROR("[App]: UsbGadget: {}", e.what());
+
+                success = false;
+            }
+            catch (std::filesystem::filesystem_error& e)
+            {
+                // Got error perform cleanup
+                LOGGER_ERROR("[App]: UsbGadget: {}", e.what());
+
+                success = false;
+            }
+            catch (std::ofstream::failure& e)
+            {
+                // Got error perform cleanup
+                LOGGER_ERROR("[App]: UsbGadget: {}", e.what());
+
+                success = false;
+            }
+        }
+        // StateChange: notMonitored, inserted were handler
+        // earlier. We'll get here only for removed, or cleanup
+        try
+        {
+            Printer::echo(gadgetDir / "UDC", "");
+        }
+        catch (std::ofstream::failure& e)
+        {
+            // Got error perform cleanup
+            LOGGER_ERROR("[App]: UsbGadget: {}", e.what());
+            success = false;
+        }
+        const std::array<const char*, 6> dirs = {
+            massStorageDir.c_str(),   funcMassStorageDir.c_str(),
+            configStringsDir.c_str(), configDir.c_str(),
+            stringsDir.c_str(),       gadgetDir.c_str()};
+        for (const char* dir : dirs)
+        {
+            std::error_code ec;
+            Printer::remove(dir, ec);
+            if (ec)
+            {
+                success = false;
+                LOGGER_ERROR("[App]: UsbGadget: {}", ec.message());
+            }
+        }
+
+        if (success)
+        {
+            return 0;
+        }
+        return -1;
+    }
+
+    static bool isConfigured(const std::string& name)
+    {
+        const std::filesystem::path gadgetDir = Dirs::gadgetPrefix() + name;
+
+        return Printer::exists(gadgetDir);
+    }
 };

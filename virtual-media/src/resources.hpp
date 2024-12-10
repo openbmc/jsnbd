@@ -94,4 +94,58 @@ class Mount
     std::unique_ptr<Directory> directory;
 };
 
+class Process
+{
+  public:
+    Process() = delete;
+    Process(const Process&) = delete;
+    Process(Process&& other) = delete;
+    Process& operator=(const Process&) = delete;
+    Process& operator=(Process&& other) = delete;
+    Process(interfaces::MountPointStateMachine& machine,
+            std::shared_ptr<::Process> process) :
+        machine(&machine), process(std::move(process))
+    {
+        if (!this->process)
+        {
+            throw Error(std::errc::io_error, "Failed to create process");
+        }
+    }
+
+    ~Process();
+
+    template <class... Args>
+    auto spawn(Args&&... args)
+    {
+        if (process->spawn(std::forward<Args>(args)...))
+        {
+            spawned = true;
+            return true;
+        }
+        return false;
+    }
+
+  private:
+    interfaces::MountPointStateMachine* machine;
+    std::shared_ptr<::Process> process = nullptr;
+    bool spawned = false;
+};
+
+class Gadget
+{
+  public:
+    Gadget() = delete;
+    Gadget& operator=(const Gadget&) = delete;
+    Gadget& operator=(Gadget&& other) = delete;
+    Gadget(const Gadget&) = delete;
+    Gadget(Gadget&& other) = delete;
+
+    Gadget(interfaces::MountPointStateMachine& machine, StateChange devState);
+    ~Gadget();
+
+  private:
+    interfaces::MountPointStateMachine* machine;
+    int32_t status;
+};
+
 } // namespace resource

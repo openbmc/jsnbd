@@ -91,6 +91,11 @@ struct MountPointStateMachine : public interfaces::MountPointStateMachine
         emitEvent(RegisterDbusEvent(bus, objServer));
     }
 
+    void emitSubprocessStoppedEvent() override
+    {
+        emitEvent(SubprocessStoppedEvent());
+    }
+
     void emitUdevStateChangeEvent(const NBDDevice<>& dev,
                                   StateChange devState) override
     {
