@@ -10,6 +10,7 @@
 
 #include <cerrno>
 #include <memory>
+#include <string>
 #include <string_view>
 #include <system_error>
 #include <utility>
@@ -23,13 +24,16 @@ struct ReadyState : public BasicStateT<ReadyState>
 
     explicit ReadyState(interfaces::MountPointStateMachine& machine) :
         BasicStateT(machine)
-    {}
+    {
+        machine.notify();
+    }
 
     ReadyState(interfaces::MountPointStateMachine& machine, const std::errc& ec,
                const std::string& message) : BasicStateT(machine)
     {
         LOGGER_ERROR("{} Errno = {} : {}", machine.getName(),
                      static_cast<int>(ec), message);
+        machine.notify(std::make_error_code(ec));
     }
 
     std::unique_ptr<BasicState> onEnter() override
@@ -39,6 +43,7 @@ struct ReadyState : public BasicStateT<ReadyState>
 
     std::unique_ptr<BasicState> handleEvent(MountEvent event)
     {
+        machine.notificationStart();
         if (event.target)
         {
             machine.getTarget() = std::move(event.target);

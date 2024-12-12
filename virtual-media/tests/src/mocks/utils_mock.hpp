@@ -1,9 +1,14 @@
 #pragma once
 
+#include "utils/utils.hpp"
+
 #include <boost/beast/core/file_base.hpp>
 
+#include <chrono>
 #include <cstddef>
 #include <filesystem>
+#include <functional>
+#include <optional>
 #include <string>
 #include <system_error>
 
@@ -15,6 +20,22 @@ namespace virtual_media_test
 
 using ::testing::_;
 using ::testing::Return;
+
+class MockSignalSender : public ::utils::SignalSender
+{
+  public:
+    MOCK_METHOD(void, send, (std::optional<const std::error_code>), (override));
+};
+
+class MockNotificationWrapper : public ::utils::NotificationWrapper
+{
+  public:
+    MOCK_METHOD(void, start,
+                (std::function<void(const boost::system::error_code&)>,
+                 const std::chrono::seconds&),
+                (override));
+    MOCK_METHOD(void, notify, (const std::error_code&), (override));
+};
 
 class FailableFileObject
 {

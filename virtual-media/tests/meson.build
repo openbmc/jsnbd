@@ -20,6 +20,8 @@ test(
     executable(
         'virtual-media-ut',
         [
+            '../src/state/activating_state.cpp',
+            '../src/resources.cpp',
             'src/environments/dbus_environment.cpp',
             'src/fakes/child_fake.cpp',
             'src/fakes/file_printer_fake.cpp',
@@ -31,7 +33,11 @@ test(
             'src/events_test.cpp',
             'src/initial_state_test.cpp',
             'src/main.cpp',
+            'src/resources_test.cpp',
+            'src/state_machine_test.cpp',
+            'src/state_transitions_test.cpp',
             'src/system_test.cpp',
+            'src/utils_test.cpp',
         ],
         dependencies: virtual_media_dependencies
         + [
