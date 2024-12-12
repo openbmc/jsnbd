@@ -8,9 +8,11 @@
 #include <boost/beast/core/file_posix.hpp>
 #include <boost/system/error_code.hpp>
 
+#include <chrono>
 #include <cstddef>
 #include <cstdint>
 #include <filesystem>
+#include <functional>
 #include <optional>
 #include <string>
 #include <system_error>
@@ -105,6 +107,40 @@ class FileObject
 
   private:
     boost::beast::file_posix file;
+};
+
+class SignalSender
+{
+  public:
+    SignalSender() = default;
+    virtual ~SignalSender() = default;
+
+    SignalSender(const SignalSender&) = delete;
+    SignalSender(SignalSender&&) = delete;
+
+    SignalSender& operator=(const SignalSender&) = delete;
+    SignalSender& operator=(SignalSender&&) = delete;
+
+    virtual void send(std::optional<const std::error_code> status) = 0;
+};
+
+class NotificationWrapper
+{
+  public:
+    NotificationWrapper() = default;
+    virtual ~NotificationWrapper() = default;
+
+    NotificationWrapper(const NotificationWrapper&) = delete;
+    NotificationWrapper(NotificationWrapper&&) = delete;
+
+    NotificationWrapper& operator=(const NotificationWrapper&) = delete;
+    NotificationWrapper& operator=(NotificationWrapper&&) = delete;
+
+    virtual void
+        start(std::function<void(const boost::system::error_code&)> handler,
+              const std::chrono::seconds& duration) = 0;
+
+    virtual void notify(const std::error_code& ec) = 0;
 };
 
 } // namespace utils

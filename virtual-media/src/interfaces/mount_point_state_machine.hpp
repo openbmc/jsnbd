@@ -10,7 +10,9 @@
 
 #include <memory>
 #include <optional>
+#include <string>
 #include <string_view>
+#include <system_error>
 
 struct BasicState;
 
@@ -35,6 +37,14 @@ struct MountPointStateMachine
 
     virtual ~MountPointStateMachine() = default;
 
+    virtual void notify(const std::error_code& ec = {}) = 0;
+    virtual void
+        notificationInitialize(std::shared_ptr<sdbusplus::asio::connection> con,
+                               const std::string& svc, const std::string& iface,
+                               const std::string& name) = 0;
+
+    virtual void notificationStart() = 0;
+
     virtual std::string_view getName() const = 0;
     virtual Configuration::MountPoint& getConfig() = 0;
     virtual std::optional<Target>& getTarget() = 0;
@@ -45,6 +55,8 @@ struct MountPointStateMachine
     virtual void emitRegisterDBusEvent(
         std::shared_ptr<sdbusplus::asio::connection> bus,
         std::shared_ptr<sdbusplus::asio::object_server> objServer) = 0;
+    virtual void emitMountEvent(std::optional<Target>) = 0;
+    virtual void emitUnmountEvent() = 0;
     virtual void emitSubprocessStoppedEvent() = 0;
     virtual void emitUdevStateChangeEvent(const NBDDevice<>& dev,
                                           StateChange devState) = 0;
