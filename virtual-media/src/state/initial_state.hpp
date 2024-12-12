@@ -3,7 +3,9 @@
 #include "configuration.hpp"
 #include "events.hpp"
 #include "interfaces/mount_point_state_machine.hpp"
+#include "state/active_state.hpp"
 #include "state/basic_state.hpp"
+#include "state/ready_state.hpp"
 #include "utils/log-wrapper.hpp"
 
 #include <sdbusplus/asio/object_server.hpp>
@@ -12,6 +14,7 @@
 
 #include <cstdint>
 #include <memory>
+#include <optional>
 #include <string>
 #include <string_view>
 #include <utility>
@@ -37,7 +40,7 @@ struct InitialState : public BasicStateT<InitialState>
         addProcessInterface(event);
         addServiceInterface(event, isStandard);
 
-        return nullptr;
+        return std::make_unique<ReadyState>(machine);
     }
 
     template <class AnyEvent>
@@ -70,7 +73,9 @@ struct InitialState : public BasicStateT<InitialState>
 
         processIface->register_property_r<bool>(
             "Active", sdbusplus::vtable::property_::emits_change,
-            [](const auto&) { return false; });
+            [&machine = machine](const bool&) {
+                return machine.getState().getIf<ActiveState>();
+            });
         processIface->register_property_r<int32_t>(
             "ExitCode", sdbusplus::vtable::property_::emits_change,
             [&machine = machine](const auto&) {
@@ -110,7 +115,13 @@ struct InitialState : public BasicStateT<InitialState>
             });
         iface->register_property_r<bool>(
             "WriteProtected", sdbusplus::vtable::property_::emits_change,
-            [&target = machine.getTarget()](const auto&) { return true; });
+            [&target = machine.getTarget()](const auto&) {
+                if (target)
+                {
+                    return !target->rw;
+                }
+                return true;
+            });
         iface->register_property_r<uint64_t>(
             "Timeout", sdbusplus::vtable::property_::const_,
             [](const auto&) { return Configuration::MountPoint::timeout; });
@@ -131,12 +142,16 @@ struct InitialState : public BasicStateT<InitialState>
         auto iface = event.objServer->add_unique_interface(path, name);
 
         iface->register_signal<int32_t>("Completion");
+        machine.notificationInitialize(event.bus, path, name, "Completion");
 
         // Common unmount
         iface->register_method("Unmount", [&machine = machine]() {
             LOGGER_INFO("[App]: Unmount called on {}", machine.getName());
 
-            return false;
+            machine.emitUnmountEvent();
+
+            LOGGER_DEBUG("[App]: Unmount returns true");
+            return true;
         });
 
         // Mount specialization
@@ -161,7 +176,9 @@ struct InitialState : public BasicStateT<InitialState>
                 LOGGER_INFO("[App]: Mount called on {} {}",
                             getObjectPath(machine), machine.getName());
 
-                return false;
+                machine.emitMountEvent(std::nullopt);
+
+                return true;
             });
         }
 
