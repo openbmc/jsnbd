@@ -1,5 +1,6 @@
 #include "configuration.hpp"
 #include "environments/dbus_environment.hpp"
+#include "mocks/child_mock.hpp"
 #include "state_machine.hpp"
 #include "system.hpp"
 
@@ -23,6 +24,7 @@ using ::testing::Eq;
 using ::testing::IsEmpty;
 using ::testing::IsFalse;
 using ::testing::IsTrue;
+using ::testing::NiceMock;
 using ::testing::Types;
 
 using MethodCallback =
@@ -65,6 +67,7 @@ class ProxyMountPointScenario
             serviceIface, "Unmount");
     }
 
+    static constexpr bool expectedMountReturnValue = true;
     const std::string objectPath{
         "/xyz/openbmc_project/VirtualMedia/Proxy/Slot_0"};
     const std::string serviceIface{"xyz.openbmc_project.VirtualMedia.Proxy"};
@@ -110,6 +113,7 @@ class StandardMountPointScenario
             serviceIface, "Unmount");
     }
 
+    static constexpr bool expectedMountReturnValue = false;
     const std::string objectPath{
         "/xyz/openbmc_project/VirtualMedia/Standard/Slot_2"};
     const std::string serviceIface{"xyz.openbmc_project.VirtualMedia.Standard"};
@@ -126,7 +130,13 @@ template <typename MountPointScenario>
 class InitialStateTest : public ::testing::Test
 {
   public:
+    InitialStateTest()
+    {
+        MockChild::engine = &child;
+    }
+
     MountPointScenario scenario;
+    NiceMock<MockChildEngine> child;
 };
 
 using Scenarios = Types<ProxyMountPointScenario, StandardMountPointScenario>;
@@ -178,24 +188,25 @@ TYPED_TEST(InitialStateTest, MountMethodIsInitialized)
 
     bool returnValue =
         DbusEnvironment::waitForFuture(returnPromise.get_future());
-    EXPECT_FALSE(returnValue);
+    EXPECT_EQ(returnValue, scenario.expectedMountReturnValue);
 }
 
 TYPED_TEST(InitialStateTest, UnmountMethodIsInitialized)
 {
     TypeParam& scenario = this->scenario;
-    std::promise<bool> returnPromise;
+    std::promise<bool> callPromise;
 
     scenario.doUnmount(
-        [&promise = returnPromise](const boost::system::error_code& ec,
-                                   const bool result) {
-            EXPECT_FALSE(ec);
-            promise.set_value(result);
+        [&promise = callPromise](const boost::system::error_code& ec,
+                                 const bool /*result*/) {
+            // We should be in ReadyState once this is called, where unmount
+            // event is invalid, so an error should be raised.
+            EXPECT_TRUE(ec);
+            promise.set_value(true);
         });
 
-    bool returnValue =
-        DbusEnvironment::waitForFuture(returnPromise.get_future());
-    EXPECT_FALSE(returnValue);
+    bool callDone = DbusEnvironment::waitForFuture(callPromise.get_future());
+    EXPECT_TRUE(callDone);
 }
 
 } // namespace virtual_media_test
