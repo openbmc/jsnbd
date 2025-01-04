@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5e28634_c2d2e1ad",
+        "filename": "virtual-media/src/state/basic_state.hpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2025-01-04T00:48:51Z",
+      "side": 1,
+      "message": "?",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 53
+      },
+      "revId": "5cb63a99a3a9973c68745544ec9d03118199b1da",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e6088fa_20ab9b2a",
+        "filename": "virtual-media/src/state/initial_state.hpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2025-01-04T00:48:51Z",
+      "side": 1,
+      "message": "suspect composition",
+      "revId": "5cb63a99a3a9973c68745544ec9d03118199b1da",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eff78caf_f0255147",
+        "filename": "virtual-media/src/state/initial_state.hpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2025-01-04T00:48:51Z",
+      "side": 1,
+      "message": "using auto like this makes things very confusing about what the type is.  Please don\u0027t write code like this.",
+      "range": {
+        "startLine": 67,
+        "startChar": 8,
+        "endLine": 67,
+        "endChar": 12
+      },
+      "revId": "5cb63a99a3a9973c68745544ec9d03118199b1da",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2c9e2a0_5598abd8",
+        "filename": "virtual-media/src/state/initial_state.hpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2025-01-04T00:48:51Z",
+      "side": 1,
+      "message": "These all look like they can implement the non-callback register_property method.  As written, there\u0027s nothing that updates the property if machine.getConfig() is changed.",
+      "range": {
+        "startLine": 91,
+        "startChar": 0,
+        "endLine": 116,
+        "endChar": 76
+      },
+      "revId": "5cb63a99a3a9973c68745544ec9d03118199b1da",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
