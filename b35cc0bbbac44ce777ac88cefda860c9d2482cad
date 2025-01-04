@@ -16,6 +16,92 @@
       "message": "Overall this patchset adds a ton of complexity that IMO is unjustified.  It\u0027s adding a whole state machine with a lot of abstraction, but fails to actually accomplish anything with it.  It would help a lot if we could start with a simple set of code that implements a basic mount point, then adds complexity as it\u0027s needed.  I had a lot of trouble reading this patchset given it doesn\u0027t really seem to accomplish anything useful (at least in this patch).",
       "revId": "b35cc0bbbac44ce777ac88cefda860c9d2482cad",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ee4f129_ab3a1b9a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2025-01-04T00:41:39Z",
+      "side": 1,
+      "message": "This patch series continues to be very difficult to review, given that I\u0027m 3 patchsets and several thousands of lines of code into the review, and we still haven\u0027t accomplished anything that\u0027s of use to a virtual media system.",
+      "revId": "b35cc0bbbac44ce777ac88cefda860c9d2482cad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4e497ca_1bc9168e",
+        "filename": "virtual-media/src/resources.hpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2025-01-04T00:41:39Z",
+      "side": 1,
+      "message": "Please don\u0027t name the same class in two different namespaces.  It confuses search.\n\n\nAlso, this isn\u0027t an interface as it\u0027s written, so it\u0027s really unclear how it should be used.",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 30
+      },
+      "revId": "b35cc0bbbac44ce777ac88cefda860c9d2482cad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20d69545_d587b843",
+        "filename": "virtual-media/src/resources.hpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2025-01-04T00:41:39Z",
+      "side": 1,
+      "message": "Why catch this and rethrow it rather than just use the throwing version of create_directory?",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 60
+      },
+      "revId": "b35cc0bbbac44ce777ac88cefda860c9d2482cad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01062aeb_79b49af6",
+        "filename": "virtual-media/src/resources.hpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2025-01-04T00:41:39Z",
+      "side": 1,
+      "message": "This class appears to do nothing in its current form?\n\nusing Mount \u003d std::unique_ptr\u003cDirectory\u003e;\n\nWould accomplish the same thing with a lot less code.",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 2
+      },
+      "revId": "b35cc0bbbac44ce777ac88cefda860c9d2482cad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
