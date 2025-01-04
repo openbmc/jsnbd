@@ -1534,6 +1534,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "73b34023_b2fbf167",
+        "filename": "src/main.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1001743
+      },
+      "writtenOn": "2025-01-04T10:13:03Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4d7f793f_9f8bd951",
+      "range": {
+        "startLine": 35,
+        "startChar": 31,
+        "endLine": 35,
+        "endChar": 36
+      },
+      "revId": "31d76a4bff1d94dd4141f0875f5259f68de2d9e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "df5e548c_34948530",
