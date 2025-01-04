@@ -127,6 +127,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "94c09eca_f2ca90b3",
+        "filename": "src/events.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2025-01-04T00:35:21Z",
+      "side": 1,
+      "message": "\u003e BasicEvent is just for avoid duplication of name field. \n\nThis seems significantly worse than just putting a name string in each element.  BasicEvent is initialized with __FUNC__, which is already present in the logger.  You could get the same result by just putting a log statement in each constructor.",
+      "parentUuid": "17547915_55d90436",
+      "revId": "a3ce83c5d1e1e06de4d4632e00f2108e4c920888",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "69aabc27_539a13a4",
         "filename": "src/events.hpp",
         "patchSetId": 1
@@ -227,6 +245,24 @@
       "side": 1,
       "message": "Removed virtual destructor. See answer above.",
       "parentUuid": "46bb62fe_2d2e08e7",
+      "revId": "a3ce83c5d1e1e06de4d4632e00f2108e4c920888",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ab61930_cf3824bb",
+        "filename": "src/events.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2025-01-04T00:35:21Z",
+      "side": 1,
+      "message": "Deduplicating a Name field isn\u0027t really a sufficient reason to take the overhead of both variant and inheritence.",
+      "parentUuid": "1a851707_8a331a74",
       "revId": "a3ce83c5d1e1e06de4d4632e00f2108e4c920888",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
