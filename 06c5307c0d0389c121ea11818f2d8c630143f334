@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42139402_368d1b84",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2025-01-04T00:29:49Z",
+      "side": 1,
+      "message": "Couple nits, nothing important.",
+      "revId": "06c5307c0d0389c121ea11818f2d8c630143f334",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78c873b2_a5368ad0",
+        "filename": "meson.build",
+        "patchSetId": 6
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2025-01-04T00:29:49Z",
+      "side": 1,
+      "message": "These look copied from bmcweb.  Please copy the latest, which sets newer versions of compiler flags.",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 97,
+        "endChar": 7
+      },
+      "revId": "06c5307c0d0389c121ea11818f2d8c630143f334",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aea10aff_4403edec",
+        "filename": "virtual-media/src/main.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2025-01-04T00:29:49Z",
+      "side": 1,
+      "message": "Generally best practice would be to let this get thrown so that a coredump can be analyzed to find the trace itself.",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 5
+      },
+      "revId": "06c5307c0d0389c121ea11818f2d8c630143f334",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
