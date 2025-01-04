@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "346e952f_8b157002",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 18
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2025-01-04T00:50:50Z",
+      "side": 1,
+      "message": "This commit message could be improved.  It\u0027s not clear to me why adding coroutines, detecting size changes of nbd devices, or calling associated callbacks are useful to virtual media.  Considering we\u0027re still not to the point where we can actually mount an nbd device, I\u0027m not really sure why these are useful.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 21
+      },
+      "revId": "50effd37e5b5becf0108462e85aae5ca25933e32",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bf41ccf_609ffe2b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 18
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2025-01-04T00:50:50Z",
+      "side": 1,
+      "message": "What does this mean?  How did you test this?",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 65
+      },
+      "revId": "50effd37e5b5becf0108462e85aae5ca25933e32",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
