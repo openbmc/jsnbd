@@ -1,6 +1,7 @@
 #include "configuration.hpp"
 #include "environments/dbus_environment.hpp"
 #include "mocks/child_mock.hpp"
+#include "mocks/file_printer_mock.hpp"
 #include "state_machine.hpp"
 #include "system.hpp"
 
@@ -67,7 +68,6 @@ class ProxyMountPointScenario
             serviceIface, "Unmount");
     }
 
-    static constexpr bool expectedMountReturnValue = true;
     const std::string objectPath{
         "/xyz/openbmc_project/VirtualMedia/Proxy/Slot_0"};
     const std::string serviceIface{"xyz.openbmc_project.VirtualMedia.Proxy"};
@@ -84,11 +84,12 @@ class StandardMountPointScenario
 {
   public:
     StandardMountPointScenario() :
-        nbdDev{"nbd2"}, monitor{ioc},
-        mp{nbdDev, "tests/run/virtual-media/nbd2.sock", "",
+        nbdDev{"nbd3"}, monitor{ioc},
+        mp{nbdDev, "tests/run/virtual-media/nbd3.sock", "",
            Configuration::Mode::standard},
-        mpsm{ioc, monitor, "Slot_2", mp}
+        mpsm{ioc, monitor, "Slot_3", mp}
     {
+        MockFilePrinter::engine = &printer;
         mpsm.emitRegisterDBusEvent(DbusEnvironment::getBus(),
                                    DbusEnvironment::getObjServer());
     }
@@ -102,7 +103,7 @@ class StandardMountPointScenario
     {
         DbusEnvironment::getBus()->async_method_call(
             std::move(callback), DbusEnvironment::serviceName(), objectPath,
-            serviceIface, "Mount", "https://placeholder.org/image.iso", false,
+            serviceIface, "Mount", "smb://192.168.10.101:445/test.iso", false,
             std::variant<int, sdbusplus::message::unix_fd>{0});
     }
 
@@ -113,9 +114,8 @@ class StandardMountPointScenario
             serviceIface, "Unmount");
     }
 
-    static constexpr bool expectedMountReturnValue = false;
     const std::string objectPath{
-        "/xyz/openbmc_project/VirtualMedia/Standard/Slot_2"};
+        "/xyz/openbmc_project/VirtualMedia/Standard/Slot_3"};
     const std::string serviceIface{"xyz.openbmc_project.VirtualMedia.Standard"};
 
   private:
@@ -124,6 +124,7 @@ class StandardMountPointScenario
     DeviceMonitor monitor;
     Configuration::MountPoint mp;
     MountPointStateMachine mpsm;
+    NiceMock<MockFilePrinterEngine> printer;
 };
 
 template <typename MountPointScenario>
@@ -188,7 +189,7 @@ TYPED_TEST(InitialStateTest, MountMethodIsInitialized)
 
     bool returnValue =
         DbusEnvironment::waitForFuture(returnPromise.get_future());
-    EXPECT_EQ(returnValue, scenario.expectedMountReturnValue);
+    EXPECT_EQ(returnValue, true);
 }
 
 TYPED_TEST(InitialStateTest, UnmountMethodIsInitialized)

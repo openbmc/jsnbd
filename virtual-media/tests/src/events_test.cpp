@@ -13,7 +13,8 @@ namespace virtual_media_test
 class EventsTest : public ::testing::Test
 {
   protected:
-    interfaces::MountPointStateMachine::Target target{};
+    interfaces::MountPointStateMachine::Target target{
+        "smb://192.168.10.101:445/test.iso", true, nullptr, nullptr};
     MountEvent event{std::move(target)};
 };
 

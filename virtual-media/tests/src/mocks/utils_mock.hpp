@@ -89,4 +89,15 @@ class MockFileObject
     MOCK_METHOD(size_t, write, (void*, size_t), ());
 };
 
+class FailableSecretFileObject
+{
+  public:
+    explicit FailableSecretFileObject([[maybe_unused]] int fd) {}
+
+    static size_t write([[maybe_unused]] void* data, [[maybe_unused]] size_t nw)
+    {
+        return static_cast<size_t>(-1);
+    }
+};
+
 } // namespace virtual_media_test

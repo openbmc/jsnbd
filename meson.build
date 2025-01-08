@@ -65,6 +65,7 @@ if (get_option('virtual-media').enabled())
           '-Wno-unused-macros',
           '-Wno-ctad-maybe-unsupported',
           '-Wno-unused-private-field',
+          '-Wno-unsafe-buffer-usage',
           '-Wunused-parameter',
           '-Wcovered-switch-default',
           '-Wcomma',
