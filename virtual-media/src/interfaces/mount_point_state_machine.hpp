@@ -3,6 +3,7 @@
 #include "configuration.hpp"
 #include "resources.hpp"
 #include "system.hpp"
+#include "utils/utils.hpp"
 
 #include <boost/asio/io_context.hpp>
 #include <sdbusplus/asio/connection.hpp>
@@ -23,8 +24,10 @@ struct MountPointStateMachine
 {
     struct Target
     {
+        std::string imgUrl;
         bool rw;
         std::unique_ptr<resource::Mount> mountPoint;
+        std::unique_ptr<utils::CredentialsProvider> credentials;
     };
 
     MountPointStateMachine() = default;

@@ -1,7 +1,10 @@
 #pragma once
 
+#include "smb.hpp"
 #include "system.hpp"
 #include "utils/log-wrapper.hpp"
+#include "utils/mounter.hpp"
+#include "utils/utils.hpp"
 
 #include <cstdint>
 #include <filesystem>
@@ -81,9 +84,18 @@ class Mount
     Mount& operator=(const Mount&) = delete;
     Mount& operator=(Mount&& other) = delete;
 
-    explicit Mount(std::unique_ptr<Directory> directory) :
+    Mount(std::unique_ptr<Directory> directory, SmbShare& smb,
+          const std::filesystem::path& remote, bool rw,
+          const std::unique_ptr<utils::CredentialsProvider>& credentials) :
         directory(std::move(directory))
-    {}
+    {
+        mounter = smb.mount(remote, rw, credentials);
+        if (!mounter)
+        {
+            throw Error(std::errc::invalid_argument,
+                        "Failed to mount CIFS share");
+        }
+    }
 
     ~Mount() = default;
 
@@ -94,6 +106,7 @@ class Mount
 
   private:
     std::unique_ptr<Directory> directory;
+    std::unique_ptr<utils::Mounter> mounter;
 };
 
 class Process

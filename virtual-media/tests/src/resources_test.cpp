@@ -1,11 +1,15 @@
 #include "configuration.hpp"
+#include "fakes/mounter_dirs_fake.hpp"
+#include "fakes/mounter_fake.hpp"
 #include "fakes/states_fake.hpp"
 #include "mocks/file_printer_mock.hpp"
 #include "resources.hpp"
+#include "smb.hpp"
 #include "state/basic_state.hpp"
 #include "state_machine.hpp"
 #include "system.hpp"
 #include "utils/gadget_dirs.hpp"
+#include "utils/utils.hpp"
 
 #include <chrono>
 #include <filesystem>
@@ -22,6 +26,49 @@ using namespace resource;
 
 namespace fs = std::filesystem;
 
+/* Mount tests */
+class MountTest : public ::testing::Test
+{
+  protected:
+    MountTest()
+    {
+        credentials =
+            std::make_unique<utils::CredentialsProvider>("user", "1234");
+    }
+
+    void doMountAndUnmount(const fs::path& name)
+    {
+        auto mountDir = std::make_unique<Directory>(name);
+        SmbShare smb(mountDir->getPath());
+        mount = std::make_unique<Mount>(std::move(mountDir), smb,
+                                        directories::remoteDir, true,
+                                        std::move(credentials));
+        mount = nullptr;
+    }
+
+    std::unique_ptr<utils::CredentialsProvider> credentials;
+    std::unique_ptr<Mount> mount;
+};
+
+TEST_F(MountTest, MountFailed)
+{
+    EXPECT_THROW(doMountAndUnmount("Slot_1"), Error);
+}
+
+TEST_F(MountTest, UnmountSuccessful)
+{
+    EXPECT_NO_THROW(doMountAndUnmount("Slot_3"));
+
+    EXPECT_EQ(MounterHelper::unmountResult, 0);
+}
+
+TEST_F(MountTest, UnmountFailed)
+{
+    EXPECT_NO_THROW(doMountAndUnmount("Slot_2"));
+
+    EXPECT_EQ(MounterHelper::unmountResult, 1);
+}
+
 /* Gadget tests */
 class GadgetTest : public ::testing::Test
 {
@@ -29,7 +76,7 @@ class GadgetTest : public ::testing::Test
     GadgetTest()
     {
         MockFilePrinter::engine = &printer;
-        const fs::path busPort = utils::GadgetDirs::busPrefix() + "/1";
+        const fs::path busPort = ::utils::GadgetDirs::busPrefix() + "/1";
         fs::create_directories(busPort);
 
         // move to TestStateI, as this specific state handles all events
@@ -41,7 +88,7 @@ class GadgetTest : public ::testing::Test
 
     ~GadgetTest() override
     {
-        fs::remove_all(utils::GadgetDirs::busPrefix());
+        fs::remove_all(::utils::GadgetDirs::busPrefix());
     }
 
     GadgetTest(const GadgetTest&) = delete;

@@ -78,6 +78,13 @@ struct DeactivatingState : public BasicStateT<DeactivatingState>
             {
                 LOGGER_INFO("{} udev StateCjamge::removed", machine.getName());
 
+                // reset mountPoint manually to stop share from staying
+                // mounted after unmounting
+                if (machine.getTarget())
+                {
+                    machine.getTarget()->mountPoint.reset();
+                }
+
                 return std::make_unique<ReadyState>(machine);
             }
             LOGGER_ERROR("{} udev StateChange::{}", machine.getName(),

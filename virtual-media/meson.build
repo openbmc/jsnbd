@@ -97,6 +97,7 @@ srcfiles_app = [
     'src/utils/impl/child.cpp',
     'src/utils/impl/file_printer.cpp',
     'src/utils/impl/gadget_dirs.cpp',
+    'src/utils/impl/mounter.cpp',
     'src/utils/impl/pipe_reader.cpp',
     'src/utils/impl/stream_descriptor.cpp',
     'src/utils/impl/udev.cpp',

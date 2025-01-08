@@ -85,7 +85,8 @@ TEST_F(InitialStateTransitionTest, RegisterDBusEventEmitted)
 
 TEST_F(InitialStateTransitionTest, MountEventEmitted)
 {
-    interfaces::MountPointStateMachine::Target target{};
+    interfaces::MountPointStateMachine::Target target{
+        "smb://192.168.10.101:445/test.iso", true, nullptr, nullptr};
     mpsm.emitEvent(MountEvent(std::move(target)));
     EXPECT_EQ(mpsm.getState().getStateName(), "InitialState");
 }
@@ -143,7 +144,8 @@ TEST_F(ReadyStateTransitionTest, MountEventEmitted)
 {
     mpsm.config.mode = static_cast<Configuration::Mode>(0xff);
 
-    interfaces::MountPointStateMachine::Target target{};
+    interfaces::MountPointStateMachine::Target target{
+        "smb://192.168.10.101:445/test.iso", true, nullptr, nullptr};
     mpsm.emitEvent(MountEvent(std::move(target)));
 
     EXPECT_EQ(mpsm.getState().getStateName(), "ActivatingState");
@@ -203,7 +205,8 @@ TEST_F(ActivatingStateTransitionTest, RegisterDbusEventEmitted)
 
 TEST_F(ActivatingStateTransitionTest, MountEventEmitted)
 {
-    interfaces::MountPointStateMachine::Target target{};
+    interfaces::MountPointStateMachine::Target target{
+        "smb://192.168.10.101:445/test.iso", true, nullptr, nullptr};
     EXPECT_THROW(mpsm.emitEvent(MountEvent(std::move(target))),
                  sdbusplus::exception::SdBusError);
 }
@@ -265,7 +268,8 @@ TEST_F(ActiveStateTransitionTest, RegisterDbusEventEmitted)
 
 TEST_F(ActiveStateTransitionTest, MountEventEmitted)
 {
-    interfaces::MountPointStateMachine::Target target{};
+    interfaces::MountPointStateMachine::Target target{
+        "smb://192.168.10.101:445/test.iso", true, nullptr, nullptr};
 
     EXPECT_THROW(mpsm.emitEvent(MountEvent(std::move(target))),
                  sdbusplus::exception::SdBusError);
@@ -321,7 +325,8 @@ TEST_F(DeactivatingStateTransitionTest, RegisterDbusEventEmitted)
 
 TEST_F(DeactivatingStateTransitionTest, MountEventEmitted)
 {
-    interfaces::MountPointStateMachine::Target target{};
+    interfaces::MountPointStateMachine::Target target{
+        "smb://192.168.10.101:445/test.iso", true, nullptr, nullptr};
 
     EXPECT_THROW(mpsm.emitEvent(MountEvent(std::move(target))),
                  sdbusplus::exception::SdBusError);
