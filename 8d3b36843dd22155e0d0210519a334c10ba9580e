@@ -1,0 +1,7 @@
+Verified+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Code-Review+2: Jeremy Kerr <jk@ozlabs.org>
+Submitted-by: Patrick Williams <patrick@stwcx.xyz>
+Submitted-at: Tue, 04 Feb 2025 11:42:19 +0000
+Reviewed-on: https://gerrit.openbmc.org/c/openbmc/jsnbd/+/77728
+Project: openbmc/jsnbd
+Branch: refs/heads/master
