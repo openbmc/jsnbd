@@ -1,0 +1,9 @@
+Code-Review+2: Jeremy Kerr <jk@ozlabs.org>
+Verified+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Submitted-by: Jeremy Kerr <jk@ozlabs.org>
+Submitted-at: Tue, 04 Feb 2025 07:10:53 +0000
+Reviewed-on: https://gerrit.openbmc.org/c/openbmc/jsnbd/+/72072
+Comments-Total: 4
+Comments-Unresolved: 1
+Project: openbmc/jsnbd
+Branch: refs/heads/master
