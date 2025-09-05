@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": true,
       "key": {
         "uuid": "97d4304e_4f91fee3",
         "filename": "/COMMIT_MSG",
@@ -20,8 +21,8 @@
         "endChar": 9
       },
       "revId": "e711c0c87883c436efefd2c601df810b8e0d7eda",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
-  ]
+  ],
+  "submitRequirementResults": []
 }
