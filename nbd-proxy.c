@@ -157,8 +157,9 @@ static int start_nbd_client(struct ctx* ctx)
         dup2(fd, STDOUT_FILENO);
         close(fd);
 
-        execlp("nbd-client", "nbd-client", "-u", ctx->sock_path, "-n", "-L",
-               "-t", timeout_str, ctx->config->nbd_device, NULL);
+        execlp("nbd-client", "nbd-client", "-u", "-n", "-L", "-N", "",
+               "-t", timeout_str, ctx->sock_path, ctx->config->nbd_device,
+               NULL);
         err(EXIT_FAILURE, "can't start ndb client");
     }
 
